@@ -112,21 +112,19 @@
                         <div class="card__header">WO Count</div>
                         <div class="card__group">
                             <KpiCard
-                                    value="state.growthMindSet.woCount.open"
+                                    value="state.kpi.growthMindSet.woCount.open"
                                     title="'Open'"
                             />
                             <KpiCard
-                                    value="state.growthMindSet.woCount.invoiced"
+                                    value="state.kpi.growthMindSet.woCount.invoiced"
                                     title="'Invoiced'"
                             />
                         </div>
                     </div>
-                    <div class="dashboard__card">
-                        <div class="card__area">
-                            <h3 class="box__digit">3551</h3>
-                            <h4 class="box__title">Service Operating Sales</h4>
-                        </div>
-                    </div>
+                    <KpiCard
+                        value="state.kpi.growthMindSet.woCount.serviceOperatingSales"
+                        title="'Service Operating Sales'"
+                    />
                     <div class="dashboard__card">
                         <div class="card__header">WIP</div>
                         <div class="card__group">

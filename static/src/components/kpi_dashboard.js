@@ -19,13 +19,15 @@ export class OwlKpiDashboard extends Component {
     }
 
     loadKpiData() {
-        let growthMindSet = {
-            woCount: {
-                open: 100,
-                invoiced: 110
+        this.state.kpi = {
+            growthMindSet: {
+                woCount: {
+                    open: 100,
+                    invoiced: 110,
+                    serviceOperatingSales: 220
+                }
             }
         }
-        this.state.growthMindSet = growthMindSet
     }
 }
 

@@ -112,11 +112,11 @@
                         <div class="card__header">WO Count</div>
                         <div class="card__group">
                             <KpiCard
-                                    value="3551"
+                                    value="state.growthMindSet.woCount.open"
                                     title="'Open'"
                             />
                             <KpiCard
-                                    value="551"
+                                    value="state.growthMindSet.woCount.invoiced"
                                     title="'Invoiced'"
                             />
                         </div>

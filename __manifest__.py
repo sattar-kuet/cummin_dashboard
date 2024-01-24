@@ -1,5 +1,5 @@
 {
-    'name': 'Cummins Dashboard',
+    'name': 'Cummin Dashboard',
     'author': 'Abdus Sattar Bhuiyan',
     'sequence': -100,
     'category': 'An intuitive dashboard with OWL JS',
@@ -14,9 +14,9 @@
     'auto_install': False,
     'assets': {
         'web.assets_backend': [
-            '/cummins_dashboard/static/src/components/**/*.js',
-            '/cummins_dashboard/static/src/components/**/*.xml',
-            '/cummins_dashboard/static/src/components/**/*.scss',
+            '/cummin_dashboard/static/src/components/**/*.js',
+            '/cummin_dashboard/static/src/components/**/*.xml',
+            '/cummin_dashboard/static/src/components/**/*.scss',
         ],
     }
 

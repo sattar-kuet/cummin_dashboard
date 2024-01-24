@@ -9,7 +9,7 @@ import { loadJS } from "@web/core/assets"
 export class OwlKpiDashboard extends Component {
     setup() {
         /* #####################################################################################
-                                 ATTENTION: such initial config is MUST
+                                ATTENTION: such initial config is MUST
         ########################################################################################*/
         this.state = useState({
             period: 90,

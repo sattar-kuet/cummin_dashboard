@@ -111,14 +111,14 @@
                     <div class="dashboard__card">
                         <div class="card__header">WO Count</div>
                         <div class="card__group">
-                            <div class="card__box">
-                                <h3 class="box__digit">3551</h3>
-                                <h4 class="box__title">Open</h4>
-                            </div>
-                            <div class="card__box">
-                                <h3 class="box__digit">551</h3>
-                                <h4 class="box__title">Invoiced</h4>
-                            </div>
+                            <KpiCard
+                                    value="3551"
+                                    title="'Open'"
+                            />
+                            <KpiCard
+                                    value="551"
+                                    title="'Invoiced'"
+                            />
                         </div>
                     </div>
                     <div class="dashboard__card">
@@ -130,18 +130,18 @@
                     <div class="dashboard__card">
                         <div class="card__header">WIP</div>
                         <div class="card__group">
-                            <div class="card__box">
-                                <h3 class="box__digit">3551</h3>
-                                <h4 class="box__title">Wo Count</h4>
-                            </div>
-                            <div class="card__box">
-                                <h3 class="box__digit">53551</h3>
-                                <h4 class="box__title">Cost</h4>
-                            </div>
-                            <div class="card__box">
-                                <h3 class="box__digit">56451</h3>
-                                <h4 class="box__title">Billable Amount</h4>
-                            </div>
+                            <KpiCard
+                                    value="53551"
+                                    title="'Wo Count'"
+                            />
+                            <KpiCard
+                                    value="53551"
+                                    title="'Cost'"
+                            />
+                            <KpiCard
+                                    value="56451"
+                                    title="'Billable Amount'"
+                            />
                         </div>
                     </div>
                 </div>
@@ -150,58 +150,47 @@
                     <div class="dashboard__title">
                         <h2>Positively Impacting Employees</h2>
                     </div>
-                    <div class="dashboard__card">
-                        <div class="card__area">
-                            <h3 class="box__digit">0.00</h3>
-                            <h4 class="box__title">Recordable Incident Rate</h4>
-                        </div>
-                    </div>
-                    <div class="dashboard__card">
-                        <div class="card__area">
-                            <h3 class="box__digit">0.00</h3>
-                            <h4 class="box__title">Near Hit / Miss Rate</h4>
-                        </div>
-                    </div>
-                    <div class="dashboard__card">
-                        <div class="card__area">
-                            <h3 class="box__digit">0.00</h3>
-                            <h4 class="box__title">JSO Completion Rate</h4>
-                        </div>
-                    </div>
-                    <div class="dashboard__card">
-                        <div class="card__area">
-                            <h3 class="box__digit">0.00</h3>
-                            <h4 class="box__title">N/A</h4>
-                        </div>
-                    </div>
+                    <KpiCard
+                            value="0.00"
+                            title="'Recordable Incident Rate'"
+                    />
+                    <KpiCard
+                            value="0.00"
+                            title="'Near Hit / Miss Rate'"
+                    />
+                    <KpiCard
+                            value="0.00"
+                            title="'JSO Completion Rate'"
+                    />
+                    <KpiCard
+                            value="0.00"
+                            title="'N/A'"
+                    />
                 </div>
                 <!-- item 3 -->
                 <div class="dashboard__item">
                     <div class="dashboard__title">
                         <h2>Operational Efficiencies</h2>
                     </div>
-                    <div class="dashboard__card">
-                        <div class="card__area">
-                            <h3 class="box__digit">21.4%</h3>
-                            <h4 class="box__title">TB %</h4>
-                        </div>
-                    </div>
-                    <div class="dashboard__card">
-                        <div class="card__area">
-                            <h3 class="box__digit">54.4%</h3>
-                            <h4 class="box__title">Productivity</h4>
-                        </div>
-                    </div>
-                    <div class="dashboard__card">
-                        <div class="card__area">
-                            <h3 class="box__digit">34.6%</h3>
-                            <h4 class="box__title">Labour Utilization</h4>
-                        </div>
-                    </div>
-                    <KpiCard 
-                      value="34.8"
-                      title="'N/A'"
-                      isParcent='true'
+                    <KpiCard
+                            value="21.4"
+                            title="'TB %'"
+                            isParcent='true'
+                    />
+                    <KpiCard
+                            value="54.4"
+                            title="'Productivity'"
+                            isParcent='true'
+                    />
+                    <KpiCard
+                            value="34.6"
+                            title="'Labour Utilization'"
+                            isParcent='true'
+                    />
+                    <KpiCard
+                            value="34.8"
+                            title="'N/A'"
+                            isParcent='true'
                     />
                 </div>
             </div>

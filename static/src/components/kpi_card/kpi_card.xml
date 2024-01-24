@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="owl.KpiCard" owl="1">
+        <div class="dashboard__card">
+            <div class="card__area">
+                <h3 class="box__digit">
+                    <span t-esc="props.value"/>
+                    <span t-if="props.isParcent">%</span>
+                </h3>
+                <h4 class="box__title">
+                    <span t-esc="props.title"/>
+                </h4>
+            </div>
+        </div>
+    </t>
+</templates>

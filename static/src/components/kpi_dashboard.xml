@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="owl.KpiDashboard" owl="1">
+        <section class="dashborad__section">
+            <div class="dashboard__header">
+                <div class="header__select">
+                    <!-- header form -->
+                    <section class="header__form">
+                        <div class="form__group">
+                            <label for="region">Distributor</label>
+                            <select name="distributor" id="distributor">
+                                <option value="">Select Distributor</option>
+                                <option value="dhaka">Dhaka</option>
+                            </select>
+                        </div>
+                        <div class="form__group">
+                            <label for="time-period">Time Period</label>
+                            <select name="time-period" id="time-period">
+                                <option value="">Custom Date</option>
+                                <option value="11/12/2024">11/12/2024</option>
+                            </select>
+                        </div>
+                        <div class="form__group">
+                            <label for="start-date">* Start Date</label>
+                            <input type="date" name="start-date" id="start-date" />
+                        </div>
+                        <div class="form__group">
+                            <label for="end-date">* End Date</label>
+                            <input type="date" name="end-date" id="end-date" />
+                        </div>
+                        <div class="form__group">
+                            <label for="region">Region</label>
+                            <select name="region" id="region">
+                                <option value="">Select region</option>
+                                <option value="dhaka">Dhaka</option>
+                            </select>
+                        </div>
+                        <div class="form__group">
+                            <label for="sub-region">Sub Region</label>
+                            <select name="sub-region" id="sub-region">
+                                <option value="">Select sub-region</option>
+                                <option value="dhaka">Dhaka</option>
+                            </select>
+                        </div>
+                        <div class="form__group">
+                            <label for="country">Country</label>
+                            <select name="country" id="country">
+                                <option value="">Select country</option>
+                                <option value="bangladesh">Bangladesh</option>
+                            </select>
+                        </div>
+                        <div class="form__group">
+                            <label for="territory">Territory</label>
+                            <select name="territory" id="territory">
+                                <option value="">Select territory</option>
+                                <option value="dhaka">Dhaka</option>
+                            </select>
+                        </div>
+                        <div class="form__group">
+                            <label for="area">Area</label>
+                            <select name="area" id="area">
+                                <option value="">Select area</option>
+                                <option value="dhaka">Dhaka</option>
+                            </select>
+                        </div>
+                        <div class="form__group">
+                            <label for="branch">Branch</label>
+                            <select name="branch" id="branch">
+                                <option value="">Select branch</option>
+                                <option value="dhaka">Dhaka</option>
+                            </select>
+                        </div>
+                        <div class="form__group">
+                            <label for="currency">Currency</label>
+                            <select name="currency" id="currency">
+                                <option value="">Select currency</option>
+                                <option value="usd">USD</option>
+                            </select>
+                        </div>
+                        <div class="btn__group">
+                            <button class="form__btn apply__btn" type="submit">Apply</button>
+                            <button class="form__btn reset__btn" type="reset">Reset</button>
+                        </div>
+                    </section>
+                </div>
+                <!-- header nav link -->
+                <ul class="header__list">
+                    <li class="list__item">
+                        <a href="" class="item__link">QSSA Reference</a>
+                    </li>
+                    <li class="list__item">
+                        <a href="" class="item__link">Documentation</a>
+                    </li>
+                    <li class="list__item">
+                        <a href="" class="item__link">Data Refreash Status</a>
+                    </li>
+                    <li class="list__item">
+                        <a href="" class="item__link">QSSA Status - WIP</a>
+                    </li>
+                    <li class="list__item">
+                        <a href="" class="item__link">Master Data</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="dashboard__content">
+                <!-- item 1 -->
+                <div class="dashboard__item">
+                    <div class="dashboard__title">
+                        <h2>Groth Mindset</h2>
+                    </div>
+                    <div class="dashboard__card">
+                        <div class="card__header">WO Count</div>
+                        <div class="card__group">
+                            <div class="card__box">
+                                <h3 class="box__digit">3551</h3>
+                                <h4 class="box__title">Open</h4>
+                            </div>
+                            <div class="card__box">
+                                <h3 class="box__digit">551</h3>
+                                <h4 class="box__title">Invoiced</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard__card">
+                        <div class="card__area">
+                            <h3 class="box__digit">3551</h3>
+                            <h4 class="box__title">Service Operating Sales</h4>
+                        </div>
+                    </div>
+                    <div class="dashboard__card">
+                        <div class="card__header">WIP</div>
+                        <div class="card__group">
+                            <div class="card__box">
+                                <h3 class="box__digit">3551</h3>
+                                <h4 class="box__title">Wo Count</h4>
+                            </div>
+                            <div class="card__box">
+                                <h3 class="box__digit">53551</h3>
+                                <h4 class="box__title">Cost</h4>
+                            </div>
+                            <div class="card__box">
+                                <h3 class="box__digit">56451</h3>
+                                <h4 class="box__title">Billable Amount</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- item 2 -->
+                <div class="dashboard__item">
+                    <div class="dashboard__title">
+                        <h2>Positively Impacting Employees</h2>
+                    </div>
+                    <div class="dashboard__card">
+                        <div class="card__area">
+                            <h3 class="box__digit">0.00</h3>
+                            <h4 class="box__title">Recordable Incident Rate</h4>
+                        </div>
+                    </div>
+                    <div class="dashboard__card">
+                        <div class="card__area">
+                            <h3 class="box__digit">0.00</h3>
+                            <h4 class="box__title">Near Hit / Miss Rate</h4>
+                        </div>
+                    </div>
+                    <div class="dashboard__card">
+                        <div class="card__area">
+                            <h3 class="box__digit">0.00</h3>
+                            <h4 class="box__title">JSO Completion Rate</h4>
+                        </div>
+                    </div>
+                    <div class="dashboard__card">
+                        <div class="card__area">
+                            <h3 class="box__digit">0.00</h3>
+                            <h4 class="box__title">N/A</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- item 3 -->
+                <div class="dashboard__item">
+                    <div class="dashboard__title">
+                        <h2>Operational Efficiencies</h2>
+                    </div>
+                    <div class="dashboard__card">
+                        <div class="card__area">
+                            <h3 class="box__digit">21.4%</h3>
+                            <h4 class="box__title">TB %</h4>
+                        </div>
+                    </div>
+                    <div class="dashboard__card">
+                        <div class="card__area">
+                            <h3 class="box__digit">54.4%</h3>
+                            <h4 class="box__title">Productivity</h4>
+                        </div>
+                    </div>
+                    <div class="dashboard__card">
+                        <div class="card__area">
+                            <h3 class="box__digit">34.6%</h3>
+                            <h4 class="box__title">Labour Utilization</h4>
+                        </div>
+                    </div>
+                    <KpiCard 
+                      value="34.8"
+                      title="'N/A'"
+                      isParcent='true'
+                    />
+                </div>
+            </div>
+        </section>
+        <div style="margin-bottom:25px;"></div>
+    </t>
+</templates>

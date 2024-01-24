@@ -1,9 +1,10 @@
 /** @odoo-module */
-
+const { Component, onWillStart, useRef, onMounted, useState } = owl
 import { registry } from "@web/core/registry"
+const actionRegistry = registry.category("actions")
 import { KpiCard } from "./kpi_card/kpi_card"
 import { loadJS } from "@web/core/assets"
-const { Component, onWillStart, useRef, onMounted, useState } = owl
+
 
 export class OwlKpiDashboard extends Component {
     setup() {
@@ -33,4 +34,4 @@ export class OwlKpiDashboard extends Component {
 
 OwlKpiDashboard.template = "owl.KpiDashboard"
 OwlKpiDashboard.components = { KpiCard }
-registry.category("actions").add("owl.kpi_dashboard", OwlKpiDashboard)
+actionRegistry.add("cummins_dashboard.kpi_dashboard", OwlKpiDashboard)

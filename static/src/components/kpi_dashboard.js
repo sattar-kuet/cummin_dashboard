@@ -34,4 +34,4 @@ export class OwlKpiDashboard extends Component {
 
 OwlKpiDashboard.template = "owl.KpiDashboard"
 OwlKpiDashboard.components = { KpiCard }
-actionRegistry.add("cummins_dashboard.kpi_dashboard", OwlKpiDashboard)
+actionRegistry.add("kpi_dashboard", OwlKpiDashboard)

@@ -3,7 +3,7 @@
     <data>
         <record id="action_kpi_dashboard" model="ir.actions.client">
             <field name="name">Kpi Dashboard</field>
-            <field name="tag">cummins_dashboard.kpi_dashboard</field>
+            <field name="tag">kpi_dashboard</field>
         </record>
         <menuitem
         name="Dashboard"

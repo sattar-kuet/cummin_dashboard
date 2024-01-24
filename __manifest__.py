@@ -15,9 +15,11 @@
     'assets': {
         'web.assets_backend': [
             '/cummins_dashboard/static/src/components/**/*.js',
-            '/cummins_dashboard/static/src/components/**/*.xml',
             '/cummins_dashboard/static/src/components/**/*.scss',
-        ]
+        ],
+         'web.assets_qweb': [
+            '/cummins_dashboard/static/src/components/**/*.xml'
+        ],
     }
 
 }

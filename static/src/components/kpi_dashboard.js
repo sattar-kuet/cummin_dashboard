@@ -26,7 +26,14 @@ export class OwlKpiDashboard extends Component {
                     open: 100,
                     invoiced: 110,
                     serviceOperatingSales: 220
-                }
+                },
+                wip: {
+                    woCount: 200,
+                    cost: 210,
+                    billableAmount: 230
+                },
+            }
+
             }
         }
     }

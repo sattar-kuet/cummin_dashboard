@@ -129,15 +129,15 @@
                         <div class="card__header">WIP</div>
                         <div class="card__group">
                             <KpiCard
-                                    value="53551"
+                                    value="state.kpi.growthMindSet.wip.woCount"
                                     title="'Wo Count'"
                             />
                             <KpiCard
-                                    value="53551"
+                                    value="state.kpi.growthMindSet.wip.cost"
                                     title="'Cost'"
                             />
                             <KpiCard
-                                    value="56451"
+                                    value="state.kpi.growthMindSet.wip.billableAmount"
                                     title="'Billable Amount'"
                             />
                         </div>

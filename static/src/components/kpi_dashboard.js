@@ -34,10 +34,10 @@ export class OwlKpiDashboard extends Component {
                 },
             }
 
-            }
         }
     }
 }
+
 
 OwlKpiDashboard.template = "owl.KpiDashboard"
 OwlKpiDashboard.components = { KpiCard }

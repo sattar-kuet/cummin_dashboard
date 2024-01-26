@@ -34,18 +34,18 @@ export class OwlKpiDashboard extends Component {
                 },
             },
             positivelyImpactingEmployees: {
-                    recordableIncidentRate: 300,
-                    nearHitMissRate: 310,
-                    jsoCompletionRate: 320,
-                    na:330
+                recordableIncidentRate: 300,
+                nearHitMissRate: 310,
+                jsoCompletionRate: 320,
+                na: 330
 
 
             },
             operationalEfficiencies: {
-                    tb: 10,
-                    Productivity: 11,
-                    labourUtilization: 12,
-                    na: 13
+                tb: 10,
+                Productivity: 11,
+                labourUtilization: 12,
+                na: 13
 
             },
 

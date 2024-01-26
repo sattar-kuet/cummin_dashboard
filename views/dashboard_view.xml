@@ -10,5 +10,14 @@
         id="menu_kpi_dashboard"
         action="action_kpi_dashboard"
         sequence="0"/>
+        <record id="action_graph_dashboard" model="ir.actions.client">
+            <field name="name">Graph Dashboard</field>
+            <field name="tag">graph_dashboard</field>
+        </record>
+        <menuitem
+        name="Dashboard2"
+        id="menu_graph_dashboard"
+        action="action_graph_dashboard"
+        sequence="0"/>
     </data>
 </odoo>

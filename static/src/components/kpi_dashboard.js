@@ -32,7 +32,22 @@ export class OwlKpiDashboard extends Component {
                     cost: 210,
                     billableAmount: 230
                 },
-            }
+            },
+            positivelyImpactingEmployees: {
+                    recordableIncidentRate: 300,
+                    nearHitMissRate: 310,
+                    jsoCompletionRate: 320,
+                    na:330
+
+
+            },
+            operationalEfficiencies: {
+                    tb: 10,
+                    Productivity: 11,
+                    labourUtilization: 12,
+                    na: 13
+
+            },
 
         }
     }

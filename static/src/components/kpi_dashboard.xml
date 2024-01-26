@@ -149,19 +149,19 @@
                         <h2>Positively Impacting Employees</h2>
                     </div>
                     <KpiCard
-                            value="0.00"
+                            value="state.kpi.positivelyImpactingEmployees.recordableIncidentRate"
                             title="'Recordable Incident Rate'"
                     />
                     <KpiCard
-                            value="0.00"
+                            value="state.kpi.positivelyImpactingEmployees.nearHitMissRate"
                             title="'Near Hit / Miss Rate'"
                     />
                     <KpiCard
-                            value="0.00"
+                            value="state.kpi.positivelyImpactingEmployees.jsoCompletionRate"
                             title="'JSO Completion Rate'"
                     />
                     <KpiCard
-                            value="0.00"
+                            value="state.kpi.positivelyImpactingEmployees.na"
                             title="'N/A'"
                     />
                 </div>
@@ -171,22 +171,22 @@
                         <h2>Operational Efficiencies</h2>
                     </div>
                     <KpiCard
-                            value="21.4"
+                            value="state.kpi.operationalEfficiencies.tb"
                             title="'TB %'"
                             isParcent='true'
                     />
                     <KpiCard
-                            value="54.4"
+                            value="state.kpi.operationalEfficiencies.Productivity"
                             title="'Productivity'"
                             isParcent='true'
                     />
                     <KpiCard
-                            value="34.6"
+                            value="state.kpi.operationalEfficiencies.labourUtilization"
                             title="'Labour Utilization'"
                             isParcent='true'
                     />
                     <KpiCard
-                            value="34.8"
+                            value="state.kpi.operationalEfficiencies.na"
                             title="'N/A'"
                             isParcent='true'
                     />

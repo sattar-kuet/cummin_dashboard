@@ -1,0 +1,7 @@
+.chart__section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 1.5rem;
+    color: #ff9742;
+}

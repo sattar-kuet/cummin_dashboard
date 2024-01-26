@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="owl.GraphDashboard" owl="1">
+        <section class="chart__section">
+            <h2>again working</h2>
+        </section>
+    </t>
+</templates>

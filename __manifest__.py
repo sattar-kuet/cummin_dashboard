@@ -19,5 +19,4 @@
             '/cummin_dashboard/static/src/components/**/*.scss',
         ],
     }
-
 }

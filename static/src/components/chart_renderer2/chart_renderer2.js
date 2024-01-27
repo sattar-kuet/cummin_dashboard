@@ -6,7 +6,7 @@ const { Component, onWillStart, useRef, onMounted } = owl
 
 export class ChartRenderer2 extends Component {
     setup() {
-        this.chartRef = useRef("chart")
+        this.chartRef = useRef("chart2")
         onWillStart(async () => {
             await loadJS("https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js")
         })

@@ -2,6 +2,7 @@
 const { Component, onWillStart, useRef, onMounted, useState } = owl
 import { registry } from "@web/core/registry"
 import { ChartRenderer } from "./chart_renderer/chart_renderer"
+import { ChartRenderer2 } from "./chart_renderer2/chart_renderer2"
 
 
 export class OwlGraphDashboard extends Component {
@@ -144,5 +145,5 @@ export class OwlGraphDashboard extends Component {
 
 
 OwlGraphDashboard.template = "owl.GraphDashboard"
-OwlGraphDashboard.components = { ChartRenderer }
+OwlGraphDashboard.components = { ChartRenderer, ChartRenderer2 }
 registry.category("actions").add("graph_dashboard", OwlGraphDashboard)

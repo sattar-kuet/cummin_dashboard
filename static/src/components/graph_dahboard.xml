@@ -2,18 +2,12 @@
 <templates xml:space="preserve">
     <t t-name="owl.GraphDashboard" owl="1">
         <section class="chart__section">
-            <div class="tb__chart">
-                <ChartRenderer type="'bar'" title="'Total to Billed (TB) Ratio'" 
+            <ChartRenderer type="'bar'" title="'Total to Billed (TB) Ratio'" 
                 bg_color="'#AA2E24'" data="state.totalBilled"/>
-            </div>
-            <div class="tb__chart">
-                <ChartRenderer type="'bar'" title="'Paper In Process (PIP) Hrs'" 
+            <ChartRenderer type="'bar'" title="'Paper In Process (PIP) Hrs'" 
                 bg_color="'#4F81BD'" data="state.paperInProgress"/>
-            </div>
-            <div class="tb__chart">
-                <ChartRenderer2 type="'bar'" title="'Paper In Process (PIP) Hrs'" 
+            <ChartRenderer2 type1="'line'" type2="'bar'" title="'Work in Process'" 
                 bg_color="'#4F81BD'" data="state.workInProgress"/>
-            </div>
         </section>
     </t>
 </templates>

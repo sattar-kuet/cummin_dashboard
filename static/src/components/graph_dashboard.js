@@ -140,8 +140,6 @@ export class OwlGraphDashboard extends Component {
             },
         ]
     }
-
-
 }
 
 

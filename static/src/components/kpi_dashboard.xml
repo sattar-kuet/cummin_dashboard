@@ -8,9 +8,13 @@
                     <section class="header__form">
                         <div class="form__group">
                             <label for="region">Distributor</label>
-                            <select name="distributor" id="distributor">
+                            <select class="form-control" name="distributor" id="distributor">
                                 <option value="">Select Distributor</option>
-                                <option value="dhaka">Dhaka</option>
+                                <t t-foreach="state.distributors" t-as="distributor" t-key="distributor.id">
+                                    <option t-att-value="distributor.id">
+                                        <t t-esc="distributor.name"/>
+                                    </option>
+                                </t>
                             </select>
                         </div>
                         <div class="form__group">
@@ -47,20 +51,6 @@
                             <select name="country" id="country">
                                 <option value="">Select country</option>
                                 <option value="bangladesh">Bangladesh</option>
-                            </select>
-                        </div>
-                        <div class="form__group">
-                            <label for="territory">Territory</label>
-                            <select name="territory" id="territory">
-                                <option value="">Select territory</option>
-                                <option value="dhaka">Dhaka</option>
-                            </select>
-                        </div>
-                        <div class="form__group">
-                            <label for="area">Area</label>
-                            <select name="area" id="area">
-                                <option value="">Select area</option>
-                                <option value="dhaka">Dhaka</option>
                             </select>
                         </div>
                         <div class="form__group">

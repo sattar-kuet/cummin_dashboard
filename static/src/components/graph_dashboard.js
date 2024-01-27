@@ -21,7 +21,6 @@ export class OwlGraphDashboard extends Component {
     }
 
     loadTotalBilled() {
-
         this.state.totalBilled = [
             {
                 date: "Jan 20",

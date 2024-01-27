@@ -7,7 +7,13 @@
             <ChartRenderer type="'bar'" title="'Paper In Process (PIP) Hrs'" 
                 bg_color="'#4F81BD'" data="state.paperInProgress"/>
             <ChartRenderer2 type1="'line'" type2="'bar'" title="'Work in Process'" 
-                bg_color="'#4F81BD'" data="state.workInProgress"/>
+                bg1_color="'#EE2E24'" bg2_color="'#DB843D'" data="state.workInProgress"/>
+            <ChartRenderer type="'line'" title="'Labour Utilisation'" 
+            bg_color="'#EE2E24'" data="state.paperInProgress"/>
+            <ChartRenderer type="'line'" title="'Billing Efficiency'" 
+            bg_color="'#EE2E24'" data="state.paperInProgress"/>
+            <ChartRenderer type="'line'" title="'Service Productivity'" 
+            bg_color="'#EE2E24'" data="state.paperInProgress"/>
         </section>
     </t>
 </templates>

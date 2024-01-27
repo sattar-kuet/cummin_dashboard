@@ -20,17 +20,17 @@ export class ChartRenderer2 extends Component {
                 data: {
                     datasets: [
                         {
-                            type: "line",
+                            type: this.props.type1,
                             // label: "Line Dataset",
                             data: tb_data?.map((row) => row.count),
-                            backgroundColor: ["#EE2E24"],
-                            borderColor: ["#EE2E24"],
+                            backgroundColor: [this.props.bg1_color],
+                            borderColor: [this.props.bg1_color],
                         },
                         {
-                            type: "bar",
+                            type: this.props.type2,
                             // label: "Bar Dataset",
                             data: tb_data?.map((row) => row.count),
-                            backgroundColor: ["#DB843D"],
+                            backgroundColor: [this.props.bg2_color],
                         },
                     ],
                     labels: tb_data?.map((row) => row.date),

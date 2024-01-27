@@ -4,6 +4,7 @@ import { registry } from "@web/core/registry"
 const actionRegistry = registry.category("actions")
 import { KpiCard } from "./kpi_card/kpi_card"
 import { loadJS } from "@web/core/assets"
+import { useService } from "@web/core/utils/hooks"
 
 
 export class OwlKpiDashboard extends Component {
@@ -14,9 +15,19 @@ export class OwlKpiDashboard extends Component {
         this.state = useState({
             period: 90,
         })
+        this.rpc = useService("rpc")
         onWillStart(async () => {
+            await this.loadFilteringData()
             this.loadKpiData()
         })
+    }
+    async loadFilteringData() {
+        await this.loadDistributors()
+    }
+    async loadDistributors() {
+        let distributors = await this.rpc('/distributor/list')
+        distributors = JSON.parse(distributors)
+        this.state.distributors = distributors
     }
 
     loadKpiData() {

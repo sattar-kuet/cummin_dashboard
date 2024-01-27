@@ -13,27 +13,135 @@ export class OwlGraphDashboard extends Component {
             period: 90,
         })
         onWillStart(async () => {
-            this.loadKpiData()
+            this.loadTotalBilled()
+            this.loadPaperInProgress()
+            this.loadWorkInProgress()
         })
     }
 
-    loadKpiData() {
-        this.state.kpi = {
-            growthMindSet: {
-                woCount: {
-                    open: 100,
-                    invoiced: 110,
-                    serviceOperatingSales: 220
-                },
-                wip: {
-                    woCount: 200,
-                    cost: 210,
-                    billableAmount: 230
-                },
-            }
+    loadTotalBilled() {
 
-        }
+        this.state.totalBilled = [
+            {
+                date: "Jan 20",
+                count: 2.0,
+            },
+
+            {
+                date: "Feb 20",
+                count: 2.0,
+            },
+
+            {
+                date: "Mar 20",
+                count: 4.0,
+            },
+
+            {
+                date: "Apr 20",
+                count: 6.0,
+            },
+
+            {
+                date: "May 20",
+                count: 8.0,
+            },
+            {
+                date: "Jun 20",
+                count: 12.0,
+            },
+            {
+                date: "Jul 20",
+                count: 10
+            },
+            {
+                date: "Aug 20",
+                count: 9
+            },
+        ]
     }
+    loadPaperInProgress() {
+        this.state.paperInProgress = [
+            {
+                date: "Jan 20",
+                count: 2.0,
+            },
+
+            {
+                date: "Feb 20",
+                count: 2.0,
+            },
+
+            {
+                date: "Mar 20",
+                count: 4.0,
+            },
+
+            {
+                date: "Apr 20",
+                count: 6.0,
+            },
+
+            {
+                date: "May 20",
+                count: 8.0,
+            },
+            {
+                date: "Jun 20",
+                count: 12.0,
+            },
+            {
+                date: "Jul 20",
+                count: 10
+            },
+            {
+                date: "Aug 20",
+                count: 9
+            },
+        ]
+    }
+    loadWorkInProgress() {
+        this.state.workInProgress = [
+            {
+                date: "Jan 20",
+                count: 2.0,
+            },
+
+            {
+                date: "Feb 20",
+                count: 2.0,
+            },
+
+            {
+                date: "Mar 20",
+                count: 4.0,
+            },
+
+            {
+                date: "Apr 20",
+                count: 6.0,
+            },
+
+            {
+                date: "May 20",
+                count: 8.0,
+            },
+            {
+                date: "Jun 20",
+                count: 12.0,
+            },
+            {
+                date: "Jul 20",
+                count: 10
+            },
+            {
+                date: "Aug 20",
+                count: 9
+            },
+        ]
+    }
+
+
 }
 
 

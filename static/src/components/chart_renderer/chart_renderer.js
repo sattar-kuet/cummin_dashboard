@@ -1,7 +1,7 @@
 /** @odoo-module */
 
 import { registry } from "@web/core/registry"
-import { loadJS } from "web.ajax";
+import { loadJS } from "@web/core/assets"
 const { Component, onWillStart, useRef, onMounted } = owl
 
 export class ChartRenderer extends Component {
@@ -16,51 +16,17 @@ export class ChartRenderer extends Component {
 
   renderChart() {
     console.log('********', this.props)
-    const tb_data = [
-      {
-        date: "Jan 20",
-        count: 2.0,
-      },
-
-      {
-        date: "Feb 20",
-        count: 2.0,
-      },
-
-      {
-        date: "Mar 20",
-        count: 4.0,
-      },
-
-      {
-        date: "Apr 20",
-        count: 6.0,
-      },
-
-      {
-        date: "May 20",
-        count: 8.0,
-      },
-      {
-        date: "Jun 20",
-      },
-      {
-        date: "Jul 20",
-      },
-      {
-        date: "Aug 20",
-      },
-    ];
+    const tb_data = this.props.data;
     new Chart(this.chartRef.el,
       {
-        type: "bar",
+        type: this.props.type,
         data: {
           labels: tb_data?.map((row) => row.date),
           datasets: [
             {
               data: tb_data?.map((row) => row.count),
               borderWidth: 1,
-              backgroundColor: ["#EE2E24"],
+              backgroundColor: [this.props.bg_color],
             },
           ],
         },
@@ -73,7 +39,7 @@ export class ChartRenderer extends Component {
           plugins: {
             title: {
               display: true,
-              text: "Total to Billed (TB) Ratio",
+              text: this.props.title,
               font: {
                 size: 18,
                 weight: "700",

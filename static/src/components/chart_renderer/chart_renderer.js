@@ -10,7 +10,6 @@ export class ChartRenderer extends Component {
     onWillStart(async () => {
       await loadJS("https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js")
     })
-
     onMounted(() => this.renderChart())
   }
 

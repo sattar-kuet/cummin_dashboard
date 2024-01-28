@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
-    <t t-name="owl.DateRange" owl="1">
+    <t t-name="owl.SelectInput" owl="1">
         <div class="form__group">
-            <label for="region">Distributor</label>
+            <!-- <label for="region">Distributor</label>
             <select class="form-control" name="distributor" t-ref="select_input">
                 <option value="">Select Distributor</option>
                 <t t-foreach="state.distributors" t-as="distributor" t-key="distributor.id">
@@ -10,11 +10,12 @@
                         <t t-esc="distributor.name"/>
                     </option>
                 </t>
-            </select>
+            </select> -->
             <!-- <select class="js-example-basic-single" name="state">
                 <option value="AL">Alabama</option>
                 <option value="WY">Wyoming</option>
             </select> -->
+            <h5>Hello World</h5>
         </div>
     </t>
 </templates>

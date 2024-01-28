@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="owl.DateRange" owl="1">
+        <input type="text" t-ref="daterange" name="daterange" value="" />
+    </t>
+</templates>

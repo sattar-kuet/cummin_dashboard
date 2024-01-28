@@ -16,9 +16,7 @@ export class SelectInput extends owl.Component {
   }
 
   renderSelectInput() {
-    $(document).ready(function () {
-      $(this.selectInputRef.el).select2();
-    });
+    $(this.selectInputRef.el).select2();
   }
 }
 

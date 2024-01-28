@@ -24,9 +24,21 @@ class Api(http.Controller):
         maintenance_requests = request.env['maintenance.request'].search([])
         country_list = []
         for maintenance_request in maintenance_requests:
-            # country_list.append({
-            #     "id": maintenance_request.country.id,
-            #     "name": maintenance_request.country.name
-            # })
-            return maintenance_request.country
-        # return json.dumps(country_list)
+            country_list.append({
+                "id": maintenance_request.country,
+                "name": maintenance_request.country
+            })
+           
+        return json.dumps(country_list)
+    
+    @http.route('/branch/list', auth="user", type="json")
+    def branch_list(self, **data):
+        maintenance_requests = request.env['maintenance.request'].search([])
+        branch_list = []
+        for maintenance_request in maintenance_requests:
+            branch_list.append({
+                "id": maintenance_request.branch,
+                "name": maintenance_request.branch
+            })
+           
+        return json.dumps(branch_list)

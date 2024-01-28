@@ -17,6 +17,7 @@ export class OwlKpiDashboard extends Component {
         })
         this.rpc = useService("rpc")
         onWillStart(async () => {
+
             await this.loadFilteringData()
             this.loadKpiData()
         })

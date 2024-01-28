@@ -6,18 +6,10 @@
                 <div class="header__select">
                     <!-- header form -->
                     <section class="header__form">
-                        <SelectInput label="'Distributor'"/>
-                        <div class="form__group">
-                            <label for="region">Distributor</label>
-                            <select class="form-control" name="distributor" id="distributor">
-                                <option value="">Select Distributor</option>
-                                <t t-foreach="state.distributors" t-as="distributor" t-key="distributor.id">
-                                    <option t-att-value="distributor.id">
-                                        <t t-esc="distributor.name"/>
-                                    </option>
-                                </t>
-                            </select>
-                        </div>
+                        <SelectInput 
+                        label="'distributor'"
+                        dataList="state.distributors"
+                        />
                         <div class="form__group">
                             <label for="daterange">Date Range</label>
                             <DateRange />

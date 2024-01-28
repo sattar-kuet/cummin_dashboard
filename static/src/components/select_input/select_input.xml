@@ -2,20 +2,21 @@
 <templates xml:space="preserve">
     <t t-name="owl.SelectInput" owl="1">
         <div class="form__group">
-            <!-- <label for="region">Distributor</label>
-            <select class="form-control" name="distributor" t-ref="select_input">
-                <option value="">Select Distributor</option>
-                <t t-foreach="state.distributors" t-as="distributor" t-key="distributor.id">
-                    <option t-att-value="distributor.id">
-                        <t t-esc="distributor.name"/>
+            <label for="props.label">
+                <t t-esc="props.label"/>
+            </label>
+            <select class="form-control"  t-ref="select_input" id="props.label">
+                <option value="">Select
+                    <span>
+                        <t t-esc="props.label"/>
+                    </span>
+                </option>
+                <t t-foreach="props.dataList" t-as="data" t-key="data.id">
+                    <option t-att-value="data.id">
+                        <t t-esc="data.name"/>
                     </option>
                 </t>
-            </select> -->
-            <!-- <select class="js-example-basic-single" name="state">
-                <option value="AL">Alabama</option>
-                <option value="WY">Wyoming</option>
-            </select> -->
-            <h5>Hello World</h5>
+            </select>
         </div>
     </t>
 </templates>

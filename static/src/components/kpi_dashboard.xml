@@ -9,11 +9,34 @@
                         <SelectInput 
                         label="'distributor'"
                         dataList="state.distributors"
-                        idName="distributor"
                         />
                         <div class="form__group">
                             <label for="daterange">Time Period</label>
                             <DateRange />
+                        </div>
+                        <div class="form__group">
+                            <label for="region">Time Period</label>
+                            <select  id="region">
+                                <option value="dhaka">Today</option>
+                                <option value="dhaka">This month</option>
+                                <option value="dhaka">Custom Data</option>
+                            </select>
+                        </div>
+                        <div class="form__group">
+                            <label for="region">Start Data</label>
+                            <input type="date"/>
+                        </div>
+                        <div class="form__group">
+                            <label for="region">End Data</label>
+                            <input type="date"/>
+                        </div>
+                        <div class="form__group">
+                            <label for="region">Time Period</label>
+                            <select  id="region">
+                                <option value="dhaka">Today</option>
+                                <option value="dhaka">This month</option>
+                                <option value="dhaka">Custom Data</option>
+                            </select>
                         </div>
                         <div class="form__group">
                             <label for="region">Region</label>

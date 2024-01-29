@@ -7,8 +7,6 @@ export class DateRange extends owl.Component {
   setup() {
     this.dateRangeRef = useRef("daterange");
     onWillStart(async () => {
-      await loadJS("https://cdn.jsdelivr.net/jquery/latest/jquery.min.js")
-      await loadJS("https://cdn.jsdelivr.net/momentjs/latest/moment.min.js")
       await loadJS("https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js")
       await loadCSS("https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css")
     });

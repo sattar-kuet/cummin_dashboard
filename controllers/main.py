@@ -54,3 +54,39 @@ class Api(http.Controller):
             })
            
         return json.dumps(currency_list)
+    
+    @http.route('/kpi/data', auth="user", type="json")
+    def kpi_data(self, **data):
+        maintenance_requests = request.env['maintenance.request'].search([])
+        wip_cost = 0
+        wip_billable_amount = 0
+        for maintenance_request in maintenance_requests:
+            wip_cost += maintenance_request.wip_cost
+            wip_billable_amount += maintenance_request.billed_hours
+        kpi_data = {
+            'growthMindSet': {
+                'woCount': {
+                    'open': 100,
+                    'invoiced': 110,
+                    'serviceOperatingSales': 220,
+                },
+                'wip':{
+                    'woCount': 200,
+                    'cost': wip_cost,
+                    'billableAmount': wip_billable_amount,
+                }
+            },
+            'positivelyImpactingEmployees': {
+                'recordableIncidentRate': 300,
+                'nearHitMissRate': 310,
+                'jsoCompletionRate': 320,
+                'na': 330,
+            },
+            'operationalEfficiencies': {
+                'tb': 10,
+                'Productivity': 11,
+                'labourUtilization': 12,
+                'na': 13,
+            },
+        }
+        return json.dumps(kpi_data)

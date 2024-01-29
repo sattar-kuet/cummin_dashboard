@@ -18,7 +18,7 @@ export class OwlKpiDashboard extends Component {
     this.rpc = useService("rpc");
     onWillStart(async () => {
       await this.loadFilteringData();
-      this.loadKpiData();
+      await this.loadKpiData();
     });
   }
   reset() {
@@ -53,33 +53,10 @@ export class OwlKpiDashboard extends Component {
   }
 
 
-  loadKpiData() {
-    this.state.kpi = {
-      growthMindSet: {
-        woCount: {
-          open: 100,
-          invoiced: 110,
-          serviceOperatingSales: 220,
-        },
-        wip: {
-          woCount: 200,
-          cost: 210,
-          billableAmount: 230,
-        },
-      },
-      positivelyImpactingEmployees: {
-        recordableIncidentRate: 300,
-        nearHitMissRate: 310,
-        jsoCompletionRate: 320,
-        na: 330,
-      },
-      operationalEfficiencies: {
-        tb: 10,
-        Productivity: 11,
-        labourUtilization: 12,
-        na: 13,
-      },
-    };
+  async loadKpiData() {
+    let kpi_data = await this.rpc("/kpi/data");
+    kpi_data = JSON.parse(kpi_data);
+    this.state.kpi = kpi_data;
   }
 }
 

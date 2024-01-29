@@ -42,3 +42,15 @@ class Api(http.Controller):
             })
            
         return json.dumps(branch_list)
+    
+    @http.route('/currency/list', auth="user", type="json")
+    def currency_list(self, **data):
+        maintenance_requests = request.env['maintenance.request'].search([])
+        currency_list = []
+        for maintenance_request in maintenance_requests:
+            currency_list.append({
+                "id": maintenance_request.currency,
+                "name": maintenance_request.currency
+            })
+           
+        return json.dumps(currency_list)

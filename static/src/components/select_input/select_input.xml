@@ -2,10 +2,10 @@
 <templates xml:space="preserve">
     <t t-name="owl.SelectInput" owl="1">
         <div class="form__group">
-            <label for="props.label">
+            <label for="props.id">
                 <t t-esc="props.label"/>
             </label>
-            <select class="form-control"  t-ref="select_input" id="props.label">
+            <select class="form-control"  t-ref="select_input">
                 <option value="">Select
                     <span>
                         <t t-esc="props.label"/>

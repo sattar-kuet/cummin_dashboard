@@ -21,14 +21,37 @@ export class OwlKpiDashboard extends Component {
       this.loadKpiData();
     });
   }
+  reset() {
+    $('.form-control').val('');
+  }
   async loadFilteringData() {
     await this.loadDistributors();
+    await this.loadCountries();
+    await this.loadBranches();
+    await this.loadCurrencies();
   }
   async loadDistributors() {
     let distributors = await this.rpc("/distributor/list");
     distributors = JSON.parse(distributors);
     this.state.distributors = distributors;
   }
+
+  async loadCountries() {
+    let countries = await this.rpc("/country/list");
+    countries = JSON.parse(countries);
+    this.state.countries = countries;
+  }
+  async loadBranches() {
+    let branches = await this.rpc("/branch/list");
+    branches = JSON.parse(branches);
+    this.state.branches = branches;
+  }
+  async loadCurrencies() {
+    let currencies = await this.rpc("/currency/list");
+    currencies = JSON.parse(currencies);
+    this.state.currencies = currencies;
+  }
+
 
   loadKpiData() {
     this.state.kpi = {

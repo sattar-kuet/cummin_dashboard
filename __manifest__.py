@@ -17,6 +17,7 @@
             '/cummin_dashboard/static/src/components/**/*.js',
             '/cummin_dashboard/static/src/components/**/*.xml',
             '/cummin_dashboard/static/src/components/**/*.scss',
+            '/cummin_dashboard/static/src/lib/daterange/daterange.css',
         ],
     }
 }

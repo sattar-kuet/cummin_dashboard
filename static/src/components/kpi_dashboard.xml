@@ -9,33 +9,11 @@
                         <SelectInput 
                         label="'distributor'"
                         dataList="state.distributors"
+                        idName="distributor"
                         />
                         <div class="form__group">
-                            <label for="daterange">Date Range</label>
+                            <label for="daterange">Time Period</label>
                             <DateRange />
-                            <!-- <select class="form-control" name="distributor" id="distributor">
-                                <option value="">Select Distributor</option>
-                                <t t-foreach="state.distributors" t-as="distributor" t-key="distributor.id">
-                                    <option t-att-value="distributor.id">
-                                        <t t-esc="distributor.name"/>
-                                    </option>
-                                </t>
-                            </select> -->
-                        </div>
-                        <div class="form__group">
-                            <label for="time-period">Time Period</label>
-                            <select name="time-period" id="time-period">
-                                <option value="">Custom Date</option>
-                                <option value="11/12/2024">11/12/2024</option>
-                            </select>
-                        </div>
-                        <div class="form__group">
-                            <label for="start-date">* Start Date</label>
-                            <input type="date" name="start-date" id="start-date" />
-                        </div>
-                        <div class="form__group">
-                            <label for="end-date">* End Date</label>
-                            <input type="date" name="end-date" id="end-date" />
                         </div>
                         <div class="form__group">
                             <label for="region">Region</label>
@@ -52,29 +30,26 @@
                             </select>
                         </div>
                         <div class="form__group">
-                            <label for="country">Country</label>
-                            <select name="country" id="country">
-                                <option value="">Select country</option>
-                                <option value="bangladesh">Bangladesh</option>
-                            </select>
+                            <SelectInput 
+                            label="'country'"
+                            dataList="state.countries"
+                            />
                         </div>
                         <div class="form__group">
-                            <label for="branch">Branch</label>
-                            <select name="branch" id="branch">
-                                <option value="">Select branch</option>
-                                <option value="dhaka">Dhaka</option>
-                            </select>
+                            <SelectInput 
+                            label="'branch'"
+                            dataList="state.branches"
+                            />
                         </div>
                         <div class="form__group">
-                            <label for="currency">Currency</label>
-                            <select name="currency" id="currency">
-                                <option value="">Select currency</option>
-                                <option value="usd">USD</option>
-                            </select>
+                            <SelectInput 
+                            label="'currency'"
+                            dataList="state.currencies"
+                            />
                         </div>
                         <div class="btn__group">
                             <button class="form__btn apply__btn" type="submit">Apply</button>
-                            <button class="form__btn reset__btn" type="reset">Reset</button>
+                            <button class="form__btn reset__btn" type="reset" t-on-click="reset">Reset</button>
                         </div>
                     </section>
                 </div>

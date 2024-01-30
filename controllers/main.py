@@ -13,11 +13,12 @@ class Api(http.Controller):
         distributors = request.env['res.company'].search([])
         distributor_list = []
         for distributor in sorted(distributors, key=lambda x: x.name):
-            distributor_list.append({
-                "id": distributor.id,
-                "name": distributor.name,
-                "key": distributor.id
-            })
+            if distributor.name:
+                distributor_list.append({
+                    "id": distributor.id,
+                    "name": distributor.name,
+                    "key": distributor.id
+                })
         return json.dumps(distributor_list)
     
     @http.route('/country/list', auth="user", type="json")
@@ -25,11 +26,12 @@ class Api(http.Controller):
         maintenance_requests = request.env['maintenance.request'].search([])
         country_list = []
         for maintenance_request in maintenance_requests:
-            country_list.append({
-                "id": maintenance_request.country,
-                "name": maintenance_request.country,
-                "key": f'country{maintenance_request.id}'
-            })
+            if maintenance_request.country:
+                country_list.append({
+                    "id": maintenance_request.country,
+                    "name": maintenance_request.country,
+                    "key": f'country{maintenance_request.id}'
+                })
            
         return json.dumps(country_list)
     
@@ -38,24 +40,27 @@ class Api(http.Controller):
         maintenance_requests = request.env['maintenance.request'].search([])
         branch_list = []
         for maintenance_request in maintenance_requests:
-            branch_list.append({
-                "id": maintenance_request.branch,
-                "name": maintenance_request.branch,
-                "key": f'branch{maintenance_request.id}'
-            })
+            if maintenance_request.branch:
+                branch_list.append({
+                    "id": maintenance_request.branch,
+                    "name": maintenance_request.branch,
+                    "key": f'branch{maintenance_request.id}'
+                })
            
         return json.dumps(branch_list)
+    
     
     @http.route('/currency/list', auth="user", type="json")
     def currency_list(self, **data):
         maintenance_requests = request.env['maintenance.request'].search([])
         currency_list = []
         for maintenance_request in maintenance_requests:
-            currency_list.append({
-                "id": maintenance_request.currency,
-                "name": maintenance_request.currency,
-                "key": f'currency{maintenance_request.id}'
-            })
+            if maintenance_request.currency:
+                currency_list.append({
+                    "id": maintenance_request.currency,
+                    "name": maintenance_request.currency,
+                    "key": f'currency{maintenance_request.id}'
+                })
            
         return json.dumps(currency_list)
     

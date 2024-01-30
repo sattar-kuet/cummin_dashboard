@@ -1,0 +1,28 @@
+.o_main_navbar,
+.btn-primary {
+    background-color: #EE2C22;
+    border-bottom: 1px solid #EE2C22;
+}
+
+.text-primary {
+    color: #EE2C22 !important;
+}
+
+.btn-primary:hover {
+    background: red;
+}
+
+.o_tooltip.active {
+    border: 3px solid #EE2C22 !important;
+    background-color: white !important;
+    transition: width 150ms ease 50ms, height 150ms ease 50ms, margin 150ms ease 50ms !important;
+}
+
+.o_DiscussSidebarCategory.o_DiscussSidebar_category.o_DiscussSidebar_categoryChat {
+    display: none;
+}
+
+img.o_DiscussSidebarCategoryItem_image.w-100.h-100.rounded-circle,
+img.rounded-circle.o_user_avatar.h-75.py-1 {
+    filter: grayscale(100%);
+}

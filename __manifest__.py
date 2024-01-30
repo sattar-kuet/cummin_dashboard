@@ -20,5 +20,8 @@
             '/cummin_dashboard/static/src/lib/daterange/daterange.css',
             '/cummin_dashboard/static/src/lib/daterange/brand.css',
         ],
+        'web.assets_frondend': [
+            '/cummin_dashboard/static/src/lib/daterange/brand.css',
+        ]
     }
 }

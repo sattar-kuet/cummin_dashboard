@@ -38,7 +38,7 @@
                             <label for="country">Country</label>
                             <select class="form-control"  t-model="state.country">
                                 <option value="">Select Country</option>
-                                <t t-foreach="state.countries" t-as="data" t-key="data.id">
+                                <t t-foreach="state.countries" t-as="data" t-key="data.key">
                                     <option t-att-value="data.id">
                                         <t t-esc="data.name"/>
                                     </option>
@@ -49,7 +49,7 @@
                             <label for="currency">Branch</label>
                             <select class="form-control"  t-model="state.branch">
                                 <option value="">Select Branch</option>
-                                <t t-foreach="state.branches" t-as="data" t-key="data.id">
+                                <t t-foreach="state.branches" t-as="data" t-key="data.key">
                                     <option t-att-value="data.id">
                                         <t t-esc="data.name"/>
                                     </option>
@@ -60,7 +60,7 @@
                             <label for="currency">Currency</label>
                             <select class="form-control"  t-model="state.currency">
                                 <option value="">Select Currency</option>
-                                <t t-foreach="state.currencies" t-as="data" t-key="data.id">
+                                <t t-foreach="state.currencies" t-as="data" t-key="data.key">
                                     <option t-att-value="data.id">
                                         <t t-esc="data.name"/>
                                     </option>

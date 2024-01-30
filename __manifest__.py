@@ -20,7 +20,7 @@
             '/cummin_dashboard/static/src/lib/daterange/daterange.css',
             '/cummin_dashboard/static/src/lib/daterange/brand.css',
         ],
-        'web.assets_frondend': [
+        'web.assets_frontend': [
             '/cummin_dashboard/static/src/lib/daterange/brand.css',
         ]
     }

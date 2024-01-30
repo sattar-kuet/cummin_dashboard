@@ -13,15 +13,68 @@ export class OwlKpiDashboard extends Component {
                                 ATTENTION: such initial config is MUST
         ########################################################################################*/
     this.state = useState({
-      period: 90,
+      distributorId: 0,
+      period: 'all_time',
+      showDateRange: false,
+      periodStartAt: '',
+      periodEndAt: '',
+      country: '',
+      branch: '',
+      currency: ''
     });
-    this.rpc = useService("rpc");
+    this.rpc = useService("rpc")
     onWillStart(async () => {
-      await this.loadFilteringData();
-      await this.loadKpiData();
+      await this.loadFilteringData()
+      await this.loadKpiData()
     });
   }
-  reset() {
+
+  convertPeriodIntoRealDate() {
+    if (this.state.period == 'this_month') {
+      this.state.periodStartAt = moment().startOf('month').format('YYYY-MM-DD')
+      this.state.periodEndAt = moment().endOf('month').format('YYYY-MM-DD')
+    } else if (this.state.period == 'today') {
+      this.state.periodStartAt = moment().format('YYYY-MM-DD')
+      this.state.periodEndAt = moment().format('YYYY-MM-DD')
+    }
+  }
+  onChangePeriod() {
+    if (this.state.period == 'custom_date') {
+      this.state.showDateRange = true
+    } else {
+      this.state.showDateRange = false
+    }
+    this.convertPeriodIntoRealDate()
+    console.log('start at:', this.state.periodStartAt)
+    console.log('end at:', this.state.periodEndAt)
+  }
+  onChangeStartAt() {
+    this.state.periodStartAt = moment(this.state.periodStartAt).format('YYYY-MM-DD')
+    console.log('New start at:', this.state.periodStartAt)
+  }
+  onChangeEndAt() {
+    this.state.periodEndAt = moment(this.state.periodEndAt).format('YYYY-MM-DD')
+    console.log('New end at:', this.state.periodEndAt)
+  }
+  applyFilter() {
+    this.filteringParameter = {
+      distributorId: this.state.distributorId,
+      periodStartAt: this.state.periodStartAt,
+      periodEndAt: this.state.periodEndAt,
+      country: this.state.country,
+      branch: this.state.branch,
+      currency: this.state.currency
+    }
+    this.loadKpiData()
+    // console.log('distributor Id:', this.state.distributorId)
+    // console.log('Start At:', this.state.periodStartAt)
+    // console.log('End At:', this.state.periodEndAt)
+    // console.log('country:', this.state.country)
+    // console.log('branch:', this.state.branch)
+    // console.log('currency:', this.state.currency)
+
+  }
+  resetFilter() {
     $('.form-control').val('');
   }
   async loadFilteringData() {
@@ -54,12 +107,14 @@ export class OwlKpiDashboard extends Component {
 
 
   async loadKpiData() {
-    let kpi_data = await this.rpc("/kpi/data");
-    kpi_data = JSON.parse(kpi_data);
-    this.state.kpi = kpi_data;
+
+    let kpi_data = await this.rpc("/kpi/data", this.filteringParameter)
+    console.log(kpi_data)
+    kpi_data = JSON.parse(kpi_data)
+    this.state.kpi = kpi_data
   }
 }
 
-OwlKpiDashboard.template = "owl.KpiDashboard";
-OwlKpiDashboard.components = { KpiCard, DateRange, SelectInput };
-actionRegistry.add("kpi_dashboard", OwlKpiDashboard);
+OwlKpiDashboard.template = "owl.KpiDashboard"
+OwlKpiDashboard.components = { KpiCard, DateRange, SelectInput }
+actionRegistry.add("kpi_dashboard", OwlKpiDashboard)

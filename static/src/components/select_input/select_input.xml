@@ -5,7 +5,7 @@
             <label for="props.id">
                 <t t-esc="props.label"/>
             </label>
-            <select class="form-control"  t-ref="select_input">
+            <select class="form-control"  t-ref="select_input" t-model="props.tModel" t-on-change="test">
                 <option value="">Select
                     <span>
                         <t t-esc="props.label"/>

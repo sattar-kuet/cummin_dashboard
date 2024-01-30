@@ -6,94 +6,73 @@
                 <div class="header__select">
                     <!-- header form -->
                     <section class="header__form">
-                        <SelectInput 
-                        label="'distributor'"
-                        dataList="state.distributors"
-                        />
                         <div class="form__group">
-                            <label for="daterange">Time Period</label>
-                            <DateRange />
-                        </div>
-                        <div class="form__group">
-                            <label for="region">Time Period</label>
-                            <select  id="region">
-                                <option value="dhaka">Today</option>
-                                <option value="dhaka">This month</option>
-                                <option value="dhaka">Custom Data</option>
+                            <label for="distributor">Distributor</label>
+                            <select class="form-control"  t-model="state.distributorId">
+                                <option value="">Select Distributor</option>
+                                <t t-foreach="state.distributors" t-as="data" t-key="data.key">
+                                    <option t-att-value="data.id">
+                                        <t t-esc="data.name"/>
+                                    </option>
+                                </t>
                             </select>
                         </div>
                         <div class="form__group">
-                            <label for="region">Start Data</label>
-                            <input type="date"/>
+                            <label for="period">Time Period</label>
+                            <select  id="period" t-model="state.period" t-on-change="onChangePeriod">
+                                <option value="all_time">All Time</option>
+                                <option value="today">Today</option>
+                                <option value="this_month">This Month</option>
+                                <option value="custom_date">Custom Date</option>
+                            </select>
+                        </div>
+                        <div class="form__group" t-if="state.showDateRange">
+                            <label for="start_date">Start Date</label>
+                            <input type="date" id="start_date" t-model="state.periodStartAt" t-on-change="onChangeStartAt"/>
+                        </div>
+                        <div class="form__group" t-if="state.showDateRange">
+                            <label for="end_date">End Date</label>
+                            <input type="date" id="end_date" t-model="state.periodEndAt" t-on-change="onChangeEndAt"/>
                         </div>
                         <div class="form__group">
-                            <label for="region">End Data</label>
-                            <input type="date"/>
-                        </div>
-                        <div class="form__group">
-                            <label for="region">Time Period</label>
-                            <select  id="region">
-                                <option value="dhaka">Today</option>
-                                <option value="dhaka">This month</option>
-                                <option value="dhaka">Custom Data</option>
+                            <label for="country">Country</label>
+                            <select class="form-control"  t-model="state.country">
+                                <option value="">Select Country</option>
+                                <t t-foreach="state.countries" t-as="data" t-key="data.id">
+                                    <option t-att-value="data.id">
+                                        <t t-esc="data.name"/>
+                                    </option>
+                                </t>
                             </select>
                         </div>
                         <div class="form__group">
-                            <label for="region">Region</label>
-                            <select name="region" id="region">
-                                <option value="">Select region</option>
-                                <option value="dhaka">Dhaka</option>
+                            <label for="currency">Branch</label>
+                            <select class="form-control"  t-model="state.branch">
+                                <option value="">Select Branch</option>
+                                <t t-foreach="state.branches" t-as="data" t-key="data.id">
+                                    <option t-att-value="data.id">
+                                        <t t-esc="data.name"/>
+                                    </option>
+                                </t>
                             </select>
                         </div>
                         <div class="form__group">
-                            <label for="sub-region">Sub Region</label>
-                            <select name="sub-region" id="sub-region">
-                                <option value="">Select sub-region</option>
-                                <option value="dhaka">Dhaka</option>
+                            <label for="currency">Currency</label>
+                            <select class="form-control"  t-model="state.currency">
+                                <option value="">Select Currency</option>
+                                <t t-foreach="state.currencies" t-as="data" t-key="data.id">
+                                    <option t-att-value="data.id">
+                                        <t t-esc="data.name"/>
+                                    </option>
+                                </t>
                             </select>
-                        </div>
-                        <div class="form__group">
-                            <SelectInput 
-                            label="'country'"
-                            dataList="state.countries"
-                            />
-                        </div>
-                        <div class="form__group">
-                            <SelectInput 
-                            label="'branch'"
-                            dataList="state.branches"
-                            />
-                        </div>
-                        <div class="form__group">
-                            <SelectInput 
-                            label="'currency'"
-                            dataList="state.currencies"
-                            />
                         </div>
                         <div class="btn__group">
-                            <button class="form__btn apply__btn" type="submit">Apply</button>
-                            <button class="form__btn reset__btn" type="reset" t-on-click="reset">Reset</button>
+                            <button class="form__btn apply__btn" t-on-click="applyFilter">Apply</button>
+                            <button class="form__btn reset__btn" type="reset" t-on-click="resetFilter">Reset</button>
                         </div>
                     </section>
                 </div>
-                <!-- header nav link -->
-                <ul class="header__list">
-                    <li class="list__item">
-                        <a href="" class="item__link">QSSA Reference</a>
-                    </li>
-                    <li class="list__item">
-                        <a href="" class="item__link">Documentation</a>
-                    </li>
-                    <li class="list__item">
-                        <a href="" class="item__link">Data Refreash Status</a>
-                    </li>
-                    <li class="list__item">
-                        <a href="" class="item__link">QSSA Status - WIP</a>
-                    </li>
-                    <li class="list__item">
-                        <a href="" class="item__link">Master Data</a>
-                    </li>
-                </ul>
             </div>
             <div class="dashboard__content">
                 <!-- item 1 -->
@@ -135,28 +114,6 @@
                             />
                         </div>
                     </div>
-                </div>
-                <!-- item 2 -->
-                <div class="dashboard__item">
-                    <div class="dashboard__title">
-                        <h2>Positively Impacting Employees</h2>
-                    </div>
-                    <KpiCard
-                            value="state.kpi.positivelyImpactingEmployees.recordableIncidentRate"
-                            title="'Recordable Incident Rate'"
-                    />
-                    <KpiCard
-                            value="state.kpi.positivelyImpactingEmployees.nearHitMissRate"
-                            title="'Near Hit / Miss Rate'"
-                    />
-                    <KpiCard
-                            value="state.kpi.positivelyImpactingEmployees.jsoCompletionRate"
-                            title="'JSO Completion Rate'"
-                    />
-                    <KpiCard
-                            value="state.kpi.positivelyImpactingEmployees.na"
-                            title="'N/A'"
-                    />
                 </div>
                 <!-- item 3 -->
                 <div class="dashboard__item">

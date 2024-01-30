@@ -57,21 +57,52 @@ class Api(http.Controller):
     
     @http.route('/kpi/data', auth="user", type="json")
     def kpi_data(self, **data):
-        maintenance_requests = request.env['maintenance.request'].search([])
+        domain = []
+        if data:
+           company_id = int(data['distributorId'])
+           if company_id > 0:
+               domain.append(('company_id', '=', company_id))
+
+           if data['periodStartAt']:
+               domain.append(('request_date', '>=', data['periodStartAt']))
+            
+           if data['periodEndAt']:
+               domain.append(('request_date', '<=', data['periodEndAt']))
+
+           if data['country']:
+               domain.append(('country', '=', data['country']))
+
+           if data['branch']:
+               domain.append(('branch', '=', data['branch']))
+
+           if data['currency']:
+               domain.append(('currency', '=', data['currency']))
+            
+
+        maintenance_requests = request.env['maintenance.request'].search(domain)
         wip_cost = 0
         wip_billable_amount = 0
+        wo_count = 0
+        wo_open = 0
+        wo_invoiced = 0
         for maintenance_request in maintenance_requests:
             wip_cost += maintenance_request.wip_cost
             wip_billable_amount += maintenance_request.billed_hours
+            wo_count += 1
+            if maintenance_request.invoice:
+              wo_invoiced += 1
+            else:
+                wo_open += 1
+
         kpi_data = {
             'growthMindSet': {
                 'woCount': {
-                    'open': 100,
-                    'invoiced': 110,
+                    'open': wo_open,
+                    'invoiced': wo_invoiced,
                     'serviceOperatingSales': 220,
                 },
                 'wip':{
-                    'woCount': 200,
+                    'woCount': wo_count,
                     'cost': wip_cost,
                     'billableAmount': wip_billable_amount,
                 }
@@ -88,5 +119,6 @@ class Api(http.Controller):
                 'labourUtilization': 12,
                 'na': 13,
             },
+            'parameter': data
         }
         return json.dumps(kpi_data)

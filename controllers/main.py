@@ -71,8 +71,17 @@ class Api(http.Controller):
         maintenance_request_tree_view_res_id = False
         if maintenance_request_list_view_obj:
             maintenance_request_tree_view_res_id = maintenance_request_list_view_obj.res_id
+
+        account_analytic_line_tree_view_obj = http.request.env['ir.model.data'].sudo().search(
+            [('name', '=', 'hr_timesheet.hr_timesheet_line_tree')]
+            , limit=1)
+        account_analytic_line_tree_view_res_id = False
+        if account_analytic_line_tree_view_obj:
+            account_analytic_line_tree_view_res_id = account_analytic_line_tree_view_obj.res_id
+
         initial_dta = {
-            'maintenanceRequestTreeViewResId': maintenance_request_tree_view_res_id
+            'maintenanceRequestTreeViewResId': maintenance_request_tree_view_res_id,
+             'accountAnalyticTreeViewResId': account_analytic_line_tree_view_res_id
         }
         return json.dumps(initial_dta)
     
@@ -142,12 +151,18 @@ class Api(http.Controller):
         total_hours = 0
         benifit_hours = 0
         applied_hours = 0
+        tb_ids = []
+        productivity_ids = []
+        applied_hours_ids = []
         for account_analytic in account_analytics:
             total_hours += account_analytic.unit_amount
+            tb_ids.append(account_analytic.id)
             if account_analytic.task in ['0410','0710','0711','0712']:
                 benifit_hours += account_analytic.unit_amount
+                productivity_ids.append(account_analytic.id)
             if account_analytic.task in ['0104','0105','0107','0108','0800']:
                 applied_hours += account_analytic.unit_amount
+                applied_hours_ids.append(account_analytic.id)
 
         payroll_hours = total_hours
         available_hours = payroll_hours - benifit_hours
@@ -171,9 +186,12 @@ class Api(http.Controller):
             
             'operationalEfficiencies': {
                 'tb': request.env['cummin_dashboard.helper'].calculate_percentage(total_hours,billed_hours),
+                'tb_ids': tb_ids,
                 'productivity': request.env['cummin_dashboard.helper'].calculate_percentage(payroll_hours,benifit_hours), 
+                'productivity_ids': productivity_ids,
                 'labourUtilization': request.env['cummin_dashboard.helper'].calculate_percentage(applied_hours,available_hours),
-                'billingEfficiency': request.env['cummin_dashboard.helper'].calculate_percentage(billed_hours,applied_hours)
+                'billingEfficiency': request.env['cummin_dashboard.helper'].calculate_percentage(billed_hours,applied_hours),
+                'applied_hours_ids': applied_hours_ids
             },
             'parameter': data
         }

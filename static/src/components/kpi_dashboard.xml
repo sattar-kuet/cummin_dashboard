@@ -127,21 +127,25 @@
                     </div>
                     <KpiCard
                             value="state.kpi.operationalEfficiencies.tb"
+                            t-on-click="viewTBdetail"
                             title="'TB %'"
                             isParcent='true'
                     />
                     <KpiCard
                             value="state.kpi.operationalEfficiencies.productivity"
+                            t-on-click="viewProductivityDetail"
                             title="'Productivity'"
                             isParcent='true'
                     />
                     <KpiCard
                             value="state.kpi.operationalEfficiencies.labourUtilization"
+                            t-on-click="viewLabourUtilizationDetail"
                             title="'Labour Utilization'"
                             isParcent='true'
                     />
                     <KpiCard
                             value="state.kpi.operationalEfficiencies.billingEfficiency"
+                            t-on-click="viewBillingEffeciencyDetail"
                             title="'Billing Efficiency'"
                             isParcent='true'
                     />

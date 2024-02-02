@@ -114,6 +114,7 @@ export class OwlKpiDashboard extends Component {
     // console.log(initial_data)
     initial_data = JSON.parse(initial_data)
     this.state.maintenanceRequestTreeViewResId = initial_data.maintenanceRequestTreeViewResId
+    this.state.accountAnalyticTreeViewResId = initial_data.accountAnalyticTreeViewResId
   }
 
   async loadKpiData() {
@@ -209,6 +210,78 @@ export class OwlKpiDashboard extends Component {
       domain,
       views: [
         [this.state.maintenanceRequestTreeViewResId, "list"],
+        [false, "form"],
+      ]
+    })
+  }
+  viewTBdetail() {
+    let domain = [
+      ['id', 'in', this.state.kpi.operationalEfficiencies.tb_ids]
+    ]
+
+    let title = 'TB'
+
+    this.actionService.doAction({
+      type: "ir.actions.act_window",
+      name: title,
+      res_model: "account.analytic.line",
+      domain,
+      views: [
+        [this.state.accountAnalyticTreeViewResId, "list"],
+        [false, "form"],
+      ]
+    })
+  }
+  viewProductivityDetail() {
+    let domain = [
+      ['id', 'in', this.state.kpi.operationalEfficiencies.productivity_ids]
+    ]
+
+    let title = 'TB'
+
+    this.actionService.doAction({
+      type: "ir.actions.act_window",
+      name: title,
+      res_model: "account.analytic.line",
+      domain,
+      views: [
+        [this.state.accountAnalyticTreeViewResId, "list"],
+        [false, "form"],
+      ]
+    })
+  }
+  viewLabourUtilizationDetail() {
+    let domain = [
+      ['id', 'in', this.state.kpi.operationalEfficiencies.applied_hours_ids]
+    ]
+
+    let title = 'Labour Utilization'
+
+    this.actionService.doAction({
+      type: "ir.actions.act_window",
+      name: title,
+      res_model: "account.analytic.line",
+      domain,
+      views: [
+        [this.state.accountAnalyticTreeViewResId, "list"],
+        [false, "form"],
+      ]
+    })
+  }
+  viewBillingEffeciencyDetail() {
+    let domain = [
+      ['id', 'in', this.state.kpi.operationalEfficiencies.applied_hours_ids]
+    ]
+
+    let title = 'Billing Effeciancy Detail'
+
+    this.actionService.doAction({
+      type: "ir.actions.act_window",
+      name: title,
+      res_model: "account.analytic.line",
+      domain,
+      views: [
+        [this.state.accountAnalyticTreeViewResId, "list"],
         [false, "form"],
       ]
     })

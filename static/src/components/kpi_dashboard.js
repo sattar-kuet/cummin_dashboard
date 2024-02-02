@@ -68,6 +68,7 @@ export class OwlKpiDashboard extends Component {
       branch: this.state.branch,
       currency: this.state.currency
     }
+    console.log('**************************', this.state.filteringParameter)
     this.loadKpiData()
     // console.log('distributor Id:', this.state.distributorId)
     // console.log('Start At:', this.state.periodStartAt)
@@ -78,7 +79,13 @@ export class OwlKpiDashboard extends Component {
 
   }
   resetFilter() {
-    $('.form-control').val('');
+    $('.form-control').val('')
+    this.state.distributorId = 0
+    this.state.periodStartAt = ''
+    this.state.periodEndAt = ''
+    this.state.country = ''
+    this.state.branch = ''
+    this.state.currency = ''
   }
   async loadFilteringData() {
     await this.loadDistributors();

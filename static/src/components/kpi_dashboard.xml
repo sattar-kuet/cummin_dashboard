@@ -19,8 +19,8 @@
                         </div>
                         <div class="form__group">
                             <label for="period">Time Period</label>
-                            <select  id="period" t-model="state.period" t-on-change="onChangePeriod">
-                                <option value="all_time">All Time</option>
+                            <select class="form-control" id="period" t-model="state.period" t-on-change="onChangePeriod">
+                                <option value="">All Time</option>
                                 <option value="today">Today</option>
                                 <option value="this_month">This Month</option>
                                 <option value="custom_date">Custom Date</option>
@@ -28,11 +28,11 @@
                         </div>
                         <div class="form__group" t-if="state.showDateRange">
                             <label for="start_date">Start Date</label>
-                            <input type="date" id="start_date" t-model="state.periodStartAt" t-on-change="onChangeStartAt"/>
+                            <input class="form-control" type="date" id="start_date" t-model="state.periodStartAt" t-on-change="onChangeStartAt"/>
                         </div>
                         <div class="form__group" t-if="state.showDateRange">
                             <label for="end_date">End Date</label>
-                            <input type="date" id="end_date" t-model="state.periodEndAt" t-on-change="onChangeEndAt"/>
+                            <input class="form-control" type="date" id="end_date" t-model="state.periodEndAt" t-on-change="onChangeEndAt"/>
                         </div>
                         <div class="form__group">
                             <label for="country">Country</label>
@@ -84,10 +84,12 @@
                         <div class="card__header">WO Count</div>
                         <div class="card__group">
                             <KpiCard
+                                    t-on-click="viewOpenMaintananceRequest"
                                     value="state.kpi.growthMindSet.woCount.open"
                                     title="'Open'"
                             />
                             <KpiCard
+                                    t-on-click="viewInvoicedMaintananceRequest"
                                     value="state.kpi.growthMindSet.woCount.invoiced"
                                     title="'Invoiced'"
                             />
@@ -101,14 +103,17 @@
                         <div class="card__header">WIP</div>
                         <div class="card__group">
                             <KpiCard
+                                    t-on-click="viewWipWoCountMaintananceRequest"
                                     value="state.kpi.growthMindSet.wip.woCount"
                                     title="'Wo Count'"
                             />
                             <KpiCard
+                                    t-on-click="viewWipCostMaintananceRequest"
                                     value="state.kpi.growthMindSet.wip.cost"
                                     title="'Cost'"
                             />
                             <KpiCard
+                                    t-on-click="viewBillableMaintananceRequest"
                                     value="state.kpi.growthMindSet.wip.billableAmount"
                                     title="'Billable Amount'"
                             />
@@ -126,7 +131,7 @@
                             isParcent='true'
                     />
                     <KpiCard
-                            value="state.kpi.operationalEfficiencies.Productivity"
+                            value="state.kpi.operationalEfficiencies.productivity"
                             title="'Productivity'"
                             isParcent='true'
                     />
@@ -136,8 +141,8 @@
                             isParcent='true'
                     />
                     <KpiCard
-                            value="state.kpi.operationalEfficiencies.na"
-                            title="'N/A'"
+                            value="state.kpi.operationalEfficiencies.billingEfficiency"
+                            title="'Billing Efficiency'"
                             isParcent='true'
                     />
                 </div>

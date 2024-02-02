@@ -14,18 +14,21 @@ export class OwlKpiDashboard extends Component {
         ########################################################################################*/
     this.state = useState({
       distributorId: 0,
-      period: 'all_time',
+      period: '',
       showDateRange: false,
       periodStartAt: '',
       periodEndAt: '',
       country: '',
       branch: '',
       currency: ''
-    });
+    })
+
+    this.actionService = useService("action")
     this.rpc = useService("rpc")
     onWillStart(async () => {
       await this.loadFilteringData()
       await this.loadKpiData()
+      await this.loadInitialData()
     });
   }
 
@@ -106,12 +109,109 @@ export class OwlKpiDashboard extends Component {
   }
 
 
-  async loadKpiData() {
+  async loadInitialData() {
+    let initial_data = await this.rpc("/kpi/load_initial_data", this.filteringParameter)
+    // console.log(initial_data)
+    initial_data = JSON.parse(initial_data)
+    this.state.maintenanceRequestTreeViewResId = initial_data.maintenanceRequestTreeViewResId
+  }
 
+  async loadKpiData() {
     let kpi_data = await this.rpc("/kpi/data", this.filteringParameter)
     console.log(kpi_data)
     kpi_data = JSON.parse(kpi_data)
     this.state.kpi = kpi_data
+  }
+
+  viewOpenMaintananceRequest() {
+    let domain = [
+      ['id', 'in', this.state.kpi.growthMindSet.woCount.openIds]
+    ]
+    console.log(this.state.kpi.growthMindSet.woCount.openIds)
+    let title = 'Maintenance Requests (Open)'
+
+    this.actionService.doAction({
+      type: "ir.actions.act_window",
+      name: title,
+      res_model: "maintenance.request",
+      domain,
+      views: [
+        [this.state.maintenanceRequestTreeViewResId, "list"],
+        [false, "form"],
+      ]
+    })
+  }
+  viewInvoicedMaintananceRequest() {
+    let domain = [
+      ['id', 'in', this.state.kpi.growthMindSet.woCount.invoicedIds]
+    ]
+    console.log(this.state.kpi.growthMindSet.woCount.invoicedIds)
+    let title = 'Maintenance Requests (Invoiced)'
+
+    this.actionService.doAction({
+      type: "ir.actions.act_window",
+      name: title,
+      res_model: "maintenance.request",
+      domain,
+      views: [
+        [this.state.maintenanceRequestTreeViewResId, "list"],
+        [false, "form"],
+      ]
+    })
+  }
+  viewWipWoCountMaintananceRequest() {
+    let domain = [
+      ['id', 'in', this.state.kpi.growthMindSet.wip.ids]
+    ]
+    console.log(this.state.kpi.growthMindSet.wip.owCountIds)
+    let title = 'Maintenance Requests (Wo Count)'
+
+    this.actionService.doAction({
+      type: "ir.actions.act_window",
+      name: title,
+      res_model: "maintenance.request",
+      domain,
+      views: [
+        [this.state.maintenanceRequestTreeViewResId, "list"],
+        [false, "form"],
+      ]
+    })
+  }
+  viewBillableMaintananceRequest() {
+    let domain = [
+      ['id', 'in', this.state.kpi.growthMindSet.wip.ids]
+    ]
+    console.log(this.state.kpi.growthMindSet.wip.billableIds)
+    let title = 'Maintenance Requests (Billable)'
+
+    this.actionService.doAction({
+      type: "ir.actions.act_window",
+      name: title,
+      res_model: "maintenance.request",
+      domain,
+      views: [
+        [this.state.maintenanceRequestTreeViewResId, "list"],
+        [false, "form"],
+      ]
+    })
+  }
+  viewWipCostMaintananceRequest() {
+    let domain = [
+      ['id', 'in', this.state.kpi.growthMindSet.wip.ids]
+    ]
+    console.log(this.state.kpi.growthMindSet.wip.ids)
+    let title = 'Maintenance Requests (WIP Cost)'
+
+    this.actionService.doAction({
+      type: "ir.actions.act_window",
+      name: title,
+      res_model: "maintenance.request",
+      domain,
+      views: [
+        [this.state.maintenanceRequestTreeViewResId, "list"],
+        [false, "form"],
+      ]
+    })
   }
 }
 

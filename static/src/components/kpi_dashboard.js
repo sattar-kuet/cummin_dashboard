@@ -60,7 +60,7 @@ export class OwlKpiDashboard extends Component {
     console.log('New end at:', this.state.periodEndAt)
   }
   applyFilter() {
-    this.filteringParameter = {
+    this.state.filteringParameter = {
       distributorId: this.state.distributorId,
       periodStartAt: this.state.periodStartAt,
       periodEndAt: this.state.periodEndAt,
@@ -118,7 +118,7 @@ export class OwlKpiDashboard extends Component {
   }
 
   async loadKpiData() {
-    let kpi_data = await this.rpc("/kpi/data", this.filteringParameter)
+    let kpi_data = await this.rpc("/kpi/data", this.state.filteringParameter)
     console.log(kpi_data)
     kpi_data = JSON.parse(kpi_data)
     this.state.kpi = kpi_data

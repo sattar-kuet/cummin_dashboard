@@ -196,6 +196,7 @@ class Api(http.Controller):
                 }
             },
             
+            
             'operationalEfficiencies': {
                 'tb': request.env['cummin_dashboard.helper'].calculate_percentage(total_hours,billed_hours),
                 'tbDetail': {'totalHours': total_hours, 'billedHours':billed_hours},

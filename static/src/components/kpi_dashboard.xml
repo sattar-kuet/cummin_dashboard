@@ -6,6 +6,9 @@
                 <div class="header__select">
                     <!-- header form -->
                     <section class="header__form">
+                        <div class="form__group">
+                            <img style="width: 220px;" src="/cummin_dashboard/static/src/image/logo.png"/>
+                        </div>
                         <div class="form__group" t-if="state.session.admin">
                             <label for="distributor">Distributor</label>
                             <select class="form-control"  t-model="state.distributorId">

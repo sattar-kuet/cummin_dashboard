@@ -14,22 +14,32 @@ export class OwlKpiDashboard extends Component {
         ########################################################################################*/
     this.state = useState({
       distributorId: 0,
+      distributor: 'Test',
       period: '',
       showDateRange: false,
       periodStartAt: '',
       periodEndAt: '',
       country: '',
       branch: '',
-      currency: ''
+      currency: '',
+      showTbDetail: false
     })
 
     this.actionService = useService("action")
     this.rpc = useService("rpc")
+
     onWillStart(async () => {
+      await this.loadSession()
       await this.loadFilteringData()
       await this.loadKpiData()
       await this.loadInitialData()
     });
+  }
+
+  async loadSession() {
+    let session = await this.rpc("/session/info")
+    this.state.session = JSON.parse(session)
+    console.log(this.state.session)
   }
 
   convertPeriodIntoRealDate() {
@@ -86,6 +96,7 @@ export class OwlKpiDashboard extends Component {
     this.state.country = ''
     this.state.branch = ''
     this.state.currency = ''
+    this.state.showDateRange = false
   }
   async loadFilteringData() {
     await this.loadDistributors();
@@ -94,9 +105,13 @@ export class OwlKpiDashboard extends Component {
     await this.loadCurrencies();
   }
   async loadDistributors() {
-    let distributors = await this.rpc("/distributor/list");
-    distributors = JSON.parse(distributors);
-    this.state.distributors = distributors;
+    if (this.state.session.distributor) {
+      this.state.distributorId = this.state.session.company_ids[0]
+    } else {
+      let distributors = await this.rpc("/distributor/list");
+      distributors = JSON.parse(distributors);
+      this.state.distributors = distributors;
+    }
   }
 
   async loadCountries() {
@@ -222,22 +237,23 @@ export class OwlKpiDashboard extends Component {
     })
   }
   viewTBdetail() {
-    let domain = [
-      ['id', 'in', this.state.kpi.operationalEfficiencies.tb_ids]
-    ]
+    this.state.showTbDetail = !this.state.showTbDetail
+    // let domain = [
+    //   ['id', 'in', this.state.kpi.operationalEfficiencies.tb_ids]
+    // ]
 
-    let title = 'TB'
+    // let title = 'TB'
 
-    this.actionService.doAction({
-      type: "ir.actions.act_window",
-      name: title,
-      res_model: "account.analytic.line",
-      domain,
-      views: [
-        [this.state.accountAnalyticTreeViewResId, "list"],
-        [false, "form"],
-      ]
-    })
+    // this.actionService.doAction({
+    //   type: "ir.actions.act_window",
+    //   name: title,
+    //   res_model: "account.analytic.line",
+    //   domain,
+    //   views: [
+    //     [this.state.accountAnalyticTreeViewResId, "list"],
+    //     [false, "form"],
+    //   ]
+    // })
   }
   viewProductivityDetail() {
     let domain = [

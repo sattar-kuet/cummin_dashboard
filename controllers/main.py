@@ -85,6 +85,17 @@ class Api(http.Controller):
         }
         return json.dumps(initial_dta)
     
+    @http.route('/session/info', auth="user", type="json")
+    def user_type(self, **data):
+        user_type = {
+            'admin':  request.env.user.has_group('cummin_dashboard.group_cummin_admin'), 
+            'distributor':  request.env.user.has_group('cummin_dashboard.group_distributor'), 
+            'technician':  request.env.user.has_group('cummin_dashboard.group_technician'), 
+            'company_ids': request.env.user.company_ids.ids,
+            'company_names': [company.name for company in request.env.user.company_ids]
+        }
+        return json.dumps(user_type)
+    
     @http.route('/kpi/data', auth="user", type="json")
     def kpi_data(self, **data):
         
@@ -124,6 +135,7 @@ class Api(http.Controller):
         wo_invoiced = 0
         billed_hours = 0
         billable_hours = 0
+        service_operating_sales = 0
         maintenance_request_open_ids = []
         maintenance_request_invoiced_ids = []
         
@@ -136,8 +148,9 @@ class Api(http.Controller):
                 maintenance_request_open_ids.append(maintenance_request.id)
             if maintenance_request.stage_id.name == 'Closure':
                 billable_hours += maintenance_request.billed_hours
+                service_operating_sales += maintenance_request.labour_sales + maintenance_request.parts_sales + maintenance_request.other_sales
             else:
-               wip_billable_amount += maintenance_request.billed_hours
+               wip_billable_amount += maintenance_request.labour_sales + maintenance_request.parts_sales + maintenance_request.other_sales
                wip_billable_ids.append(maintenance_request.id)
                wo_count += 1
                wo_count_ids.append(maintenance_request.id)
@@ -151,12 +164,11 @@ class Api(http.Controller):
         total_hours = 0
         benifit_hours = 0
         applied_hours = 0
-        tb_ids = []
+        tb_detail = {}
         productivity_ids = []
         applied_hours_ids = []
         for account_analytic in account_analytics:
             total_hours += account_analytic.unit_amount
-            tb_ids.append(account_analytic.id)
             if account_analytic.task in ['0410','0710','0711','0712']:
                 benifit_hours += account_analytic.unit_amount
                 productivity_ids.append(account_analytic.id)
@@ -174,7 +186,7 @@ class Api(http.Controller):
                     'openIds': maintenance_request_open_ids,
                     'invoiced': wo_invoiced,
                     'invoicedIds': maintenance_request_invoiced_ids,
-                    'serviceOperatingSales': 220,
+                    'serviceOperatingSales': service_operating_sales,
                 },
                 'wip':{
                     'woCount': wo_count,
@@ -186,7 +198,7 @@ class Api(http.Controller):
             
             'operationalEfficiencies': {
                 'tb': request.env['cummin_dashboard.helper'].calculate_percentage(total_hours,billed_hours),
-                'tb_ids': tb_ids,
+                'tbDetail': {'totalHours': total_hours, 'billedHours':billed_hours},
                 'productivity': request.env['cummin_dashboard.helper'].calculate_percentage(payroll_hours,benifit_hours), 
                 'productivity_ids': productivity_ids,
                 'labourUtilization': request.env['cummin_dashboard.helper'].calculate_percentage(applied_hours,available_hours),

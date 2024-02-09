@@ -8,6 +8,8 @@
     'license': 'LGPL-3',
     'data': [
          'views/dashboard_view.xml',
+         'views/templates.xml',
+         'security/user_group.xml'
     ],
     'demo': [],
     'installable': True,

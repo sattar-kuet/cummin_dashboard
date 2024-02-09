@@ -1,6 +1,6 @@
 from odoo import fields, models
 
-class Helper(models.AbstractModel):
+class Helper(models.AbstractModel): 
     _name = 'cummin_dashboard.helper'
 
 

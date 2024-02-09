@@ -6,7 +6,7 @@
                 <div class="header__select">
                     <!-- header form -->
                     <section class="header__form">
-                        <div class="form__group">
+                        <div class="form__group" t-if="state.session.admin">
                             <label for="distributor">Distributor</label>
                             <select class="form-control"  t-model="state.distributorId">
                                 <option value="">Select Distributor</option>
@@ -16,6 +16,12 @@
                                     </option>
                                 </t>
                             </select>
+                        </div>
+                        <div class="form__group" t-if="state.session.distributor">
+                            <label for="distributor">Distributor</label>
+                            <p style="text-align: center;border: 1px solid #d7d1d1; padding:3px;">
+                                <t t-esc="state.session.company_names[0]"/>
+                            </p>
                         </div>
                         <div class="form__group">
                             <label for="period">Time Period</label>
@@ -75,53 +81,208 @@
                 </div>
             </div>
             <div class="dashboard__content">
-                <!-- item 1 -->
                 <div class="dashboard__item">
                     <div class="dashboard__title">
-                        <h2>Groth Mindset</h2>
+                        <h2>Growth Mindset</h2>
                     </div>
-                    <div class="dashboard__card">
-                        <div class="card__header">WO Count</div>
-                        <div class="card__group">
-                            <KpiCard
-                                    t-on-click="viewOpenMaintananceRequest"
-                                    value="state.kpi.growthMindSet.woCount.open"
-                                    title="'Open'"
-                            />
-                            <KpiCard
-                                    t-on-click="viewInvoicedMaintananceRequest"
-                                    value="state.kpi.growthMindSet.woCount.invoiced"
-                                    title="'Invoiced'"
-                            />
-                        </div>
+                    <div class="dashboard__tables">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Open</th>
+                                    <th>Invoiced</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>WO Count</td>
+                                    <td t-on-click="viewOpenMaintananceRequest" style="cursor: pointer;">
+                                        <t t-esc="state.kpi.growthMindSet.woCount.open"/>
+                                    </td>
+                                    <td t-on-click="viewInvoicedMaintananceRequest" style="cursor: pointer;">
+                                        <t t-esc="state.kpi.growthMindSet.woCount.invoiced"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Service Operating Sales</td>
+                                    <td>
+                                        <t t-esc="state.kpi.growthMindSet.woCount.serviceOperatingSales" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>WO Conunt</th>
+                                    <th>Cost</th>
+                                    <th>Billable Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>WO Count</td>
+                                    <td t-on-click="viewWipWoCountMaintananceRequest" style="cursor: pointer;">
+                                        <t t-esc="state.kpi.growthMindSet.wip.woCount"/>
+                                    </td>
+                                    <td t-on-click="viewWipCostMaintananceRequest" style="cursor: pointer;">
+                                        <t t-esc="state.kpi.growthMindSet.wip.cost"/>
+                                    </td>
+                                    <td t-on-click="viewBillableMaintananceRequest" style="cursor: pointer;">
+                                        <t t-esc="state.kpi.growthMindSet.wip.billableAmount"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <KpiCard
-                        value="state.kpi.growthMindSet.woCount.serviceOperatingSales"
-                        title="'Service Operating Sales'"
-                    />
-                    <div class="dashboard__card">
-                        <div class="card__header">WIP</div>
-                        <div class="card__group">
-                            <KpiCard
-                                    t-on-click="viewWipWoCountMaintananceRequest"
-                                    value="state.kpi.growthMindSet.wip.woCount"
-                                    title="'Wo Count'"
-                            />
-                            <KpiCard
-                                    t-on-click="viewWipCostMaintananceRequest"
-                                    value="state.kpi.growthMindSet.wip.cost"
-                                    title="'Cost'"
-                            />
-                            <KpiCard
-                                    t-on-click="viewBillableMaintananceRequest"
-                                    value="state.kpi.growthMindSet.wip.billableAmount"
-                                    title="'Billable Amount'"
-                            />
-                        </div>
+                </div>
+                <div class="dashboard__item">
+                    <div class="dashboard__title">
+                        <h2>Operational Efficiencies</h2>
+                    </div>
+                    <div class="dashboard__tables">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">TB %</td>
+                                    <td colspan="2" t-on-click="viewTBdetail" style="cursor: pointer;">
+                                        <t t-esc="state.kpi.operationalEfficiencies.tb"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="state.showTbDetail">
+                                    <td style="color: #495057; background-color: transparent;">Total Hours</td>
+                                    <td>
+                                        <t t-esc="state.kpi.operationalEfficiencies.tbDetail.totalHours"/>
+                                    </td>
+                                    <td>Billed Hours</td>
+                                    <td>
+                                        <t t-esc="state.kpi.operationalEfficiencies.tbDetail.billedHours"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Productivity</td>
+                                    <td t-on-click="viewProductivityDetail" style="cursor: pointer;">0.0%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Labour Utilization</td>
+                                    <td t-on-click="viewLabourUtilizationDetail" style="cursor: pointer;">0.0%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Billing Efficiency</td>
+                                    <td t-on-click="viewBillingEffeciencyDetail" style="cursor: pointer;">0.0%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>PIP</td>
+                                    <td  style="cursor: pointer;">0.0%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Medium PIP Hours</th>
+                                    <th>Average PIP Hours</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>PIP</td>
+                                    <td style="cursor: pointer;">0.0%</td>
+                                    <td style="cursor: pointer;">0.0%</td>
+                                </tr>
+                            </tbody>
+                        </table> -->
+                        <!-- <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Warranty Recovery</td>
+                                    <td style="cursor: pointer;">0.0%</td>
+                                </tr>
+                            </tbody>
+                        </table> -->
+                        <!-- <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Service Operating Prime Margin</td>
+                                    <td style="cursor: pointer;">0.0%</td>
+                                </tr>
+                            </tbody>
+                        </table> -->
                     </div>
                 </div>
                 <!-- item 3 -->
-                <div class="dashboard__item">
+                <!-- <div class="dashboard__item">
                     <div class="dashboard__title">
                         <h2>Operational Efficiencies</h2>
                     </div>
@@ -149,7 +310,7 @@
                             title="'Billing Efficiency'"
                             isParcent='true'
                     />
-                </div>
+                </div> -->
             </div>
         </section>
         <div style="margin-bottom:25px;"></div>

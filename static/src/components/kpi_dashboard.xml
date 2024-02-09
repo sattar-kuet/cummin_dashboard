@@ -32,6 +32,7 @@
                                 <option value="">All Time</option>
                                 <option value="today">Today</option>
                                 <option value="this_month">This Month</option>
+                                <option value="prev_month">Previous Month</option>
                                 <option value="custom_date">Custom Date</option>
                             </select>
                         </div>

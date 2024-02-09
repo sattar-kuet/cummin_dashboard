@@ -46,7 +46,12 @@ export class OwlKpiDashboard extends Component {
     if (this.state.period == 'this_month') {
       this.state.periodStartAt = moment().startOf('month').format('YYYY-MM-DD')
       this.state.periodEndAt = moment().endOf('month').format('YYYY-MM-DD')
-    } else if (this.state.period == 'today') {
+    }
+    else if (this.state.period == 'prev_month') {
+      this.state.periodStartAt = moment().subtract(1, 'month').startOf('month').format('YYYY-MM-DD')
+      this.state.periodEndAt = moment().subtract(1, 'month').endOf('month').format('YYYY-MM-DD')
+    }
+    else if (this.state.period == 'today') {
       this.state.periodStartAt = moment().format('YYYY-MM-DD')
       this.state.periodEndAt = moment().format('YYYY-MM-DD')
     }

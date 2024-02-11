@@ -187,6 +187,14 @@ export class OwlKpiDashboard extends Component {
       ]
     })
   }
+  viewOWaging() {
+    this.actionService.doAction(
+      "cummin_dashboard.action_wo_aging"
+    )
+  }
+
+
+
   viewWipWoCountMaintananceRequest() {
     let domain = [
       ['id', 'in', this.state.kpi.growthMindSet.wip.ids]

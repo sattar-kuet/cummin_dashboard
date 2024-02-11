@@ -22,40 +22,40 @@ export class WoAging extends Component {
     loadwoAgin() {
         this.state.woAgin = [
             {
-                date: "Jan 20",
-                count: 2.0,
+                label: "Jan 20",
+                value: 2.0,
             },
 
             {
-                date: "Feb 20",
-                count: 2.0,
+                label: "Feb 20",
+                value: 2.0,
             },
 
             {
-                date: "Mar 20",
-                count: 4.0,
+                label: "Mar 20",
+                value: 4.0,
             },
 
             {
-                date: "Apr 20",
-                count: 6.0,
+                label: "Apr 20",
+                value: 6.0,
             },
 
             {
-                date: "May 20",
-                count: 8.0,
+                label: "May 20",
+                value: 8.0,
             },
             {
-                date: "Jun 20",
-                count: 12.0,
+                label: "Jun 20",
+                value: 12.0,
             },
             {
-                date: "Jul 20",
-                count: 10
+                label: "Jul 20",
+                value: 10
             },
             {
-                date: "Aug 20",
-                count: 9
+                label: "Aug 20",
+                value: 9
             },
         ]
     }

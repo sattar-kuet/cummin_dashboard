@@ -7,7 +7,7 @@
                 bg_color="'#AA2E24'" data="state.woAgin"/>
 			</section>
 			<section class="main__table sticky-top bg-white">
-				<Table/>
+				<Table data="state.woAginTableData"/>
 			</section>
 		</div>
 	</t>

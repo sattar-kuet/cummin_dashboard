@@ -16,6 +16,7 @@ export class WoAging extends Component {
         })
         onWillStart(async () => {
             this.loadwoAgin()
+            this.loadwoAginTableData()
         })
     }
 
@@ -58,6 +59,19 @@ export class WoAging extends Component {
                 value: 9
             },
         ]
+    }
+
+    loadwoAginTableData() {
+        this.state.woAginTableData = {
+            th: [
+                { title: '', colspan: 1, key: 1 },
+                { title: '', colspan: 1, key: 2 },
+                { title: 'Order Age', colspan: 3, key: 3 },
+                { title: 'Applied', colspan: 1, key: 4 },
+                { title: 'Bill Amount', colspan: 4, key: 5 },
+                { title: 'Cost', colspan: 4, key: 6 },
+            ]
+        }
     }
 
 

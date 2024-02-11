@@ -11,12 +11,11 @@
         <table >
             <thead >
                 <tr class="highlighted">
-                    <th ></th>
-                    <th></th>
-                    <th colspan="3">Order Age</th>
-                    <th>Applied</th>
-                    <th colspan="4">Bill Amount</th>
-                    <th colspan="4">Cost</th>
+                    <t t-foreach="props.data.th" t-as="th" t-key="th.key">
+                        <th t-attf-colspan="{{th.colspan}}">
+                            <t t-esc="th.title"/>
+                        </th>
+                    </t>
                 </tr>
             </thead>
             <tbody>

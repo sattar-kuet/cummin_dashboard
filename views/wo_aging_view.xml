@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="action_wo_aging" model="ir.actions.client">
+            <field name="name">WO Aging</field>
+            <field name="tag">wo_aging</field>
+        </record>
+        <menuitem
+        name="WO Aging"
+        id="menu_wo_aging"
+        action="action_wo_aging"
+        parent="menu_graph_dashboard"
+        sequence="0"/>
+    </data>
+</odoo>

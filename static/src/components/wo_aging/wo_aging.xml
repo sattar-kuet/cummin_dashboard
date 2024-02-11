@@ -1,69 +1,14 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
 	<t t-name="owl.WoAging" owl="1">
 		<div class="vh-100 overflow-auto">
-			<section class="chart__section">
-            <ChartRenderer type="'bar'" title="'Total to Billed (TB) Ratio'"
-                bg_color="'#AA2E24'" data="state.totalBilled"/>
-            <ChartRenderer type="'bar'" title="'Paper In Process (PIP) Hrs'"
-                bg_color="'#4F81BD'" data="state.paperInProgress"/>
-
-            <ChartRenderer type="'line'" title="'Labour Utilisation'"
-            bg_color="'#EE2E24'" data="state.paperInProgress"/>
-            <ChartRenderer type="'line'" title="'Billing Efficiency'"
-            bg_color="'#EE2E24'" data="state.paperInProgress"/>
-            <ChartRenderer type="'line'" title="'Service Productivity'"
-            bg_color="'#EE2E24'" data="state.paperInProgress"/>
-        </section>
-			<section class="main__table sticky-top bg-white">
-				<div class="d-flex align-items-center justify-content-between">
-
-					<div class="table__paginate">
-						<div role="search" class="o_cp_pager">
-
-						</div>
-					</div>
-				</div>
-
-
-				<table >
-					<thead>
-						<tr>
-    						<th colspan="2">Name</th>
-							<th>Age</th>
-							<th>Age</th>
-							<th>Age</th>
-							<th>Age</th>
-							<th colspan="3">Age</th>
-							<th>Age</th>
-							<th>Age</th>
-							<th colspan="2">Age</th>
-							<th>Age</th>
-						</tr>
-					</thead>
-					<tbody>
-
-						<tr>
-    						<td>Jill</td>
-							<td>Smith</td>
-							<td>43</td>
-							<td>Jill</td>
-							<td>Smith</td>
-							<td>43</td>
-							<td>Jill</td>
-							<td>Smith</td>
-							<td>43</td>
-							<td>Jill</td>
-							<td>Smith</td>
-							<td>43</td>
-							<td>43</td>
-							<td>43</td>
-						</tr>
-					</tbody>
-				</table>
+			<section class="chart__section bg-white">
+				<ChartRenderer type="'bar'" title="'Wo Aging'"
+                bg_color="'#AA2E24'" data="state.woAgin"/>
 			</section>
-
+			<section class="main__table sticky-top bg-white">
+				<Table/>
+			</section>
 		</div>
 	</t>
 </templates>

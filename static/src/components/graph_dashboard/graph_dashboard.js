@@ -1,8 +1,8 @@
 /** @odoo-module */
 const { Component, onWillStart, useRef, onMounted, useState } = owl
 import { registry } from "@web/core/registry"
-import { ChartRenderer } from "./chart_renderer/chart_renderer"
-import { ChartRenderer2 } from "./chart_renderer2/chart_renderer2"
+import { ChartRenderer } from "../chart_renderer/chart_renderer"
+import { ChartRenderer2 } from "../chart_renderer2/chart_renderer2"
 
 
 export class OwlGraphDashboard extends Component {

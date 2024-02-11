@@ -1,8 +1,9 @@
 
-  /** @odoo-module */
+/** @odoo-module */
 const { Component, onWillStart, useRef, onMounted, useState } = owl
 import { registry } from "@web/core/registry"
-import { ChartRenderer } from "./chart_renderer/chart_renderer"
+import { ChartRenderer } from "../chart_renderer/chart_renderer"
+import { Table } from "../table/table"
 
 
 export class WoAging extends Component {
@@ -14,12 +15,12 @@ export class WoAging extends Component {
             period: 90,
         })
         onWillStart(async () => {
-            this.loadTotalBilled()
+            this.loadwoAgin()
         })
     }
 
-    loadTotalBilled() {
-        this.state.totalBilled = [
+    loadwoAgin() {
+        this.state.woAgin = [
             {
                 date: "Jan 20",
                 count: 2.0,
@@ -64,5 +65,5 @@ export class WoAging extends Component {
 
 
 WoAging.template = "owl.WoAging"
-WoAging.components = { ChartRenderer }
+WoAging.components = { ChartRenderer, Table }
 registry.category("actions").add("wo_aging", WoAging)

@@ -2,9 +2,9 @@
 const { Component, onWillStart, useRef, onMounted, useState } = owl;
 import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
-import { DateRange } from "./date_range/date_range";
-import { KpiCard } from "./kpi_card/kpi_card";
-import { SelectInput } from "./select_input/select_input";
+import { DateRange } from "../date_range/date_range";
+import { KpiCard } from "../kpi_card/kpi_card";
+import { SelectInput } from "../select_input/select_input";
 const actionRegistry = registry.category("actions");
 
 export class OwlKpiDashboard extends Component {

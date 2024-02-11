@@ -96,6 +96,48 @@ export class WoAging extends Component {
                             { title: '>80', colspan: 1, key: 19 },
                             { title: 'Total', colspan: 1, key: 20 },
                         ]
+                },
+                {
+                    class: '',
+                    key: 1001,
+                    td:
+                        [
+                            { title: 'AFRICA', colspan: 1, key: 7 },
+                            { title: 750, colspan: 1, key: 8 },
+                            { title: 135, colspan: 1, key: 9 },
+                            { title: 166, colspan: 1, key: 10 },
+                            { title: 449, colspan: 1, key: 11 },
+                            { title: 22893.2, colspan: 1, key: 12 },
+                            { title: 78459.53, colspan: 1, key: 13 },
+                            { title: 77854.32, colspan: 1, key: 14 },
+                            { title: 232086.25, colspan: 1, key: 15 },
+                            { title: 388400.10, colspan: 1, key: 16 },
+                            { title: 73241.01, colspan: 1, key: 17 },
+                            { title: 149294.48, colspan: 1, key: 18 },
+                            { title: 1092690.46, colspan: 1, key: 19 },
+                            { title: 1315225.94, colspan: 1, key: 20 },
+                        ]
+                },
+                {
+                    class: 'highlighted',
+                    key: 1002,
+                    td:
+                        [
+                            { title: 'Grand Total', colspan: 1, key: 7 },
+                            { title: 750, colspan: 1, key: 8 },
+                            { title: 135, colspan: 1, key: 9 },
+                            { title: 166, colspan: 1, key: 10 },
+                            { title: 449, colspan: 1, key: 11 },
+                            { title: 22893.2, colspan: 1, key: 12 },
+                            { title: 78459.53, colspan: 1, key: 13 },
+                            { title: 77854.32, colspan: 1, key: 14 },
+                            { title: 232086.25, colspan: 1, key: 15 },
+                            { title: 388400.10, colspan: 1, key: 16 },
+                            { title: 73241.01, colspan: 1, key: 17 },
+                            { title: 149294.48, colspan: 1, key: 18 },
+                            { title: 1092690.46, colspan: 1, key: 19 },
+                            { title: 1315225.94, colspan: 1, key: 20 },
+                        ]
                 }
             ]
         }

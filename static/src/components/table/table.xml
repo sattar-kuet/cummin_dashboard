@@ -10,7 +10,7 @@
         </div>
         <table >
             <thead>
-                <tr>
+                <tr class="highlighted">
                     <th colspan="2">Name</th>
                     <th>Age</th>
                     <th>Age</th>

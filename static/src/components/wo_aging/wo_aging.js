@@ -63,13 +63,40 @@ export class WoAging extends Component {
 
     loadwoAginTableData() {
         this.state.woAginTableData = {
-            th: [
-                { title: '', colspan: 1, key: 1 },
-                { title: '', colspan: 1, key: 2 },
-                { title: 'Order Age', colspan: 3, key: 3 },
-                { title: 'Applied', colspan: 1, key: 4 },
-                { title: 'Bill Amount', colspan: 4, key: 5 },
-                { title: 'Cost', colspan: 4, key: 6 },
+            th: {
+                class: 'highlighted',
+                items:
+                    [
+                        { title: '', colspan: 1, key: 1 },
+                        { title: '', colspan: 1, key: 2 },
+                        { title: 'Order Age', colspan: 3, key: 3 },
+                        { title: 'Applied', colspan: 1, key: 4 },
+                        { title: 'Bill Amount', colspan: 4, key: 5 },
+                        { title: 'Cost', colspan: 4, key: 6 },
+                    ]
+            },
+            tr: [
+                {
+                    class: 'highlighted',
+                    key: 1000,
+                    td:
+                        [
+                            { title: 'Region', colspan: 1, key: 7 },
+                            { title: 'Order Count', colspan: 1, key: 8 },
+                            { title: '0 to 30', colspan: 1, key: 9 },
+                            { title: '31 to 80', colspan: 1, key: 10 },
+                            { title: '>80', colspan: 1, key: 11 },
+                            { title: 'Labour Hours', colspan: 1, key: 12 },
+                            { title: '0 to 30', colspan: 1, key: 13 },
+                            { title: '31 to 80', colspan: 1, key: 14 },
+                            { title: '>80', colspan: 1, key: 15 },
+                            { title: 'Total for all Open WO', colspan: 1, key: 16 },
+                            { title: '0 to 30', colspan: 1, key: 17 },
+                            { title: '31 to 80', colspan: 1, key: 18 },
+                            { title: '>80', colspan: 1, key: 19 },
+                            { title: 'Total', colspan: 1, key: 20 },
+                        ]
+                }
             ]
         }
     }

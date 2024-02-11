@@ -2,6 +2,10 @@
     padding: 20px 40px 0;
     border-collapse: collapse;
 
+    .highlighted{
+            font-weight: 700;
+          }
+
     .table__header {
         display: flex;
         justify-content: space-between;
@@ -14,7 +18,6 @@
 
             .page__count {
                 font-size: 1rem;
-                font-weight: 700;
             }
 
             .page__btn {
@@ -36,7 +39,6 @@
 
                     i {
                         font-size: 1.3rem;
-                        font-weight: 900;
                     }
                 }
             }
@@ -57,14 +59,12 @@
 
         thead {
             background-color: #d6d6d6;
-            font-size: 1rem;
-            font-weight: 700;
 
             tr {
                 th {
                     border-right: 1px solid #c5c5c5;
                     padding: 6px 16px;
-                    text-align: right;
+                    text-align: center;
 
                     &:nth-child(-n + 2) {
                         text-align: left;
@@ -77,9 +77,11 @@
             }
         }
 
+
         tbody {
             font-size: 0.9rem;
-            font-weight: 600;
+
+
 
             tr {
                 border-bottom: 1px solid #d6d6d6;
@@ -103,13 +105,15 @@
         tfoot {
             background-color: #ffffff;
             font-size: 1rem;
-            font-weight: 700;
-
             tr {
                 td {
                     padding: 6px 16px;
                     border-right: 1px solid #c5c5c5;
                     text-align: right;
+
+                  &:nth-child(-n + 2) {
+                        text-align: left;
+                    }
                 }
             }
         }
@@ -132,7 +136,6 @@
 
             .page__count {
                 font-size: 1rem;
-                font-weight: 700;
             }
 
             .page__btn {
@@ -154,7 +157,7 @@
 
                     i {
                         font-size: 1.3rem;
-                        font-weight: 900;
+
                     }
                 }
             }
@@ -171,8 +174,6 @@
 
         thead {
             background-color: #eeeeee;
-            font-size: 1rem;
-            font-weight: 700;
 
             tr {
                 th {
@@ -191,9 +192,9 @@
             }
         }
 
+
         tbody {
             font-size: 0.9rem;
-            font-weight: 600;
 
             tr {
                 border-bottom: 1px solid #eeeeee;
@@ -224,11 +225,9 @@
                         margin: 0 auto;
                         cursor: pointer;
                         font-size: 0.8rem;
-                        font-weight: 500;
 
                         i {
                             font-size: 0.9rem;
-                            font-weight: 500;
                         }
                     }
                 }
@@ -238,13 +237,16 @@
         tfoot {
             background-color: #eeeeee;
             font-size: 0.9rem;
-            font-weight: 700;
 
             tr {
                 td {
                     padding: 5px 15px;
                     text-align: right;
                     border-right: 1px solid #d9d9d9;
+
+                  &:nth-child(-n + 2) {
+                        text-align: left;
+                    }
                 }
             }
         }

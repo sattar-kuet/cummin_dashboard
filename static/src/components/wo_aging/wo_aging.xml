@@ -2,12 +2,17 @@
 <templates xml:space="preserve">
 	<t t-name="owl.WoAging" owl="1">
 		<div class="vh-100 overflow-auto">
-			<section class="chart__section bg-white">
-				<ChartRenderer type="'bar'" title="'Wo Aging'"
+			<section class="dashborad__section">
+				<Filter periodStartAt="state.periodStartAt"/>
+				<section class="chart__section bg-white">
+					<div></div>
+					<ChartRenderer3 type="'bar'" title="'Wo Aging'"
                 bg_color="'#AA2E24'" data="state.woAgin"/>
-			</section>
-			<section class="main__table sticky-top bg-white">
-				<Table data="state.woAginTableData"/>
+					<div></div>
+				</section>
+				<section class="main__table sticky-top bg-white">
+					<Table data="state.woAginTableData"/>
+				</section>
 			</section>
 		</div>
 	</t>

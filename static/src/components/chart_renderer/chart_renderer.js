@@ -18,13 +18,14 @@ export class ChartRenderer extends Component {
   renderChart() {
     console.log("********", this.props);
     const tb_data = this.props.data;
-    new Chart(this.chartRef.el, {
+    var ctx = this.chartRef.el.getContext("2d");
+    new Chart(ctx, {
       type: this.props.type,
       data: {
-        labels: tb_data?.map((row) => row.label),
+        labels: tb_data?.map((row) => row.date),
         datasets: [
           {
-            data: tb_data?.map((row) => row.value),
+            data: tb_data?.map((row) => row.count),
             borderWidth: 1,
             backgroundColor: [this.props.bg_color],
             borderColor: [this.props.bg_color],

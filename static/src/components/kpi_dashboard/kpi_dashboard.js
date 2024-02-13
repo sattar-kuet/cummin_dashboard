@@ -1,11 +1,13 @@
 /** @odoo-module */
-const { Component, onWillStart, useRef, onMounted, useState } = owl;
-import { registry } from "@web/core/registry";
-import { useService } from "@web/core/utils/hooks";
-import { Filter } from "../filter/filter";
-import { KpiCard } from "../kpi_card/kpi_card";
-import { SelectInput } from "../select_input/select_input";
-const actionRegistry = registry.category("actions");
+const { Component, onWillStart, useRef, onMounted, useState } = owl
+import { registry } from "@web/core/registry"
+import { useService } from "@web/core/utils/hooks"
+import { Filter } from "../filter/filter"
+import { KpiCard } from "../kpi_card/kpi_card"
+import { SelectInput } from "../select_input/select_input"
+import { Utility } from "../utility"
+const utility = new Utility()
+const actionRegistry = registry.category("actions")
 
 export class OwlKpiDashboard extends Component {
   setup() {
@@ -45,17 +47,12 @@ export class OwlKpiDashboard extends Component {
     this.state.kpi = JSON.parse(kpi_data)
   }
   viewOWaging() {
-    this.setCookie('username', 'john_doe', 30)
+    utility.setCookie('username', 'john_doe', 30)
     this.actionService.doAction(
       "cummin_dashboard.action_wo_aging"
     )
   }
-  setCookie(name, value, days) {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
-    const cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
-    document.cookie = cookie;
-  }
+
 }
 
 OwlKpiDashboard.template = "owl.KpiDashboard"

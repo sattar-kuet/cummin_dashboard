@@ -103,7 +103,8 @@ export class OwlKpiDashboard extends Component {
   }
   viewOWaging() {
     this.actionService.doAction(
-      "cummin_dashboard.action_wo_aging"
+      "cummin_dashboard.action_wo_aging",
+      this.state.filteringParameter
     )
   }
 

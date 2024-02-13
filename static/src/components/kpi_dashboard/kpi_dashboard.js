@@ -13,16 +13,18 @@ export class OwlKpiDashboard extends Component {
                                 ATTENTION: such initial config is MUST
         ########################################################################################*/
     this.state = useState({
-      distributorId: 0,
-      distributor: 'Test',
-      period: '',
-      showDateRange: false,
-      periodStartAt: '',
-      periodEndAt: '',
-      country: '',
-      branch: '',
-      currency: '',
-      showTbDetail: false
+      filteringParameter: {
+        distributorId: 0,
+        distributor: '',
+        period: '',
+        showDateRange: false,
+        periodStartAt: '',
+        periodEndAt: '',
+        country: '',
+        branch: '',
+        currency: '',
+        showTbDetail: false
+      }
     })
 
     this.actionService = useService("action")

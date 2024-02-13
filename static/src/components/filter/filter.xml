@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="owl.Filter" owl="1">
+        <div class="dashboard__header">
+            <div class="header__select">
+                <section class="header__form">
+                    <div class="form__group">
+                        <img style="width: 220px;" src="/cummin_dashboard/static/src/image/logo.png"/>
+                    </div>
+                    <div class="form__group" t-if="state.session.admin">
+                        <label for="distributor">Distributor</label>
+                        <select class="form-control"  t-model="state.distributorId">
+                            <option value="">Select Distributor</option>
+                            <t t-foreach="state.distributors" t-as="data" t-key="data.key">
+                                <option t-att-value="data.id">
+                                    <t t-esc="data.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="form__group" t-if="state.session.distributor">
+                        <label for="distributor">Distributor</label>
+                        <p style="text-align: center;border: 1px solid #d7d1d1; padding:3px;">
+                            <t t-esc="state.session.company_names[0]"/>
+                        </p>
+                    </div>
+                    <div class="form__group">
+                        <label for="period">Time Period</label>
+                        <select class="form-control" id="period" t-model="state.period" t-on-change="onChangePeriod">
+                            <option value="">All Time</option>
+                            <option value="today">Today</option>
+                            <option value="this_month">This Month</option>
+                            <option value="prev_month">Previous Month</option>
+                            <option value="custom_date">Custom Date</option>
+                        </select>
+                    </div>
+                    <div class="form__group" t-if="state.showDateRange">
+                        <label for="start_date">Start Date</label>
+                        <input class="form-control" type="date" id="start_date" t-model="props.periodStartAt" t-on-change="onChangeStartAt"/>
+                    </div>
+                    <div class="form__group" t-if="state.showDateRange">
+                        <label for="end_date">End Date</label>
+                        <input class="form-control" type="date" id="end_date" t-model="state.periodEndAt" t-on-change="onChangeEndAt"/>
+                    </div>
+                    <div class="form__group">
+                        <label for="country">Country</label>
+                        <select class="form-control"  t-model="state.country">
+                            <option value="">Select Country</option>
+                            <t t-foreach="state.countries" t-as="data" t-key="data.key">
+                                <option t-att-value="data.id">
+                                    <t t-esc="data.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="form__group">
+                        <label for="currency">Branch</label>
+                        <select class="form-control"  t-model="state.branch">
+                            <option value="">Select Branch</option>
+                            <t t-foreach="state.branches" t-as="data" t-key="data.key">
+                                <option t-att-value="data.id">
+                                    <t t-esc="data.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="form__group">
+                        <label for="currency">Currency</label>
+                        <select class="form-control"  t-model="state.currency">
+                            <option value="">Select Currency</option>
+                            <t t-foreach="state.currencies" t-as="data" t-key="data.key">
+                                <option t-att-value="data.id">
+                                    <t t-esc="data.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="btn__group">
+                        <button class="form__btn apply__btn" t-on-click="applyFilter">Apply</button>
+                        <button class="form__btn reset__btn" type="reset" t-on-click="resetFilter">Reset</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </t>
+</templates>

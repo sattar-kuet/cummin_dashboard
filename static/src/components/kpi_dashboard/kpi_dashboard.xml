@@ -57,10 +57,10 @@
                             <tbody>
                                 <tr>
                                     <td>WO Count</td>
-                                    <td t-on-click="viewWipWoCountMaintananceRequest" style="cursor: pointer;">
+                                    <td style="cursor: pointer;">
                                         <t t-esc="state.kpi.growthMindSet.wip.woCount"/>
                                     </td>
-                                    <td t-on-click="viewWipCostMaintananceRequest" style="cursor: pointer;">
+                                    <td style="cursor: pointer;">
                                         <t t-esc="state.kpi.growthMindSet.wip.cost"/>
                                     </td>
                                     <td t-on-click="viewBillableMaintananceRequest" style="cursor: pointer;">
@@ -86,7 +86,7 @@
                             <tbody>
                                 <tr>
                                     <td colspan="2">TB %</td>
-                                    <td colspan="2" t-on-click="viewTBdetail" style="cursor: pointer;">
+                                    <td colspan="2" style="cursor: pointer;">
                                         <t t-esc="state.kpi.operationalEfficiencies.tb"/>
                                     </td>
                                 </tr>
@@ -112,7 +112,7 @@
                             <tbody>
                                 <tr>
                                     <td>Productivity</td>
-                                    <td t-on-click="viewProductivityDetail" style="cursor: pointer;">0.0%</td>
+                                    <td style="cursor: pointer;">0.0%</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -126,7 +126,7 @@
                             <tbody>
                                 <tr>
                                     <td>Labour Utilization</td>
-                                    <td t-on-click="viewLabourUtilizationDetail" style="cursor: pointer;">0.0%</td>
+                                    <td style="cursor: pointer;">0.0%</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -140,7 +140,7 @@
                             <tbody>
                                 <tr>
                                     <td>Billing Efficiency</td>
-                                    <td t-on-click="viewBillingEffeciencyDetail" style="cursor: pointer;">0.0%</td>
+                                    <td style="cursor: pointer;">0.0%</td>
                                 </tr>
                             </tbody>
                         </table>

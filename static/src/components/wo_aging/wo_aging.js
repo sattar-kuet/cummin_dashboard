@@ -9,19 +9,33 @@ import { Table } from "../table/table"
 
 export class WoAging extends Component {
 
-    setup(params) {
+    setup() {
         /* #####################################################################################
                                 ATTENTION: such initial config is MUST
         ########################################################################################*/
         this.state = useState({
-            filteringParameter: params
+            state1: 1
         })
         onWillStart(async () => {
             this.loadwoAging()
             this.loadwoAgingTableData()
+            const username = this.getCookie('username')
+            console.log('username', username)
         })
 
         this.env.bus.on("filterApplied", this, this.onFilterApplied)
+    }
+
+    getCookie(name) {
+        const cookieName = `${name}=`;
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.indexOf(cookieName) === 0) {
+                return cookie.substring(cookieName.length, cookie.length);
+            }
+        }
+        return null;
     }
 
     onFilterApplied(ev) {

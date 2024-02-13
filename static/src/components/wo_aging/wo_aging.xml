@@ -2,9 +2,6 @@
 <templates xml:space="preserve">
 	<t t-name="owl.WoAging" owl="1">
 		<div class="vh-100 overflow-auto">
-			<h1>
-				<t t-esc="state.message"/>
-			</h1>
 			<section class="dashborad__section">
 				<Filter periodStartAt="state.periodStartAt"/>
 				<section class="chart__section bg-white">

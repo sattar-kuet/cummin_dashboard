@@ -5,8 +5,7 @@ import { useService } from "@web/core/utils/hooks"
 import { Filter } from "../filter/filter"
 import { KpiCard } from "../kpi_card/kpi_card"
 import { SelectInput } from "../select_input/select_input"
-import { Utility } from "../utility"
-const utility = new Utility()
+
 const actionRegistry = registry.category("actions")
 
 export class OwlKpiDashboard extends Component {
@@ -47,7 +46,6 @@ export class OwlKpiDashboard extends Component {
     this.state.kpi = JSON.parse(kpi_data)
   }
   viewOWaging() {
-    utility.setCookie('username', 'john_doe', 30)
     this.actionService.doAction(
       "cummin_dashboard.action_wo_aging"
     )

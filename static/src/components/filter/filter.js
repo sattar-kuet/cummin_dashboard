@@ -4,10 +4,12 @@ import { registry } from "@web/core/registry"
 import { loadJS } from "@web/core/assets"
 import { useService, useBus } from "@web/core/utils/hooks";
 const { Component, onWillStart, useRef, onMounted, useState } = owl
+import { Utility } from "../utility"
+const utility = new Utility()
 
 export class Filter extends Component {
     setup() {
-        this.state = useState({
+        let filteringParameter = {
             session: {},
             distributorId: 0,
             distributor: '',
@@ -19,7 +21,12 @@ export class Filter extends Component {
             branch: '',
             currency: '',
             showTbDetail: false
-        })
+        }
+        const filteringParameterFromCookie = utility.getCookie('filteringParameter')
+        if (filteringParameterFromCookie) {
+            console.log('filteringParameterFromCookie', filteringParameterFromCookie.distributorId)
+        }
+        this.state = useState(filteringParameter)
         this.rpc = useService("rpc")
         onWillStart(async () => {
             await this.loadSession()
@@ -115,6 +122,8 @@ export class Filter extends Component {
             branch: this.state.branch,
             currency: this.state.currency
         }
+        let filteringDataString = JSON.stringify(filteringData)
+        utility.setCookie('filteringParameter', filteringDataString, 30)
         console.log(this.env.bus.trigger('filterApplied', filteringData))
     }
 }

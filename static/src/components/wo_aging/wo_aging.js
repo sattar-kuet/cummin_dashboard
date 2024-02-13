@@ -5,9 +5,6 @@ import { registry } from "@web/core/registry"
 import { Filter } from "../filter/filter"
 import { ChartRenderer3 } from "../chart_renderer3/chart_renderer3"
 import { Table } from "../table/table"
-import { Utility } from "../utility"
-const utility = new Utility()
-
 
 export class WoAging extends Component {
 
@@ -21,14 +18,12 @@ export class WoAging extends Component {
         onWillStart(async () => {
             this.loadwoAging()
             this.loadwoAgingTableData()
-            const username = utility.getCookie('username')
-            console.log('username', username)
         })
 
         this.env.bus.on("filterApplied", this, this.onFilterApplied)
     }
 
-   
+
 
     onFilterApplied(ev) {
         this.state.message = ev.message

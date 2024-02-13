@@ -9,37 +9,29 @@ import { Table } from "../table/table"
 
 export class WoAging extends Component {
 
-    setup() {
+    setup(params) {
         /* #####################################################################################
                                 ATTENTION: such initial config is MUST
         ########################################################################################*/
         this.state = useState({
-            distributorId: 0,
-            distributor: 'Test',
-            period: '',
-            showDateRange: false,
-            periodStartAt: '',
-            periodEndAt: '',
-            country: '',
-            branch: '',
-            currency: '',
-            showTbDetail: false
+            filteringParameter: params
         })
         onWillStart(async () => {
-            this.loadwoAgin()
-            this.loadwoAginTableData()
+            this.loadwoAging()
+            this.loadwoAgingTableData()
         })
 
         this.env.bus.on("filterApplied", this, this.onFilterApplied)
     }
 
-    onFilterApplied(data) {
-        console.log('I am at parent component ', data)
+    onFilterApplied(ev) {
+        this.state.message = ev.message
+        console.log('I am at parent component ', ev)
     }
 
 
 
-    loadwoAgin() {
+    loadwoAging() {
         this.state.woAgin = [
             {
                 label: "Jan 20",
@@ -80,7 +72,7 @@ export class WoAging extends Component {
         ]
     }
 
-    loadwoAginTableData() {
+    loadwoAgingTableData() {
         this.state.woAginTableData = {
             th: {
                 class: 'highlighted',

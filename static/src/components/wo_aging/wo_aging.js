@@ -20,17 +20,13 @@ export class WoAging extends Component {
             this.loadwoAgingTableData()
         })
 
-        this.env.bus.on("filterApplied", this, this.onFilterApplied)
+        // this.env.bus.on("filterApplied", this, this.onFilterApplied)
     }
 
-
-
-    onFilterApplied(ev) {
-        this.state.message = ev.message
-        console.log('I am at parent component ', ev)
-    }
-
-
+    // onFilterApplied(ev) {
+    //     this.state.message = ev.message
+    //     console.log('I am at parent component ', ev)
+    // }
 
     loadwoAging() {
         this.state.woAgin = [

@@ -22,10 +22,10 @@ export class Filter extends Component {
             currency: '',
             showTbDetail: false
         }
-        const filteringParameterFromCookie = utility.getCookie('filteringParameter')
-        if (filteringParameterFromCookie) {
-            console.log('filteringParameterFromCookie', filteringParameterFromCookie.distributorId)
-        }
+        // const filteringParameterFromCookie = utility.getCookie('filteringParameter')
+        // if (filteringParameterFromCookie) {
+        //     console.log('filteringParameterFromCookie', filteringParameterFromCookie.distributorId)
+        // }
         this.state = useState(filteringParameter)
         this.rpc = useService("rpc")
         onWillStart(async () => {
@@ -80,7 +80,11 @@ export class Filter extends Component {
         this.convertPeriodIntoRealDate()
     }
     convertPeriodIntoRealDate() {
-        if (this.state.period == 'this_month') {
+        if (this.state.period == '') {
+            this.state.periodStartAt = ''
+            this.state.periodEndAt = ''
+        }
+        else if (this.state.period == 'this_month') {
             this.state.periodStartAt = moment().startOf('month').format('YYYY-MM-DD')
             this.state.periodEndAt = moment().endOf('month').format('YYYY-MM-DD')
         }
@@ -122,9 +126,10 @@ export class Filter extends Component {
             branch: this.state.branch,
             currency: this.state.currency
         }
-        let filteringDataString = JSON.stringify(filteringData)
-        utility.setCookie('filteringParameter', filteringDataString, 30)
-        console.log(this.env.bus.trigger('filterApplied', filteringData))
+        // let filteringDataString = JSON.stringify(filteringData)
+        // utility.setCookie('filteringParameter', filteringDataString, 30)
+        console.log('filteringData', filteringData)
+        this.env.bus.trigger('filterApplied', filteringData)
     }
 }
 

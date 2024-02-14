@@ -9,7 +9,7 @@ const utility = new Utility()
 
 export class Filter extends Component {
     setup() {
-        let filteringParameter = {
+        this.state = useState({
             session: {},
             distributorId: 0,
             distributor: '',
@@ -21,19 +21,15 @@ export class Filter extends Component {
             branch: '',
             currency: '',
             showTbDetail: false
-        }
-        // const filteringParameterFromCookie = utility.getCookie('filteringParameter')
-        // if (filteringParameterFromCookie) {
-        //     console.log('filteringParameterFromCookie', filteringParameterFromCookie.distributorId)
-        // }
-        this.state = useState(filteringParameter)
+        })
         this.rpc = useService("rpc")
         onWillStart(async () => {
             await this.loadSession()
             await this.loadFilteringData()
+            this.loadFilteringParameterFromCookie()
         })
-
     }
+
     async loadSession() {
         let session = await this.rpc("/session/info")
         this.state.session = JSON.parse(session)
@@ -70,6 +66,16 @@ export class Filter extends Component {
         let currencies = await this.rpc("/currency/list");
         currencies = JSON.parse(currencies);
         this.state.currencies = currencies;
+    }
+
+    loadFilteringParameterFromCookie() {
+        const filteringParameterFromCookie = utility.getCookie('filteringParameter')
+        if (filteringParameterFromCookie) {
+            let filteringParameter = JSON.parse(filteringParameterFromCookie)
+            this.state.distributorId = parseInt(filteringParameter.distributorId)
+            let filteringData = this.getFilteringData()
+            this.env.bus.trigger('filterApplied', filteringData)
+        }
     }
     onChangePeriod() {
         if (this.state.period == 'custom_date') {
@@ -116,9 +122,16 @@ export class Filter extends Component {
         this.state.branch = ''
         this.state.currency = ''
         this.state.showDateRange = false
+        let filteringData = this.getFilteringData()
+        this.setFilteringDataToCookie(filteringData)
     }
     applyFilter() {
-        let filteringData = {
+        let filteringData = this.getFilteringData()
+        this.setFilteringDataToCookie(filteringData)
+        this.env.bus.trigger('filterApplied', filteringData)
+    }
+    getFilteringData() {
+        return {
             distributorId: this.state.distributorId,
             periodStartAt: this.state.periodStartAt,
             periodEndAt: this.state.periodEndAt,
@@ -126,10 +139,10 @@ export class Filter extends Component {
             branch: this.state.branch,
             currency: this.state.currency
         }
-        // let filteringDataString = JSON.stringify(filteringData)
-        // utility.setCookie('filteringParameter', filteringDataString, 30)
-        console.log('filteringData', filteringData)
-        this.env.bus.trigger('filterApplied', filteringData)
+    }
+    setFilteringDataToCookie(filteringData) {
+        let filteringDataString = JSON.stringify(filteringData)
+        utility.setCookie('filteringParameter', filteringDataString, 30)
     }
 }
 

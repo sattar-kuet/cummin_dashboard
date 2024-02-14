@@ -32,17 +32,19 @@ export class OwlKpiDashboard extends Component {
     this.rpc = useService("rpc")
 
     onWillStart(async () => {
+      this.env.bus.on("filterApplied", this, this.onFilterApplied)
       await this.loadKpiData()
     });
-    onMounted(() => {
-      this.env.bus.on("filterApplied", this, this.onFilterApplied)
-    });
+    // onMounted(() => {
+    //   this.env.bus.on("filterApplied", this, this.onFilterApplied)
+    // });
     onWillUnmount(() => {
       this.env.bus.off("filterApplied", this, this.onFilterApplied)
     });
   }
   onFilterApplied(filteringParameter) {
     this.state.filteringParameter = filteringParameter
+    console.log('filterApplied trigger', filteringParameter)
     this.loadKpiData()
   }
 

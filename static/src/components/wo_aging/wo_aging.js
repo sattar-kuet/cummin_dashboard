@@ -1,6 +1,6 @@
 
 /** @odoo-module */
-const { Component, onWillStart, useRef, onMounted, useState } = owl
+const { Component, onWillStart, useRef, onMounted, onWillUnmount, useState } = owl
 import { registry } from "@web/core/registry"
 import { Filter } from "../filter/filter"
 import { ChartRenderer3 } from "../chart_renderer3/chart_renderer3"
@@ -19,15 +19,17 @@ export class WoAging extends Component {
             this.loadwoAging()
             this.loadwoAgingTableData()
         })
-
-        // this.env.bus.on("filterApplied", this, this.onFilterApplied)
+        onMounted(() => {
+            this.env.bus.on("filterApplied", this, this.onFilterApplied)
+        });
+        onWillUnmount(() => {
+            this.env.bus.off("filterApplied", this, this.onFilterApplied)
+        });
     }
 
-    // onFilterApplied(ev) {
-    //     this.state.message = ev.message
-    //     console.log('I am at parent component ', ev)
-    // }
-
+    onFilterApplied(filteringParameter) {
+        console.log(filteringParameter)
+    }
     loadwoAging() {
         this.state.woAgin = [
             {

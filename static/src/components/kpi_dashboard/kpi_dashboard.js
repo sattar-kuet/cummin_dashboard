@@ -1,5 +1,5 @@
 /** @odoo-module */
-const { Component, onWillStart, useRef, onMounted, useState } = owl
+const { Component, onWillStart, useRef, onMounted, onWillUnmount, useState } = owl
 import { registry } from "@web/core/registry"
 import { useService } from "@web/core/utils/hooks"
 import { Filter } from "../filter/filter"
@@ -34,7 +34,12 @@ export class OwlKpiDashboard extends Component {
     onWillStart(async () => {
       await this.loadKpiData()
     });
-    this.env.bus.on("filterApplied", this, this.onFilterApplied)
+    onMounted(() => {
+      this.env.bus.on("filterApplied", this, this.onFilterApplied)
+    });
+    onWillUnmount(() => {
+      this.env.bus.off("filterApplied", this, this.onFilterApplied)
+    });
   }
   onFilterApplied(filteringParameter) {
     this.state.filteringParameter = filteringParameter

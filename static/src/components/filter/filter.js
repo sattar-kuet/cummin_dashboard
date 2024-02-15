@@ -19,8 +19,7 @@ export class Filter extends Component {
             periodEndAt: '',
             country: '',
             branch: '',
-            currency: '',
-            showTbDetail: false
+            currency: ''
         })
         this.rpc = useService("rpc")
         onWillStart(async () => {
@@ -72,8 +71,17 @@ export class Filter extends Component {
         const filteringParameterFromCookie = utility.getCookie('filteringParameter')
         if (filteringParameterFromCookie) {
             let filteringParameter = JSON.parse(filteringParameterFromCookie)
+            // console.log(filteringParameter)
             this.state.distributorId = parseInt(filteringParameter.distributorId)
+            this.state.period = filteringParameter.period
+            this.state.showDateRange = filteringParameter.showDateRange
+            this.state.periodStartAt = filteringParameter.periodStartAt
+            this.state.periodEndAt = filteringParameter.periodEndAt
+            this.state.country = filteringParameter.country
+            this.state.branch = filteringParameter.branch
+            this.state.currency = filteringParameter.currency
             let filteringData = this.getFilteringData()
+            console.log('filteringData from cookie:', filteringData)
             this.env.bus.trigger('filterApplied', filteringData)
         }
     }
@@ -133,6 +141,8 @@ export class Filter extends Component {
     getFilteringData() {
         return {
             distributorId: this.state.distributorId,
+            period: this.state.period,
+            showDateRange: this.state.showDateRange,
             periodStartAt: this.state.periodStartAt,
             periodEndAt: this.state.periodEndAt,
             country: this.state.country,

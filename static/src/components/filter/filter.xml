@@ -36,7 +36,7 @@
                     </div>
                     <div class="form__group" t-if="state.showDateRange">
                         <label for="start_date">Start Date</label>
-                        <input class="form-control" type="date" id="start_date" t-model="props.periodStartAt" t-on-change="onChangeStartAt"/>
+                        <input class="form-control" type="date" id="start_date" t-model="state.periodStartAt" t-on-change="onChangeStartAt"/>
                     </div>
                     <div class="form__group" t-if="state.showDateRange">
                         <label for="end_date">End Date</label>

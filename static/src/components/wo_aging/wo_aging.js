@@ -1,11 +1,13 @@
 
 /** @odoo-module */
 const { Component, onWillStart, useRef, onMounted, onWillUnmount, useState } = owl
+import { useService } from "@web/core/utils/hooks"
 import { registry } from "@web/core/registry"
 import { Filter } from "../filter/filter"
 import { ChartRenderer3 } from "../chart_renderer3/chart_renderer3"
 import { Table } from "../table/table"
-
+import { Utility } from "../utility"
+const utility = new Utility()
 export class WoAging extends Component {
 
     setup() {
@@ -13,22 +15,53 @@ export class WoAging extends Component {
                                 ATTENTION: such initial config is MUST
         ########################################################################################*/
         this.state = useState({
-            state1: 1
+            filteringParameter: {
+                distributorId: 0,
+                distributor: '',
+                period: '',
+                showDateRange: false,
+                periodStartAt: '',
+                periodEndAt: '',
+                country: '',
+                branch: '',
+                currency: '',
+                showTbDetail: false
+            }
         })
+        this.rpc = useService("rpc")
         onWillStart(async () => {
-            this.loadwoAging()
-            this.loadwoAgingTableData()
-        })
-        onMounted(() => {
+            this.loadFilteringParameterFromCookie()
             this.env.bus.on("filterApplied", this, this.onFilterApplied)
-        });
+            this.loadwoAging()
+            await this.loadwoAgingTableData()
+        })
+        // onMounted(() => {
+        //     this.env.bus.on("filterApplied", this, this.onFilterApplied)
+        // });
         onWillUnmount(() => {
             this.env.bus.off("filterApplied", this, this.onFilterApplied)
         });
     }
 
+    loadFilteringParameterFromCookie() {
+        const filteringParameterFromCookie = utility.getCookie('filteringParameter')
+        if (filteringParameterFromCookie) {
+            let filteringParameter = JSON.parse(filteringParameterFromCookie)
+            // console.log(filteringParameter)
+            this.state.distributorId = parseInt(filteringParameter.distributorId)
+            this.state.period = filteringParameter.period
+            this.state.showDateRange = filteringParameter.showDateRange
+            this.state.periodStartAt = filteringParameter.periodStartAt
+            this.state.periodEndAt = filteringParameter.periodEndAt
+            this.state.country = filteringParameter.country
+            this.state.branch = filteringParameter.branch
+            this.state.currency = filteringParameter.currency
+        }
+    }
+
     onFilterApplied(filteringParameter) {
-        console.log(filteringParameter)
+        this.state.filteringParameter = filteringParameter
+        this.loadwoAgingTableData()
     }
     loadwoAging() {
         this.state.woAgin = [
@@ -71,91 +104,12 @@ export class WoAging extends Component {
         ]
     }
 
-    loadwoAgingTableData() {
-        this.state.woAginTableData = {
-            th: {
-                class: 'highlighted',
-                items:
-                    [
-                        { title: '', colspan: 1, key: 1 },
-                        { title: '', colspan: 1, key: 2 },
-                        { title: 'Order Age', colspan: 3, key: 3 },
-                        { title: 'Applied', colspan: 1, key: 4 },
-                        { title: 'Bill Amount', colspan: 4, key: 5 },
-                        { title: 'Cost', colspan: 4, key: 6 },
-                    ]
-            },
-            tr: [
-                {
-                    class: 'highlighted',
-                    key: 1000,
-                    td:
-                        [
-                            { title: 'Region', colspan: 1, key: 7 },
-                            { title: 'Order Count', colspan: 1, key: 8 },
-                            { title: '0 to 30', colspan: 1, key: 9 },
-                            { title: '31 to 80', colspan: 1, key: 10 },
-                            { title: '>80', colspan: 1, key: 11 },
-                            { title: 'Labour Hours', colspan: 1, key: 12 },
-                            { title: '0 to 30', colspan: 1, key: 13 },
-                            { title: '31 to 80', colspan: 1, key: 14 },
-                            { title: '>80', colspan: 1, key: 15 },
-                            { title: 'Total for all Open WO', colspan: 1, key: 16 },
-                            { title: '0 to 30', colspan: 1, key: 17 },
-                            { title: '31 to 80', colspan: 1, key: 18 },
-                            { title: '>80', colspan: 1, key: 19 },
-                            { title: 'Total', colspan: 1, key: 20 },
-                        ]
-                },
-                {
-                    class: '',
-                    key: 1001,
-                    td:
-                        [
-                            { title: 'AFRICA', colspan: 1, key: 7 },
-                            { title: 750, colspan: 1, key: 8 },
-                            { title: 135, colspan: 1, key: 9 },
-                            { title: 166, colspan: 1, key: 10 },
-                            { title: 449, colspan: 1, key: 11 },
-                            { title: 22893.2, colspan: 1, key: 12 },
-                            { title: 78459.53, colspan: 1, key: 13 },
-                            { title: 77854.32, colspan: 1, key: 14 },
-                            { title: 232086.25, colspan: 1, key: 15 },
-                            { title: 388400.10, colspan: 1, key: 16 },
-                            { title: 73241.01, colspan: 1, key: 17 },
-                            { title: 149294.48, colspan: 1, key: 18 },
-                            { title: 1092690.46, colspan: 1, key: 19 },
-                            { title: 1315225.94, colspan: 1, key: 20 },
-                        ]
-                },
-                {
-                    class: 'highlighted',
-                    key: 1002,
-                    td:
-                        [
-                            { title: 'Grand Total', colspan: 1, key: 7 },
-                            { title: 750, colspan: 1, key: 8 },
-                            { title: 135, colspan: 1, key: 9 },
-                            { title: 166, colspan: 1, key: 10 },
-                            { title: 449, colspan: 1, key: 11 },
-                            { title: 22893.2, colspan: 1, key: 12 },
-                            { title: 78459.53, colspan: 1, key: 13 },
-                            { title: 77854.32, colspan: 1, key: 14 },
-                            { title: 232086.25, colspan: 1, key: 15 },
-                            { title: 388400.10, colspan: 1, key: 16 },
-                            { title: 73241.01, colspan: 1, key: 17 },
-                            { title: 149294.48, colspan: 1, key: 18 },
-                            { title: 1092690.46, colspan: 1, key: 19 },
-                            { title: 1315225.94, colspan: 1, key: 20 },
-                        ]
-                }
-            ]
-        }
+    async loadwoAgingTableData() {
+        console.log('this.state.filteringParameter', this.state.filteringParameter)
+        let wo_aging_table_data = await this.rpc("/wo_aging/table_data", this.state.filteringParameter)
+        this.state.woAginTableData = JSON.parse(wo_aging_table_data)
     }
-
-
 }
-
 
 WoAging.template = "owl.WoAging"
 WoAging.components = { ChartRenderer3, Table, Filter }

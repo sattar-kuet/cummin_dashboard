@@ -98,32 +98,7 @@ class Api(http.Controller):
     
     @http.route('/kpi/data', auth="user", type="json")
     def kpi_data(self, **data):
-        
-        domain = []
-        time_sheet_domain = []
-        if data:
-           company_id = int(data['distributorId'])
-           if company_id > 0:
-               domain.append(('company_id', '=', company_id))
-
-           if data['periodStartAt']:
-               domain.append(('request_date', '>=', data['periodStartAt']))
-               time_sheet_domain.append(('date', '>=', data['periodStartAt']))
-            
-           if data['periodEndAt']:
-               domain.append(('request_date', '<=', data['periodEndAt']))
-               time_sheet_domain.append(('date', '<=', data['periodEndAt']))
-
-           if data['country']:
-               domain.append(('country', '=', data['country']))
-
-           if data['branch']:
-               domain.append(('branch', '=', data['branch']))
-
-           if data['currency']:
-               domain.append(('currency', '=', data['currency']))
-            
-
+        domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data)
         maintenance_requests = request.env['maintenance.request'].search(domain)
         wip_cost = 0
         wip_cost_ids = []
@@ -210,3 +185,91 @@ class Api(http.Controller):
         }
         # return {'ids':wip_billable_ids, 'amount':wip_billable_amount,'stage_id':stage_id}
         return json.dumps(kpi_data)
+    
+
+    @http.route('/wo_aging/table_data', auth="user", type="json")
+    def wo_aging(self, **data):
+        domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data)
+        print('*'*100,domain)
+        maintenance_requests = request.env['maintenance.request'].search(domain)
+        order_count = 0
+        for maintenance_request in maintenance_requests:
+          if maintenance_request.stage_id.name != 'Closure':
+              order_count +=1
+        table_data = {
+                    "th": {
+                        "class": "highlighted",
+                        "items": [
+                            {"title": "", "colspan": 1, "key": 1},
+                            {"title": "", "colspan": 1, "key": 2},
+                            {"title": "Order Age1", "colspan": 3, "key": 3},
+                            {"title": "Applied", "colspan": 1, "key": 4},
+                            {"title": "Bill Amount", "colspan": 4, "key": 5},
+                            {"title": "Cost", "colspan": 4, "key": 6}
+                        ]
+                    },
+                    "tr": [
+                        {
+                            "class": "highlighted",
+                            "key": 1000,
+                            "td": [
+                                {"title": "Region", "colspan": 1, "key": 7},
+                                {"title": "Order Count", "colspan": 1, "key": 8},
+                                {"title": "0 to 30", "colspan": 1, "key": 9},
+                                {"title": "31 to 80", "colspan": 1, "key": 10},
+                                {"title": ">80", "colspan": 1, "key": 11},
+                                {"title": "Labour Hours", "colspan": 1, "key": 12},
+                                {"title": "0 to 30", "colspan": 1, "key": 13},
+                                {"title": "31 to 80", "colspan": 1, "key": 14},
+                                {"title": ">80", "colspan": 1, "key": 15},
+                                {"title": "Total for all Open WO", "colspan": 1, "key": 16},
+                                {"title": "0 to 30", "colspan": 1, "key": 17},
+                                {"title": "31 to 80", "colspan": 1, "key": 18},
+                                {"title": ">80", "colspan": 1, "key": 19},
+                                {"title": "Total", "colspan": 1, "key": 20}
+                            ]
+                        },
+                        {
+                            "class": "",
+                            "key": 1001,
+                            "td": [
+                                {"title": "AFRICA", "colspan": 1, "key": 7},
+                                {"title": order_count, "colspan": 1, "key": 8},
+                                {"title": 135, "colspan": 1, "key": 9},
+                                {"title": 166, "colspan": 1, "key": 10},
+                                {"title": 449, "colspan": 1, "key": 11},
+                                {"title": 22893.2, "colspan": 1, "key": 12},
+                                {"title": 78459.53, "colspan": 1, "key": 13},
+                                {"title": 77854.32, "colspan": 1, "key": 14},
+                                {"title": 232086.25, "colspan": 1, "key": 15},
+                                {"title": 388400.10, "colspan": 1, "key": 16},
+                                {"title": 73241.01, "colspan": 1, "key": 17},
+                                {"title": 149294.48, "colspan": 1, "key": 18},
+                                {"title": 1092690.46, "colspan": 1, "key": 19},
+                                {"title": 1315225.94, "colspan": 1, "key": 20}
+                            ]
+                        },
+                        {
+                            "class": "highlighted",
+                            "key": 1002,
+                            "td": [
+                                {"title": "Grand Total", "colspan": 1, "key": 7},
+                                {"title": order_count, "colspan": 1, "key": 8},
+                                {"title": 135, "colspan": 1, "key": 9},
+                                {"title": 166, "colspan": 1, "key": 10},
+                                {"title": 449, "colspan": 1, "key": 11},
+                                {"title": 22893.2, "colspan": 1, "key": 12},
+                                {"title": 78459.53, "colspan": 1, "key": 13},
+                                {"title": 77854.32, "colspan": 1, "key": 14},
+                                {"title": 232086.25, "colspan": 1, "key": 15},
+                                {"title": 388400.10, "colspan": 1, "key": 16},
+                                {"title": 73241.01, "colspan": 1, "key": 17},
+                                {"title": 149294.48, "colspan": 1, "key": 18},
+                                {"title": 1092690.46, "colspan": 1, "key": 19},
+                                {"title": 1315225.94, "colspan": 1, "key": 20}
+                            ]
+                        }
+                    ]
+                }
+
+        return json.dumps(table_data)

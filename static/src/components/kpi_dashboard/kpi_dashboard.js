@@ -23,8 +23,7 @@ export class OwlKpiDashboard extends Component {
         periodEndAt: '',
         country: '',
         branch: '',
-        currency: '',
-        showTbDetail: false
+        currency: ''
       }
     })
 

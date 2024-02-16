@@ -10,15 +10,20 @@ class Api(http.Controller):
 
     @http.route('/distributor/list', auth="user", type="json")
     def distributor_list(self, **data):
-        distributors = request.env['res.company'].search([])
+        maintenance_requests = request.env['maintenance.request'].sudo().search([])
         distributor_list = []
-        for distributor in sorted(distributors, key=lambda x: x.name):
-            if distributor.name:
-                distributor_list.append({
-                    "id": distributor.id,
-                    "name": distributor.name,
-                    "key": distributor.id
+        company_considered = []
+        for maintenance_request in maintenance_requests:
+            company = maintenance_request.create_uid.company_id
+            if company.id in company_considered:
+                continue
+            company_considered.append(company.id)
+            distributor_list.append({
+                    "id": company.id,
+                    "name": company.name,
+                    "key": company.id
                 })
+        
         return json.dumps(distributor_list)
     
     @http.route('/country/list', auth="user", type="json")

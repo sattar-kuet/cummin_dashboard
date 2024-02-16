@@ -11,14 +11,22 @@ class Helper(models.AbstractModel):
             return 'Inifinity'
         return round(numerator/denominator,2)
     
-    @staticmethod
-    def get_filtering_domain(data):
+   
+    def get_filtering_domain(self,data):
         domain = []
         time_sheet_domain = []
         if data:
            company_id = int(data['distributorId'])
            if company_id > 0:
-               domain.append(('company_id', '=', company_id))
+               cr = self.env.cr
+               sql_query = """
+                    SELECT user_id 
+                    FROM res_company_users_rel 
+                    WHERE cid = %s
+                """
+               cr.execute(sql_query, (company_id,))
+               user_ids = [row[0] for row in cr.fetchall()]
+               domain.append(('create_uid', 'in', user_ids))
 
            if data['periodStartAt']:
                domain.append(('request_date', '>=', data['periodStartAt']))

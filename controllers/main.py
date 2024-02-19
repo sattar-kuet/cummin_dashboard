@@ -198,9 +198,19 @@ class Api(http.Controller):
         print('*'*100,domain)
         maintenance_requests = request.env['maintenance.request'].search(domain)
         order_count = 0
+        order_0_30 = 0
+        order_31_80 = 0
+        order_81_infinity = 0
         for maintenance_request in maintenance_requests:
-          if maintenance_request.stage_id.name != 'Closure':
+        #   if maintenance_request.stage_id.name != 'Closure':
+            if not  maintenance_request.invoice:
               order_count +=1
+              if request.env['cummin_dashboard.helper'].between_x1_x2_days_older(maintenance_request.create_date,0,30):
+                  order_0_30 += 1
+              if request.env['cummin_dashboard.helper'].between_x1_x2_days_older(maintenance_request.create_date,31,80):
+                  order_31_80 += 1
+              if request.env['cummin_dashboard.helper'].between_x1_x2_days_older(maintenance_request.create_date,81,-1):
+                  order_81_infinity += 1
         table_data = {
                     "th": {
                         "class": "highlighted",
@@ -240,9 +250,9 @@ class Api(http.Controller):
                             "td": [
                                 {"title": "AFRICA", "colspan": 1, "key": 7},
                                 {"title": order_count, "colspan": 1, "key": 8},
-                                {"title": 135, "colspan": 1, "key": 9},
-                                {"title": 166, "colspan": 1, "key": 10},
-                                {"title": 449, "colspan": 1, "key": 11},
+                                {"title": order_0_30, "colspan": 1, "key": 9},
+                                {"title": order_31_80, "colspan": 1, "key": 10},
+                                {"title": order_81_infinity, "colspan": 1, "key": 11},
                                 {"title": 22893.2, "colspan": 1, "key": 12},
                                 {"title": 78459.53, "colspan": 1, "key": 13},
                                 {"title": 77854.32, "colspan": 1, "key": 14},
@@ -278,3 +288,6 @@ class Api(http.Controller):
                 }
 
         return json.dumps(table_data)
+    @http.route('/test_url', auth="public", type="http", website="true")
+    def test_url(self, **data):
+        return request.render('cummin_dashboard.test_page', {'message':'Hey Gerald. How are you?'})

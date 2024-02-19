@@ -13,4 +13,9 @@
             </xpath>
         </field>
     </record>
+    <template id="test_page">
+        <h1>
+            <t t-esc="message"/>
+        </h1>
+    </template>
 </odoo>

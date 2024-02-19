@@ -1,4 +1,5 @@
 from odoo import fields, models
+from datetime import datetime, timedelta
 
 class Helper(models.AbstractModel): 
     _name = 'cummin_dashboard.helper'
@@ -45,4 +46,12 @@ class Helper(models.AbstractModel):
            if data['currency']:
                domain.append(('currency', '=', data['currency']))
         return domain,time_sheet_domain
-            
+    
+    @staticmethod
+    def between_x1_x2_days_older(given_date,x1,x2):
+        current_date = datetime.now().date()
+        create_date = fields.Datetime.to_datetime(given_date).date()
+        days_difference = (current_date - create_date).days
+        if x1 <= days_difference and (days_difference <= x2 or x2 == -1):
+            return True
+        return False

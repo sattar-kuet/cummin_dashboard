@@ -1,19 +1,19 @@
 .o_main_navbar,
 .btn-primary {
-    background-color: #EE2C22;
-    border-bottom: 1px solid #EE2C22;
+    background-color: #d71e25;
+    border-bottom: 1px solid #d71e25;
 }
 
 .text-primary {
-    color: #EE2C22 !important;
+    color: #d71e25 !important;
 }
 
 .btn-primary:hover {
-    background: red;
+    background: #d71e25;
 }
 
 .o_tooltip.active {
-    border: 3px solid #EE2C22 !important;
+    border: 3px solid #d71e25 !important;
     background-color: white !important;
     transition: width 150ms ease 50ms, height 150ms ease 50ms, margin 150ms ease 50ms !important;
 }
@@ -25,4 +25,14 @@
 img.o_DiscussSidebarCategoryItem_image.w-100.h-100.rounded-circle,
 img.rounded-circle.o_user_avatar.h-75.py-1 {
     filter: grayscale(100%);
+}
+
+.o_field_statusbar>.o_statusbar_status>.o_arrow_button.o_arrow_button_current.disabled {
+    background-color: #d71e25;
+    color: #FFFFFF;
+}
+
+.o_field_statusbar>.o_statusbar_status>.o_arrow_button.o_arrow_button_current.disabled:after,
+.o_field_statusbar>.o_statusbar_status>.o_arrow_button.o_arrow_button_current.disabled:before {
+    border-left-color: #d71e25;
 }

@@ -194,23 +194,10 @@ class Api(http.Controller):
 
     @http.route('/wo_aging/table_data', auth="user", type="json")
     def wo_aging(self, **data):
-        domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data)
-        print('*'*100,domain)
-        maintenance_requests = request.env['maintenance.request'].search(domain)
-        order_count = 0
-        order_0_30 = 0
-        order_31_80 = 0
-        order_81_infinity = 0
-        for maintenance_request in maintenance_requests:
-        #   if maintenance_request.stage_id.name != 'Closure':
-            if not  maintenance_request.invoice:
-              order_count +=1
-              if request.env['cummin_dashboard.helper'].between_x1_x2_days_older(maintenance_request.create_date,0,30):
-                  order_0_30 += 1
-              if request.env['cummin_dashboard.helper'].between_x1_x2_days_older(maintenance_request.create_date,31,80):
-                  order_31_80 += 1
-              if request.env['cummin_dashboard.helper'].between_x1_x2_days_older(maintenance_request.create_date,81,-1):
-                  order_81_infinity += 1
+        maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
+        order_count,order_0_30,order_31_80,order_81_infinity = request.env['cummin_dashboard.helper'].order_count_detail(maintenance_request_domain)
+        labour_hours,labour_hours_0_30,labour_hours_31_80,labour_hours_81_infinity = request.env['cummin_dashboard.helper'].labour_hours_detail(time_sheet_domain)
+        
         table_data = {
                     "th": {
                         "class": "highlighted",
@@ -222,8 +209,9 @@ class Api(http.Controller):
                             {"title": "Bill Amount", "colspan": 4, "key": 5},
                             {"title": "Cost", "colspan": 4, "key": 6}
                         ]
-                    },
-                    "tr": [
+                    }
+                }
+        table_data["tr"] = [
                         {
                             "class": "highlighted",
                             "key": 1000,
@@ -253,10 +241,10 @@ class Api(http.Controller):
                                 {"title": order_0_30, "colspan": 1, "key": 9},
                                 {"title": order_31_80, "colspan": 1, "key": 10},
                                 {"title": order_81_infinity, "colspan": 1, "key": 11},
-                                {"title": 22893.2, "colspan": 1, "key": 12},
-                                {"title": 78459.53, "colspan": 1, "key": 13},
-                                {"title": 77854.32, "colspan": 1, "key": 14},
-                                {"title": 232086.25, "colspan": 1, "key": 15},
+                                {"title": labour_hours, "colspan": 1, "key": 12},
+                                {"title": labour_hours_0_30, "colspan": 1, "key": 13},
+                                {"title": labour_hours_31_80, "colspan": 1, "key": 14},
+                                {"title": labour_hours_81_infinity, "colspan": 1, "key": 15},
                                 {"title": 388400.10, "colspan": 1, "key": 16},
                                 {"title": 73241.01, "colspan": 1, "key": 17},
                                 {"title": 149294.48, "colspan": 1, "key": 18},
@@ -270,13 +258,13 @@ class Api(http.Controller):
                             "td": [
                                 {"title": "Grand Total", "colspan": 1, "key": 7},
                                 {"title": order_count, "colspan": 1, "key": 8},
-                                {"title": 135, "colspan": 1, "key": 9},
-                                {"title": 166, "colspan": 1, "key": 10},
-                                {"title": 449, "colspan": 1, "key": 11},
-                                {"title": 22893.2, "colspan": 1, "key": 12},
-                                {"title": 78459.53, "colspan": 1, "key": 13},
-                                {"title": 77854.32, "colspan": 1, "key": 14},
-                                {"title": 232086.25, "colspan": 1, "key": 15},
+                                {"title": order_0_30, "colspan": 1, "key": 9},
+                                {"title": order_31_80, "colspan": 1, "key": 10},
+                                {"title": order_81_infinity, "colspan": 1, "key": 11},
+                                {"title": labour_hours, "colspan": 1, "key": 12},
+                                {"title": labour_hours_0_30, "colspan": 1, "key": 13},
+                                {"title": labour_hours_31_80, "colspan": 1, "key": 14},
+                                {"title": labour_hours_81_infinity, "colspan": 1, "key": 15},
                                 {"title": 388400.10, "colspan": 1, "key": 16},
                                 {"title": 73241.01, "colspan": 1, "key": 17},
                                 {"title": 149294.48, "colspan": 1, "key": 18},
@@ -285,9 +273,8 @@ class Api(http.Controller):
                             ]
                         }
                     ]
-                }
-
         return json.dumps(table_data)
+        
     @http.route('/test_url', auth="public", type="http", website="true")
     def test_url(self, **data):
         return request.render('cummin_dashboard.test_page', {'message':'Hey Gerald. How are you?'})

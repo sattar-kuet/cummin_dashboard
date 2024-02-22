@@ -194,87 +194,92 @@ class Api(http.Controller):
 
     @http.route('/wo_aging/table_data', auth="user", type="json")
     def wo_aging(self, **data):
+        key = 1
         table_data = {
                     "th": {
                         "class": "highlighted",
                         "items": [
-                            {"title": "", "colspan": 1, "key": 1},
-                            {"title": "", "colspan": 1, "key": 2},
-                            {"title": "Order Age1", "colspan": 3, "key": 3},
-                            {"title": "Applied", "colspan": 1, "key": 4},
-                            {"title": "Bill Amount", "colspan": 4, "key": 5},
-                            {"title": "Cost", "colspan": 4, "key": 6}
+                            {"title": "", "colspan": 1, "key": key+1},
+                            {"title": "", "colspan": 1, "key": key+2},
+                            {"title": "Order Age1", "colspan": 3, "key": key+3},
+                            {"title": "Applied", "colspan": 1, "key": key+4},
+                            {"title": "Bill Amount", "colspan": 4, "key": key+5},
+                            {"title": "Cost", "colspan": 4, "key": key+6}
                         ]
                     }
                 }
+        key = key+7
         table_data["tr"] = [
                         {
                             "class": "highlighted",
                             "key": 1000,
                             "td": [
-                                {"title": "Region", "colspan": 1, "key": 7},
-                                {"title": "Order Count", "colspan": 1, "key": 8},
-                                {"title": "0 to 30", "colspan": 1, "key": 9},
-                                {"title": "31 to 80", "colspan": 1, "key": 10},
-                                {"title": ">80", "colspan": 1, "key": 11},
-                                {"title": "Labour Hours", "colspan": 1, "key": 12},
-                                {"title": "0 to 30", "colspan": 1, "key": 13},
-                                {"title": "31 to 80", "colspan": 1, "key": 14},
-                                {"title": ">80", "colspan": 1, "key": 15},
-                                {"title": "Total for all Open WO", "colspan": 1, "key": 16},
-                                {"title": "0 to 30", "colspan": 1, "key": 17},
-                                {"title": "31 to 80", "colspan": 1, "key": 18},
-                                {"title": ">80", "colspan": 1, "key": 19},
-                                {"title": "Total", "colspan": 1, "key": 20}
+                                {"title": "Region", "colspan": 1, "key": key},
+                                {"title": "Order Count", "colspan": 1, "key": key+1},
+                                {"title": "0 to 30", "colspan": 1, "key": key+2},
+                                {"title": "31 to 80", "colspan": 1, "key": key+3},
+                                {"title": ">80", "colspan": 1, "key": key+4},
+                                {"title": "Labour Hours", "colspan": 1, "key": key+5},
+                                {"title": "0 to 30", "colspan": 1, "key": key+6},
+                                {"title": "31 to 80", "colspan": 1, "key": key+7},
+                                {"title": ">80", "colspan": 1, "key": key+8},
+                                {"title": "Total for all Open WO", "colspan": 1, "key": key+9},
+                                {"title": "0 to 30", "colspan": 1, "key": key+10},
+                                {"title": "31 to 80", "colspan": 1, "key": key+11},
+                                {"title": ">80", "colspan": 1, "key": key+12},
+                                {"title": "Total", "colspan": 1, "key": key+13}
                             ]
                         }
                     ]
+        key = key+14
         maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
         regions = request.env['cummin_dashboard.helper'].get_regions()
         
-        maintenance_request_ids,order_count,order_0_30,order_31_80,order_81_infinity = request.env['cummin_dashboard.helper'].order_count_detail(maintenance_request_domain)
-        time_sheet_domain.append(('maintenance_request_id','in',maintenance_request_ids))
-        labour_hours,labour_hours_0_30,labour_hours_31_80,labour_hours_81_infinity = request.env['cummin_dashboard.helper'].labour_hours_detail(time_sheet_domain)
+        for region in regions:
+            maintenance_request_ids,order_count,order_0_30,order_31_80,order_81_infinity = request.env['cummin_dashboard.helper'].order_count_detail(maintenance_request_domain)
+            time_sheet_domain.append(('maintenance_request_id','in',maintenance_request_ids))
+            labour_hours,labour_hours_0_30,labour_hours_31_80,labour_hours_81_infinity = request.env['cummin_dashboard.helper'].labour_hours_detail(time_sheet_domain)
+            
+            table_data["tr"].append({
+                            "class": "",
+                            "key": key,
+                            "td": [
+                                {"title": "AFRICA", "colspan": 1, "key": key+1},
+                                {"title": order_count, "colspan": 1, "key": key+2},
+                                {"title": order_0_30, "colspan": 1, "key": key+3},
+                                {"title": order_31_80, "colspan": 1, "key": key+4},
+                                {"title": order_81_infinity, "colspan": 1, "key": key+5},
+                                {"title": labour_hours, "colspan": 1, "key": key+6},
+                                {"title": labour_hours_0_30, "colspan": 1, "key": key+7},
+                                {"title": labour_hours_31_80, "colspan": 1, "key": key+8},
+                                {"title": labour_hours_81_infinity, "colspan": 1, "key": key+9},
+                                {"title": 388400.10, "colspan": 1, "key": key+10},
+                                {"title": 73241.01, "colspan": 1, "key": key+11},
+                                {"title": 149294.48, "colspan": 1, "key": key+12},
+                                {"title": 1092690.46, "colspan": 1, "key": key+13},
+                                {"title": 1315225.94, "colspan": 1, "key": key+14}
+                            ]
+                        })
+            key = key+15
         
-        
-        table_data["tr"].append({
-                        "class": "",
-                        "key": 1001,
-                        "td": [
-                            {"title": "AFRICA", "colspan": 1, "key": 7},
-                            {"title": order_count, "colspan": 1, "key": 8},
-                            {"title": order_0_30, "colspan": 1, "key": 9},
-                            {"title": order_31_80, "colspan": 1, "key": 10},
-                            {"title": order_81_infinity, "colspan": 1, "key": 11},
-                            {"title": labour_hours, "colspan": 1, "key": 12},
-                            {"title": labour_hours_0_30, "colspan": 1, "key": 13},
-                            {"title": labour_hours_31_80, "colspan": 1, "key": 14},
-                            {"title": labour_hours_81_infinity, "colspan": 1, "key": 15},
-                            {"title": 388400.10, "colspan": 1, "key": 16},
-                            {"title": 73241.01, "colspan": 1, "key": 17},
-                            {"title": 149294.48, "colspan": 1, "key": 18},
-                            {"title": 1092690.46, "colspan": 1, "key": 19},
-                            {"title": 1315225.94, "colspan": 1, "key": 20}
-                        ]
-                    })
         table_data["tr"].append({
                             "class": "highlighted",
-                            "key": 1002,
+                            "key": key+1,
                             "td": [
-                                {"title": "Grand Total", "colspan": 1, "key": 7},
-                                {"title": order_count, "colspan": 1, "key": 8},
-                                {"title": order_0_30, "colspan": 1, "key": 9},
-                                {"title": order_31_80, "colspan": 1, "key": 10},
-                                {"title": order_81_infinity, "colspan": 1, "key": 11},
-                                {"title": labour_hours, "colspan": 1, "key": 12},
-                                {"title": labour_hours_0_30, "colspan": 1, "key": 13},
-                                {"title": labour_hours_31_80, "colspan": 1, "key": 14},
-                                {"title": labour_hours_81_infinity, "colspan": 1, "key": 15},
-                                {"title": 388400.10, "colspan": 1, "key": 16},
-                                {"title": 73241.01, "colspan": 1, "key": 17},
-                                {"title": 149294.48, "colspan": 1, "key": 18},
-                                {"title": 1092690.46, "colspan": 1, "key": 19},
-                                {"title": 1315225.94, "colspan": 1, "key": 20}
+                                {"title": "Grand Total", "colspan": 1, "key": key+2},
+                                {"title": order_count, "colspan": 1, "key": key+3},
+                                {"title": order_0_30, "colspan": 1, "key": key+4},
+                                {"title": order_31_80, "colspan": 1, "key": key+5},
+                                {"title": order_81_infinity, "colspan": 1, "key": key+6},
+                                {"title": labour_hours, "colspan": 1, "key": key+7},
+                                {"title": labour_hours_0_30, "colspan": 1, "key": key+8},
+                                {"title": labour_hours_31_80, "colspan": 1, "key": key+9},
+                                {"title": labour_hours_81_infinity, "colspan": 1, "key": key+10},
+                                {"title": 388400.10, "colspan": 1, "key": key+11},
+                                {"title": 73241.01, "colspan": 1, "key": key+12},
+                                {"title": 149294.48, "colspan": 1, "key": key+13},
+                                {"title": 1092690.46, "colspan": 1, "key": key+14},
+                                {"title": 1315225.94, "colspan": 1, "key": key+15}
                             ]
                         })
         return json.dumps(table_data)

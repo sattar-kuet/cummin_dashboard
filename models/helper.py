@@ -94,7 +94,7 @@ class Helper(models.AbstractModel):
             return labour_hours,labour_hours_0_30,labour_hours_31_80,labour_hours_81_infinity
    
     
-    def get_regions(self):
+    def get_countries(self):
         unique_countries = self.env['maintenance.request'].sudo().search([]).mapped('country')
         unique_countries = list(set(unique_countries))
         return unique_countries

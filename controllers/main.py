@@ -233,18 +233,36 @@ class Api(http.Controller):
                     ]
         key = key+14
         maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
-        regions = request.env['cummin_dashboard.helper'].get_regions()
-        
-        for region in regions:
+        countries = request.env['cummin_dashboard.helper'].get_countries()
+        total_order_count = 0
+        total_order_0_30 = 0
+        total_order_31_80 = 0
+        total_order_81_infinity = 0
+        total_labour_hours = 0
+        total_labour_hours_0_30 = 0
+        total_labour_hours_31_80 = 0
+        total_labour_hours_81_infinity = 0
+        for country in countries:
+            country_name = '-'
+            if country:
+                country_name = country
+            maintenance_request_domain.append(('country','=', country))
             maintenance_request_ids,order_count,order_0_30,order_31_80,order_81_infinity = request.env['cummin_dashboard.helper'].order_count_detail(maintenance_request_domain)
             time_sheet_domain.append(('maintenance_request_id','in',maintenance_request_ids))
             labour_hours,labour_hours_0_30,labour_hours_31_80,labour_hours_81_infinity = request.env['cummin_dashboard.helper'].labour_hours_detail(time_sheet_domain)
-            
+            total_order_count += int(order_count)
+            total_order_0_30 += int(order_0_30)
+            total_order_31_80 += int(order_31_80)
+            total_order_81_infinity += int(order_81_infinity)
+            total_labour_hours += float(labour_hours)
+            total_labour_hours_0_30 += float(labour_hours_0_30)
+            total_labour_hours_31_80 += float(labour_hours_31_80)
+            total_labour_hours_81_infinity += float(labour_hours_81_infinity) 
             table_data["tr"].append({
                             "class": "",
                             "key": key,
                             "td": [
-                                {"title": "AFRICA", "colspan": 1, "key": key+1},
+                                {"title": country_name, "colspan": 1, "key": key+1},
                                 {"title": order_count, "colspan": 1, "key": key+2},
                                 {"title": order_0_30, "colspan": 1, "key": key+3},
                                 {"title": order_31_80, "colspan": 1, "key": key+4},
@@ -267,14 +285,14 @@ class Api(http.Controller):
                             "key": key+1,
                             "td": [
                                 {"title": "Grand Total", "colspan": 1, "key": key+2},
-                                {"title": order_count, "colspan": 1, "key": key+3},
-                                {"title": order_0_30, "colspan": 1, "key": key+4},
-                                {"title": order_31_80, "colspan": 1, "key": key+5},
-                                {"title": order_81_infinity, "colspan": 1, "key": key+6},
-                                {"title": labour_hours, "colspan": 1, "key": key+7},
-                                {"title": labour_hours_0_30, "colspan": 1, "key": key+8},
-                                {"title": labour_hours_31_80, "colspan": 1, "key": key+9},
-                                {"title": labour_hours_81_infinity, "colspan": 1, "key": key+10},
+                                {"title": total_order_count, "colspan": 1, "key": key+3},
+                                {"title": total_order_0_30, "colspan": 1, "key": key+4},
+                                {"title": total_order_31_80, "colspan": 1, "key": key+5},
+                                {"title": total_order_81_infinity, "colspan": 1, "key": key+6},
+                                {"title": total_labour_hours, "colspan": 1, "key": key+7},
+                                {"title": total_labour_hours_0_30, "colspan": 1, "key": key+8},
+                                {"title": total_labour_hours_31_80, "colspan": 1, "key": key+9},
+                                {"title": total_labour_hours_81_infinity, "colspan": 1, "key": key+10},
                                 {"title": 388400.10, "colspan": 1, "key": key+11},
                                 {"title": 73241.01, "colspan": 1, "key": key+12},
                                 {"title": 149294.48, "colspan": 1, "key": key+13},

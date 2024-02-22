@@ -56,6 +56,7 @@ class Helper(models.AbstractModel):
             order_0_30 = 0
             order_31_80 = 0
             order_81_infinity = 0
+            maintenance_request_ids = []
             for maintenance_request in maintenance_requests:
             #   if maintenance_request.stage_id.name != 'Closure':
                 if not  maintenance_request.invoice:
@@ -66,7 +67,8 @@ class Helper(models.AbstractModel):
                     order_31_80 += 1
                 if self.env['cummin_dashboard.helper'].between_x1_x2_days_older(maintenance_request.create_date,81,-1):
                     order_81_infinity += 1
-            return order_count,order_0_30,order_31_80,order_81_infinity
+                maintenance_request_ids.append(maintenance_request.id)
+            return maintenance_request_ids,order_count,order_0_30,order_31_80,order_81_infinity
     
     def labour_hours_detail(self,domain):
             domain.append(('task','in',PRODUCTIVE_HOURS))
@@ -90,6 +92,12 @@ class Helper(models.AbstractModel):
             labour_hours_81_infinity = "{:.{}f}".format(labour_hours_81_infinity, 2)
 
             return labour_hours,labour_hours_0_30,labour_hours_31_80,labour_hours_81_infinity
+   
+    
+    def get_regions(self):
+        unique_countries = self.env['maintenance.request'].sudo().search([]).mapped('country')
+        unique_countries = list(set(unique_countries))
+        return unique_countries
     
     @staticmethod
     def convert_time_from_float(time_data):

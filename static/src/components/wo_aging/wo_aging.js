@@ -62,6 +62,7 @@ export class WoAging extends Component {
     onFilterApplied(filteringParameter) {
         this.state.filteringParameter = filteringParameter
         this.loadwoAgingTableData()
+        this.loadwoAgingChartData()
     }
     async loadwoAgingChartData() {
         let wo_aging_chart_data = await this.rpc("/wo_aging/chart_data", this.state.filteringParameter)

@@ -193,7 +193,7 @@ class Api(http.Controller):
     
 
     @http.route('/wo_aging/table_data', auth="user", type="json")
-    def wo_aging(self, **data):
+    def wo_aging_table_data(self, **data):
         key = 1
         table_data = {
                     "th": {
@@ -316,6 +316,48 @@ class Api(http.Controller):
                             ]
                         })
         return json.dumps(table_data)
+    
+    @http.route('/wo_aging/chart_data', auth="user", type="json")
+    def wo_aging_chart_data(self, **data):
+        countries = request.env['cummin_dashboard.helper'].get_countries()
+        labels = []
+        bg_0_30 = []
+        bg_31_80 = []
+        bg_81_infinity = []
+        data_0_30 = []
+        data_31_80 = []
+        data_81_infinity = []
+        for country in countries:
+            if not country:
+                country = '-'
+            labels.append(country)
+            bg_0_30.append('green')
+            bg_31_80.append('red')
+            bg_81_infinity.append('blue')
+            data_0_30.append(3)
+            data_31_80.append(4)
+            data_81_infinity.append(5)
+        chart_data = {
+            "labels": labels,
+            "datasets": [
+                {
+                    "label": "0 to 30",
+                    "backgroundColor": bg_0_30,
+                    "data": data_0_30
+                },
+                {
+                    "label": "31 to 80",
+                    "backgroundColor": bg_31_80,
+                    "data": data_31_80
+                },
+                {
+                    "label": "<80",
+                    "backgroundColor": bg_81_infinity,
+                    "data": data_81_infinity
+                }
+            ]
+        }
+        return json.dumps(chart_data)
         
     @http.route('/test_url', auth="public", type="http", website="true")
     def test_url(self, **data):

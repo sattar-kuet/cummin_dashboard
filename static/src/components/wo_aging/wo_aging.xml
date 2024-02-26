@@ -7,7 +7,7 @@
 				<section class="chart__section bg-white">
 					<div></div>
 					<ChartRenderer3 type="'bar'" title="'Wo Aging'"
-                bg_color="'#AA2E24'" data="state.woAgin"/>
+                bg_color="'#AA2E24'" data="state.woAgingChartData"/>
 					<div></div>
 				</section>
 				<section class="main__table sticky-top bg-white">

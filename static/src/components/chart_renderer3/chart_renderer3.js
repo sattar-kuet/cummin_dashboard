@@ -16,43 +16,18 @@ export class ChartRenderer3 extends Component {
 
     renderChart3() {
         console.log("********", this.props)
-        const tb_data = this.props.data
         var ctx = this.chartRef.el.getContext("2d")
-        var data = {
-            labels: [
-                "AFRICA",
-                "MIDDLEEAST",
-            ],
-            datasets: [
-                {
-                    label: "0 to 30",
-                    backgroundColor: [
-                        "green",
-                        "green",
-                    ],
-                    data: [2, 6]
-                },
-                {
-                    label: "31 to 80",
-                    backgroundColor: [
-                        "red",
-                        "red",
-                    ],
-                    data: [4, 3]
-                },
-                {
-                    label: "<80",
-                    backgroundColor: [
-                        "blue",
-                        "blue",
-                    ],
-                    data: [5, 6]
-                }
-            ]
-        };
-
+        var data = this.props.data
         // Notice how nested the beginAtZero is
         var options = {
+            scales: {
+                y: {
+                    title: {
+                        display: true,
+                        text: 'WO Count'
+                    }
+                }
+            },
             plugins: {
                 title: {
                     display: true,

@@ -32,7 +32,7 @@ export class WoAging extends Component {
         onWillStart(async () => {
             this.loadFilteringParameterFromCookie()
             this.env.bus.on("filterApplied", this, this.onFilterApplied)
-            this.loadwoAging()
+            await this.loadwoAgingChartData()
             await this.loadwoAgingTableData()
         })
         // onMounted(() => {
@@ -63,45 +63,9 @@ export class WoAging extends Component {
         this.state.filteringParameter = filteringParameter
         this.loadwoAgingTableData()
     }
-    loadwoAging() {
-        this.state.woAgin = [
-            {
-                label: "Jan 20",
-                value: 2.0,
-            },
-
-            {
-                label: "Feb 20",
-                value: 2.0,
-            },
-
-            {
-                label: "Mar 20",
-                value: 4.0,
-            },
-
-            {
-                label: "Apr 20",
-                value: 6.0,
-            },
-
-            {
-                label: "May 20",
-                value: 8.0,
-            },
-            {
-                label: "Jun 20",
-                value: 12.0,
-            },
-            {
-                label: "Jul 20",
-                value: 10
-            },
-            {
-                label: "Aug 20",
-                value: 9
-            },
-        ]
+    async loadwoAgingChartData() {
+        let wo_aging_chart_data = await this.rpc("/wo_aging/chart_data", this.state.filteringParameter)
+        this.state.woAgingChartData = JSON.parse(wo_aging_chart_data)
     }
 
     async loadwoAgingTableData() {

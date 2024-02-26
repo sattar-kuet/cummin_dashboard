@@ -74,25 +74,45 @@ class Helper(models.AbstractModel):
             domain.append(('task','in',PRODUCTIVE_HOURS))
             time_sheets = self.env['account.analytic.line'].search(domain)
             labour_hours = 0.0
-            labour_hours_0_30 = 0
-            labour_hours_31_80 = 0
-            labour_hours_81_infinity = 0
             for time_sheet in time_sheets:
                 labour_hours += self.convert_time_from_float(time_sheet.unit_amount)
-                if self.env['cummin_dashboard.helper'].between_x1_x2_days_older(time_sheet.date,0,30):
-                    labour_hours_0_30 += self.convert_time_from_float(time_sheet.unit_amount)
-                if self.env['cummin_dashboard.helper'].between_x1_x2_days_older(time_sheet.date,31,80):
-                    labour_hours_31_80 += self.convert_time_from_float(time_sheet.unit_amount)
-                if self.env['cummin_dashboard.helper'].between_x1_x2_days_older(time_sheet.date,80,-1):
-                    labour_hours_81_infinity += self.convert_time_from_float(time_sheet.unit_amount)
-                #  labour_hours = self.sum_time_durations(labour_hours,time_sheet.unit_amount)
             labour_hours = "{:.{}f}".format(labour_hours, 2)
-            labour_hours_0_30 = "{:.{}f}".format(labour_hours_0_30, 2)
-            labour_hours_31_80 = "{:.{}f}".format(labour_hours_31_80, 2)
-            labour_hours_81_infinity = "{:.{}f}".format(labour_hours_81_infinity, 2)
 
-            return labour_hours,labour_hours_0_30,labour_hours_31_80,labour_hours_81_infinity
-   
+            return labour_hours
+    
+    def billable_amount_detail(self,domain):
+        maintenance_requests = self.env['maintenance.request'].search(domain)
+        billable_amount = 0
+        billable_amount_0_30 = 0
+        billable_amount_31_80 = 0
+        billable_amount_81_inifinity = 0
+        for maintenance_request in maintenance_requests:
+            total_sales = maintenance_request.labour_sales + maintenance_request.parts_sales + maintenance_request.other_sales
+            billable_amount += total_sales
+            if self.env['cummin_dashboard.helper'].between_x1_x2_days_older(maintenance_request.create_date,0,30):
+               billable_amount_0_30 += total_sales
+            elif self.env['cummin_dashboard.helper'].between_x1_x2_days_older(maintenance_request.create_date,31,80):
+               billable_amount_31_80 += total_sales
+            elif self.env['cummin_dashboard.helper'].between_x1_x2_days_older(maintenance_request.create_date,81,-1):
+               billable_amount_81_inifinity += total_sales
+        return billable_amount, billable_amount_0_30, billable_amount_31_80, billable_amount_81_inifinity
+    
+    def cost_detail(self, domain):
+        maintenance_requests = self.env['maintenance.request'].search(domain)
+        cost = 0
+        cost_0_30 = 0
+        cost_31_80 = 0
+        cost_81_inifinity = 0
+        for maintenance_request in maintenance_requests:
+            cost += maintenance_request.wip_cost
+            if self.env['cummin_dashboard.helper'].between_x1_x2_days_older(maintenance_request.create_date,0,30):
+               cost_0_30 += maintenance_request.wip_cost
+            elif self.env['cummin_dashboard.helper'].between_x1_x2_days_older(maintenance_request.create_date,31,80):
+               cost_31_80 += maintenance_request.wip_cost
+            elif self.env['cummin_dashboard.helper'].between_x1_x2_days_older(maintenance_request.create_date,81,-1):
+               cost_81_inifinity += maintenance_request.wip_cost
+        return cost, cost_0_30, cost_31_80, cost_81_inifinity
+
     
     def get_countries(self):
         unique_countries = self.env['maintenance.request'].sudo().search([]).mapped('country')

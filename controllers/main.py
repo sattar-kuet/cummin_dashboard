@@ -201,9 +201,9 @@ class Api(http.Controller):
                         "items": [
                             {"title": "", "colspan": 1, "key": key+1},
                             {"title": "", "colspan": 1, "key": key+2},
-                            {"title": "Order Age1", "colspan": 3, "key": key+3},
+                            {"title": "Order Age", "colspan": 3, "key": key+3},
                             {"title": "Applied", "colspan": 1, "key": key+4},
-                            {"title": "Bill Amount", "colspan": 4, "key": key+5},
+                            {"title": "Billable Amount", "colspan": 4, "key": key+5},
                             {"title": "Cost", "colspan": 4, "key": key+6}
                         ]
                     }
@@ -239,9 +239,14 @@ class Api(http.Controller):
         total_order_31_80 = 0
         total_order_81_infinity = 0
         total_labour_hours = 0
-        total_labour_hours_0_30 = 0
-        total_labour_hours_31_80 = 0
-        total_labour_hours_81_infinity = 0
+        total_billable_amount = 0
+        total_billable_amount_0_30 = 0
+        total_billable_amount_31_80 = 0
+        total_billable_amount_81_infinity = 0
+        total_cost_0_30 = 0
+        total_cost_31_80 = 0
+        total_cost_81_infinity = 0
+        total_cost = 0
         for country in countries:
             country_name = '-'
             if country:
@@ -249,15 +254,25 @@ class Api(http.Controller):
             maintenance_request_domain.append(('country','=', country))
             maintenance_request_ids,order_count,order_0_30,order_31_80,order_81_infinity = request.env['cummin_dashboard.helper'].order_count_detail(maintenance_request_domain)
             time_sheet_domain.append(('maintenance_request_id','in',maintenance_request_ids))
-            labour_hours,labour_hours_0_30,labour_hours_31_80,labour_hours_81_infinity = request.env['cummin_dashboard.helper'].labour_hours_detail(time_sheet_domain)
+            labour_hours = request.env['cummin_dashboard.helper'].labour_hours_detail(time_sheet_domain)
+            billable_amount, billable_amount_0_30, billable_amount_31_80, billable_amount_81_inifinity = request.env['cummin_dashboard.helper'].billable_amount_detail(maintenance_request_domain)
+            cost, cost_0_30, cost_31_80, cost_81_inifinity = request.env['cummin_dashboard.helper'].cost_detail(maintenance_request_domain)
+            
             total_order_count += int(order_count)
             total_order_0_30 += int(order_0_30)
             total_order_31_80 += int(order_31_80)
             total_order_81_infinity += int(order_81_infinity)
             total_labour_hours += float(labour_hours)
-            total_labour_hours_0_30 += float(labour_hours_0_30)
-            total_labour_hours_31_80 += float(labour_hours_31_80)
-            total_labour_hours_81_infinity += float(labour_hours_81_infinity) 
+            total_billable_amount += float(billable_amount)
+            total_billable_amount_0_30 += float(billable_amount_0_30)
+            total_billable_amount_31_80 += float(billable_amount_31_80)
+            total_billable_amount_81_infinity += float(billable_amount_81_inifinity)
+
+            total_cost += float(cost)
+            total_cost_0_30 += float(cost_0_30)
+            total_cost_31_80 += float(cost_31_80)
+            total_cost_81_infinity += float(total_cost_81_infinity)
+
             table_data["tr"].append({
                             "class": "",
                             "key": key,
@@ -268,14 +283,14 @@ class Api(http.Controller):
                                 {"title": order_31_80, "colspan": 1, "key": key+4},
                                 {"title": order_81_infinity, "colspan": 1, "key": key+5},
                                 {"title": labour_hours, "colspan": 1, "key": key+6},
-                                {"title": labour_hours_0_30, "colspan": 1, "key": key+7},
-                                {"title": labour_hours_31_80, "colspan": 1, "key": key+8},
-                                {"title": labour_hours_81_infinity, "colspan": 1, "key": key+9},
-                                {"title": 388400.10, "colspan": 1, "key": key+10},
-                                {"title": 73241.01, "colspan": 1, "key": key+11},
-                                {"title": 149294.48, "colspan": 1, "key": key+12},
-                                {"title": 1092690.46, "colspan": 1, "key": key+13},
-                                {"title": 1315225.94, "colspan": 1, "key": key+14}
+                                {"title": billable_amount_0_30, "colspan": 1, "key": key+7},
+                                {"title": billable_amount_31_80, "colspan": 1, "key": key+8},
+                                {"title": billable_amount_81_inifinity, "colspan": 1, "key": key+9},
+                                {"title": billable_amount, "colspan": 1, "key": key+10},
+                                {"title": cost_0_30, "colspan": 1, "key": key+11},
+                                {"title": cost_31_80, "colspan": 1, "key": key+12},
+                                {"title": cost_81_inifinity, "colspan": 1, "key": key+13},
+                                {"title": cost, "colspan": 1, "key": key+14}
                             ]
                         })
             key = key+15
@@ -290,14 +305,14 @@ class Api(http.Controller):
                                 {"title": total_order_31_80, "colspan": 1, "key": key+5},
                                 {"title": total_order_81_infinity, "colspan": 1, "key": key+6},
                                 {"title": total_labour_hours, "colspan": 1, "key": key+7},
-                                {"title": total_labour_hours_0_30, "colspan": 1, "key": key+8},
-                                {"title": total_labour_hours_31_80, "colspan": 1, "key": key+9},
-                                {"title": total_labour_hours_81_infinity, "colspan": 1, "key": key+10},
-                                {"title": 388400.10, "colspan": 1, "key": key+11},
-                                {"title": 73241.01, "colspan": 1, "key": key+12},
-                                {"title": 149294.48, "colspan": 1, "key": key+13},
-                                {"title": 1092690.46, "colspan": 1, "key": key+14},
-                                {"title": 1315225.94, "colspan": 1, "key": key+15}
+                                {"title": total_billable_amount_0_30, "colspan": 1, "key": key+8},
+                                {"title": total_billable_amount_31_80, "colspan": 1, "key": key+9},
+                                {"title": total_billable_amount_81_infinity, "colspan": 1, "key": key+10},
+                                {"title": total_billable_amount, "colspan": 1, "key": key+11},
+                                {"title": total_cost_0_30, "colspan": 1, "key": key+12},
+                                {"title": total_cost_31_80, "colspan": 1, "key": key+13},
+                                {"title": total_cost_81_infinity, "colspan": 1, "key": key+14},
+                                {"title": total_cost, "colspan": 1, "key": key+15}
                             ]
                         })
         return json.dumps(table_data)

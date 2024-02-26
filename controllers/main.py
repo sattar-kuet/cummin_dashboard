@@ -327,16 +327,19 @@ class Api(http.Controller):
         data_0_30 = []
         data_31_80 = []
         data_81_infinity = []
+        maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
         for country in countries:
+            maintenance_request_domain.append(('country','=', country))
+            maintenance_request_ids,order_count,order_0_30,order_31_80,order_81_infinity = request.env['cummin_dashboard.helper'].order_count_detail(maintenance_request_domain)
             if not country:
                 country = '-'
             labels.append(country)
             bg_0_30.append('green')
             bg_31_80.append('red')
             bg_81_infinity.append('blue')
-            data_0_30.append(3)
-            data_31_80.append(4)
-            data_81_infinity.append(5)
+            data_0_30.append(order_0_30)
+            data_31_80.append(order_31_80)
+            data_81_infinity.append(order_81_infinity)
         chart_data = {
             "labels": labels,
             "datasets": [

@@ -1,0 +1,19 @@
+.dashboard_header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.label_content {
+    display: flex;
+    /* Use flexbox for the span and img */
+    align-items: center;
+    /* Align items vertically */
+    justify-content: center;
+    /* Horizontally center the content */
+}
+
+.label_content img {
+    margin-right: 5px;
+    /* Add some space between the image and text */
+}

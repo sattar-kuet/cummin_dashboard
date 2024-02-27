@@ -3,7 +3,8 @@
 	<t t-name="owl.WoAging" owl="1">
 		<div class="vh-100 overflow-auto">
 			<section class="dashborad__section">
-				<Filter periodStartAt="state.periodStartAt"/>
+				<Header/>
+				<Filter/>
 				<section class="chart__section bg-white">
 					<div></div>
 					<ChartRenderer3 type="'bar'" title="'Wo Aging'"

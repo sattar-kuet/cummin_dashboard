@@ -2,6 +2,7 @@
 <templates xml:space="preserve">
     <t t-name="owl.KpiDashboard" owl="1">
         <section class="dashborad__section">
+            <Header/>
             <Filter/>
             <div class="dashboard__content">
                 <div class="dashboard__item">

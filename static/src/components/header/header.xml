@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="owl.Header" owl="1">
+        <div class="dashboard_header">
+            <span class="label_content">
+                <img height="40px" src="/cummin_dashboard/static/src/image/favicon.png"/>
+                <span style="font-size: 38px;font-weight: 900;">Cummins Enterprise Business Intelligence</span>
+            </span>
+        </div>
+    </t>
+</templates>

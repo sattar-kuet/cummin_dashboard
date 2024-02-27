@@ -3,6 +3,7 @@
 const { Component, onWillStart, useRef, onMounted, onWillUnmount, useState } = owl
 import { useService } from "@web/core/utils/hooks"
 import { registry } from "@web/core/registry"
+import { Header } from "../header/header"
 import { Filter } from "../filter/filter"
 import { ChartRenderer3 } from "../chart_renderer3/chart_renderer3"
 import { Table } from "../table/table"
@@ -78,5 +79,5 @@ export class WoAging extends Component {
 }
 
 WoAging.template = "owl.WoAging"
-WoAging.components = { ChartRenderer3, Table, Filter }
+WoAging.components = { ChartRenderer3, Table, Header, Filter }
 registry.category("actions").add("wo_aging", WoAging)

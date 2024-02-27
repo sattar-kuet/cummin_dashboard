@@ -66,6 +66,7 @@ export class WoAging extends Component {
     }
     async loadwoAgingChartData() {
         let wo_aging_chart_data = await this.rpc("/wo_aging/chart_data", this.state.filteringParameter)
+        console.log('Change on chart data is being detected')
         this.state.woAgingChartData = JSON.parse(wo_aging_chart_data)
     }
 

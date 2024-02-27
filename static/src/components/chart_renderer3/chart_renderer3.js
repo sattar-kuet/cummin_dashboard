@@ -53,7 +53,11 @@ export class ChartRenderer3 extends Component {
         };
 
         // Chart declaration:
-        var myBarChart = new Chart(ctx, {
+        if (this.myBarChart) {
+            // If the chart already exists, destroy it before re-rendering
+            this.myBarChart.destroy();
+        }
+        this.myBarChart = new Chart(ctx, {
             type: "bar",
             data: data,
             options: options

@@ -124,6 +124,7 @@ export class Filter extends Component {
     resetFilter() {
         $('.form-control').val('')
         this.state.distributorId = 0
+        this.state.period = ''
         this.state.periodStartAt = ''
         this.state.periodEndAt = ''
         this.state.country = ''
@@ -137,6 +138,7 @@ export class Filter extends Component {
         let filteringData = this.getFilteringData()
         this.setFilteringDataToCookie(filteringData)
         this.env.bus.trigger('filterApplied', filteringData)
+        window.location.reload(true)
     }
     getFilteringData() {
         return {

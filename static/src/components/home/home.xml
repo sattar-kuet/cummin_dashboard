@@ -16,6 +16,7 @@
                         <h2 class="card-title">Attendance</h2>
                     </div>
                 </div>
+                
                 <div class="card" t-if="!state.session.technician" t-on-click="redirectToDashboard">
                     <img src="/cummin_dashboard/static/src/image/icon/dashboard.png"/>
                     <div class="card-content">

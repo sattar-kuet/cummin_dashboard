@@ -91,15 +91,16 @@ class Api(http.Controller):
         return json.dumps(initial_dta)
     
     @http.route('/session/info', auth="user", type="json")
-    def user_type(self, **data):
-        user_type = {
+    def session_info(self, **data):
+        session_info = {
             'admin':  request.env.user.has_group('cummin_dashboard.group_cummin_admin'), 
             'distributor':  request.env.user.has_group('cummin_dashboard.group_distributor'), 
             'technician':  request.env.user.has_group('cummin_dashboard.group_technician'), 
+            'supervisor':  request.env.user.has_group('cummin_dashboard.group_supervisor'), 
             'company_ids': request.env.user.company_ids.ids,
             'company_names': [company.name for company in request.env.user.company_ids]
         }
-        return json.dumps(user_type)
+        return json.dumps(session_info)
     
     @http.route('/kpi/data', auth="user", type="json")
     def kpi_data(self, **data):

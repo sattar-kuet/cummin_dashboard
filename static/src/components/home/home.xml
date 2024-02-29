@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="card" >
-                    <img src="/cummin_dashboard/static/src/image/icon/service_order.png"/>
+                    <img src="/cummin_dashboard/static/src/image/icon/attendance.jpg"/>
                     <div class="card-content">
                         <h2 class="card-title">Attendance</h2>
                     </div>
@@ -28,13 +28,13 @@
                         <h2 class="card-title">Time Sheet</h2>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" t-if="state.session.distributor || state.session.admin">
                     <img src="/cummin_dashboard/static/src/image/icon/reporting.png"/>
                     <div class="card-content">
                         <h2 class="card-title">Reporting</h2>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" t-if="state.session.distributor || state.session.admin">
                     <img src="/cummin_dashboard/static/src/image/icon/target_data.png"/>
                     <div class="card-content">
                         <h2 class="card-title">Target Data</h2>

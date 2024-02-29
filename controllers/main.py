@@ -58,14 +58,18 @@ class Api(http.Controller):
     def currency_list(self, **data):
         maintenance_requests = request.env['maintenance.request'].search([])
         currency_list = []
-        for maintenance_request in maintenance_requests:
-            if maintenance_request.currency:
-                currency_list.append({
-                    "id": maintenance_request.currency,
-                    "name": maintenance_request.currency,
-                    "key": f'currency{maintenance_request.id}'
+        # for maintenance_request in maintenance_requests:
+        #     if maintenance_request.currency:
+        #         currency_list.append({
+        #             "id": maintenance_request.currency,
+        #             "name": maintenance_request.currency,
+        #             "key": f'currency{maintenance_request.id}'
+        #         })
+        currency_list.append({
+                    "id": 'USD',
+                    "name": 'USD',
+                    "key": 'currency1'
                 })
-           
         return json.dumps(currency_list)
     
     @http.route('/kpi/load_initial_data', auth="user", type="json")

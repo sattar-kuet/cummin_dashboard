@@ -67,7 +67,6 @@
                     <div class="form__group">
                         <label for="currency">Currency</label>
                         <select class="form-control"  t-model="state.currency">
-                            <option value="">Select Currency</option>
                             <t t-foreach="state.currencies" t-as="data" t-key="data.key">
                                 <option t-att-value="data.id">
                                     <t t-esc="data.name"/>

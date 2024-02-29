@@ -19,7 +19,7 @@ export class Filter extends Component {
             periodEndAt: '',
             country: '',
             branch: '',
-            currency: ''
+            currency: 'USD'
         })
         this.rpc = useService("rpc")
         onWillStart(async () => {

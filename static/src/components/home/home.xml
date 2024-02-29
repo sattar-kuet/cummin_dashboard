@@ -10,7 +10,7 @@
                         <h2 class="card-title">Service Order</h2>
                     </div>
                 </div>
-                <div class="card" >
+                <div class="card" t-if="state.session.technician">
                     <img src="/cummin_dashboard/static/src/image/icon/attendance.jpg"/>
                     <div class="card-content">
                         <h2 class="card-title">Attendance</h2>

@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
+        <record id="action_cummin_home" model="ir.actions.client">
+            <field name="name">home</field>
+            <field name="tag">cummin_home</field>
+        </record>
+        <menuitem
+        name="Home"
+        id="menu_cummin_home"
+        action="action_cummin_home"
+        sequence="0"/>
         <record id="action_kpi_dashboard" model="ir.actions.client">
             <field name="name">Kpi Dashboard</field>
             <field name="tag">kpi_dashboard</field>
@@ -9,7 +18,7 @@
         name="Dashboard"
         id="menu_kpi_dashboard"
         action="action_kpi_dashboard"
-        sequence="0"/>
+        sequence="1"/>
         <record id="action_graph_dashboard" model="ir.actions.client">
             <field name="name">Graph Dashboard</field>
             <field name="tag">graph_dashboard</field>
@@ -18,7 +27,7 @@
         name="Dashboard2"
         id="menu_graph_dashboard"
         action="action_graph_dashboard"
-        sequence="0"/>
+        sequence="2"/>
         <record id="action_wo_aging" model="ir.actions.client">
             <field name="name">WO Aging</field>
             <field name="tag">wo_aging</field>

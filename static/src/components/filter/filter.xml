@@ -64,7 +64,7 @@
                             </t>
                         </select>
                     </div>
-                    <div class="form__group">
+                    <!-- <div class="form__group">
                         <label for="currency">Currency</label>
                         <select class="form-control"  t-model="state.currency">
                             <t t-foreach="state.currencies" t-as="data" t-key="data.key">
@@ -73,7 +73,7 @@
                                 </option>
                             </t>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="btn__group">
                         <button class="form__btn apply__btn" t-on-click="applyFilter">Apply</button>
                         <button class="form__btn reset__btn" type="reset" t-on-click="resetFilter">Reset</button>

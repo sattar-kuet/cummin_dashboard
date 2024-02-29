@@ -46,8 +46,8 @@ class Helper(models.AbstractModel):
            if data['branch']:
                maintenance_request_domain.append(('branch', '=', data['branch']))
 
-           if data['currency']:
-               maintenance_request_domain.append(('currency', '=', data['currency']))
+        #    if data['currency']:
+        #        maintenance_request_domain.append(('currency', '=', data['currency']))
         return maintenance_request_domain,time_sheet_domain
     
     def order_count_detail(self,domain):

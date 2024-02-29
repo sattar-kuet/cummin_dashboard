@@ -18,8 +18,7 @@ export class Filter extends Component {
             periodStartAt: '',
             periodEndAt: '',
             country: '',
-            branch: '',
-            currency: 'USD'
+            branch: ''
         })
         this.rpc = useService("rpc")
         onWillStart(async () => {
@@ -79,7 +78,7 @@ export class Filter extends Component {
             this.state.periodEndAt = filteringParameter.periodEndAt
             this.state.country = filteringParameter.country
             this.state.branch = filteringParameter.branch
-            this.state.currency = filteringParameter.currency
+            // this.state.currency = filteringParameter.currency
             let filteringData = this.getFilteringData()
             console.log('filteringData from cookie:', filteringData)
             this.env.bus.trigger('filterApplied', filteringData)
@@ -129,7 +128,7 @@ export class Filter extends Component {
         this.state.periodEndAt = ''
         this.state.country = ''
         this.state.branch = ''
-        this.state.currency = ''
+        // this.state.currency = ''
         this.state.showDateRange = false
         let filteringData = this.getFilteringData()
         this.setFilteringDataToCookie(filteringData)
@@ -149,7 +148,7 @@ export class Filter extends Component {
             periodEndAt: this.state.periodEndAt,
             country: this.state.country,
             branch: this.state.branch,
-            currency: this.state.currency
+            // currency: this.state.currency
         }
     }
     setFilteringDataToCookie(filteringData) {

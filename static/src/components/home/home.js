@@ -33,7 +33,27 @@ export class Home extends owl.Component {
         let redirectTo = baseUrl + '/web#action=826&model=maintenance.request&view_type=kanban&cids=1&menu_id=776'
         window.location.href = redirectTo
     }
+    redirectToAttendance() {
+        let baseUrl = utility.getBaseUrl()
+        let redirectTo = baseUrl + '/web#cids=1&menu_id=754&action=907'
+        window.location.href = redirectTo
+    }
     redirectToDashboard() {
+        let baseUrl = utility.getBaseUrl()
+        let redirectTo = baseUrl + '/web#action=934&cids=1&menu_id=780'
+        window.location.href = redirectTo
+    }
+    redirectToTimeSheet() {
+        let baseUrl = utility.getBaseUrl()
+        let redirectTo = baseUrl + '/web#action=840&model=account.analytic.line&view_type=list&cids=1&menu_id=702'
+        window.location.href = redirectTo
+    }
+    redirectToReporting() {
+        let baseUrl = utility.getBaseUrl()
+        let redirectTo = baseUrl + '/web#action=934&cids=1&menu_id=780'
+        window.location.href = redirectTo
+    }
+    redirectToTargetData() {
         let baseUrl = utility.getBaseUrl()
         let redirectTo = baseUrl + '/web#action=934&cids=1&menu_id=780'
         window.location.href = redirectTo

@@ -11,18 +11,18 @@
                     </div>
                 </div>
                 <div class="card" t-if="state.session.technician">
-                    <img src="/cummin_dashboard/static/src/image/icon/attendance.jpg"/>
+                    <img src="/cummin_dashboard/static/src/image/icon/attendance.png"/>
                     <div class="card-content">
                         <h2 class="card-title">Attendance</h2>
                     </div>
                 </div>
                 <div class="card" t-if="!state.session.technician" t-on-click="redirectToDashboard">
-                    <img src="/cummin_dashboard/static/src/image/icon/dashboard.jpg"/>
+                    <img src="/cummin_dashboard/static/src/image/icon/dashboard.png"/>
                     <div class="card-content">
                         <h2 class="card-title">Dashboard</h2>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" t-on-click="redirectToTimeSheet">
                     <img src="/cummin_dashboard/static/src/image/icon/time_sheet.png"/>
                     <div class="card-content">
                         <h2 class="card-title">Time Sheet</h2>

@@ -4,7 +4,7 @@
         <section class="dashborad__section">
             <Header/>
             <div class="card-container">
-                <div class="card">
+                <div class="card" t-on-click="redirectToServiceOrder">
                     <img src="/cummin_dashboard/static/src/image/icon/service_order.png"/>
                     <div class="card-content">
                         <h2 class="card-title">Service Order</h2>

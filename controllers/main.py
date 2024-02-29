@@ -102,6 +102,19 @@ class Api(http.Controller):
         }
         return json.dumps(session_info)
     
+    @http.route('/home/load_initial_data', auth="user", type="json")
+    def load_initial_data(self, **data):
+        service_order_list_view_obj = http.request.env['ir.model.data'].sudo().search(
+            [('name', '=', 'maintenance_request_view_inherit')]
+            , limit=1)
+        service_order_view_res_id = False
+        if service_order_list_view_obj:
+            service_order_view_res_id = service_order_list_view_obj.res_id
+        initial_data = {
+            'serviceOrderTreeViewResId':  service_order_view_res_id
+        }
+        return json.dumps(initial_data)
+    
     @http.route('/kpi/data', auth="user", type="json")
     def kpi_data(self, **data):
         domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data)

@@ -17,5 +17,9 @@ export class Utility {
         }
         return null;
     }
+    getBaseUrl() {
+        var baseUrl = window.location.protocol + "//" + window.location.host
+        return baseUrl
+    }
 
 }

@@ -4,21 +4,34 @@ import { registry } from "@web/core/registry"
 const actionRegistry = registry.category("actions")
 import { Header } from "../header/header"
 import { useService, useBus } from "@web/core/utils/hooks";
-
+import { Utility } from "../utility"
+const utility = new Utility()
 export class Home extends owl.Component {
     setup() {
         this.state = useState({
             session: {}
         })
+        this.actionService = useService("action")
         this.rpc = useService("rpc")
         onWillStart(async () => {
+            await this.loadInitialData()
             await this.loadSession()
         })
+    }
+    async loadInitialData() {
+        let initialData = await this.rpc('/home/load_initial_data')
+        initialData = JSON.parse(initialData)
+        this.state.serviceOrderTreeViewResId = initialData.serviceOrderTreeViewResId
     }
     async loadSession() {
         let session = await this.rpc("/session/info")
         this.state.session = JSON.parse(session)
         console.log(this.state.session)
+    }
+    redirectToServiceOrder() {
+        let baseUrl = utility.getBaseUrl()
+        let redirectTo = baseUrl + '/web#action=826&model=maintenance.request&view_type=kanban&cids=1&menu_id=776'
+        window.location.href = redirectTo
     }
 }
 

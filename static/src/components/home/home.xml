@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="owl.Home" owl="1">
+        <section class="dashborad__section">
+            <Header/>
+            <div class="card-container">
+                <div class="card">
+                    <img src="/cummin_dashboard/static/src/image/icon/service_order.png"/>
+                    <div class="card-content">
+                        <h2 class="card-title">Service Order</h2>
+                    </div>
+                </div>
+                <div class="card" t-if="state.session.admin">
+                    <img src="/cummin_dashboard/static/src/image/icon/service_order.png"/>
+                    <div class="card-content">
+                        <h2 class="card-title">Attendance</h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/cummin_dashboard/static/src/image/icon/dashboard.jpg"/>
+                    <div class="card-content">
+                        <h2 class="card-title">Dashboard</h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/cummin_dashboard/static/src/image/icon/time_sheet.png"/>
+                    <div class="card-content">
+                        <h2 class="card-title">Time Sheet</h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/cummin_dashboard/static/src/image/icon/reporting.png"/>
+                    <div class="card-content">
+                        <h2 class="card-title">Reporting</h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/cummin_dashboard/static/src/image/icon/target_data.png"/>
+                    <div class="card-content">
+                        <h2 class="card-title">Target Data</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </t>
+</templates>

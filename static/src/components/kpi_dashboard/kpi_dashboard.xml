@@ -8,7 +8,6 @@
                 <div class="dashboard__item">
                     <div class="dashboard__title">
                         <h2>Growth Mindset</h2>
-                        <Tagify/>
                     </div>
                     <div class="dashboard__tables">
                         <table>

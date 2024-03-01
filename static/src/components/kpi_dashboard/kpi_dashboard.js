@@ -4,7 +4,6 @@ import { registry } from "@web/core/registry"
 import { useService } from "@web/core/utils/hooks"
 import { Header } from "../header/header"
 import { Filter } from "../filter/filter"
-import { Tagify } from "../tagify/tagify"
 import { KpiCard } from "../kpi_card/kpi_card"
 import { SelectInput } from "../select_input/select_input"
 
@@ -62,5 +61,5 @@ export class OwlKpiDashboard extends Component {
 }
 
 OwlKpiDashboard.template = "owl.KpiDashboard"
-OwlKpiDashboard.components = { Filter, KpiCard, SelectInput, Header,Tagify }
+OwlKpiDashboard.components = { Filter, KpiCard, SelectInput, Header }
 actionRegistry.add("kpi_dashboard", OwlKpiDashboard)

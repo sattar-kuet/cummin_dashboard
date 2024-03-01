@@ -6,7 +6,7 @@ import { registry } from "@web/core/registry"
 import { Header } from "../header/header"
 import { Filter } from "../filter/filter"
 import { ChartRenderer3 } from "../chart_renderer3/chart_renderer3"
-import { Table } from "../table/table"
+import { Table } from "../tagify/tagify"
 import { Utility } from "../utility"
 const utility = new Utility()
 export class WoAging extends Component {

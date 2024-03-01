@@ -5,7 +5,6 @@
 			<section class="dashborad__section">
 				<Header/>
 				<Filter/>
-				<Table data="state.name"/>
 				<section class="chart__section bg-white">
 					<div></div>
 					<ChartRenderer3 type="'bar'" title="'Wo Aging'"

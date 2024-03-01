@@ -10,10 +10,11 @@ export class TagifyInput extends owl.Component {
         });
         onMounted(() => {
             const input = document.querySelector('input[name=tags]');
-            new Tagify(input, {
+            const tagify = new Tagify(input, {
                 whitelist: ['Egypt', 'Ethiopia'],
                 enforceWhitelist: true
             });
+            // tagify.dropdown.show.call(tagify);
         });
     }
 }

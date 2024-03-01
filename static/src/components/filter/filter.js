@@ -53,7 +53,6 @@ export class Filter extends Component {
 
     async loadCountries() {
         let countries = await this.rpc("/country/list");
-        countries = JSON.parse(countries);
         this.state.countries = countries;
     }
     async loadBranches() {

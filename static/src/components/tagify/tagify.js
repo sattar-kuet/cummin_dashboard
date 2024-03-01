@@ -11,7 +11,7 @@ export class TagifyInput extends owl.Component {
         onMounted(() => {
             const input = document.querySelector('input[name=tags]');
             new Tagify(input, {
-                whitelist: ['Nazia', 'Shuvro'],
+                whitelist: ['Egypt', 'Ethiopia'],
                 enforceWhitelist: true
             });
         });

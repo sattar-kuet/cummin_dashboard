@@ -44,7 +44,7 @@
                     </div>
                     <div class="form__group">
                         <label for="country">Country</label>
-                        <TagifyInput/>
+                        <TagifyInput options="state.countries"/>
                     </div>
                     <div class="form__group">
                         <label for="currency">Branch</label>

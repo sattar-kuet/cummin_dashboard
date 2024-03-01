@@ -55,7 +55,7 @@
                     </div>
                     <div class="form__group">
                         <label for="country">Country</label>
-                        <Tagify title="Shuvro"/>
+                        <Tagify />
                     </div>
                     <div class="form__group">
                         <label for="currency">Branch</label>

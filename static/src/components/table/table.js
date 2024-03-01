@@ -5,8 +5,7 @@ export class Table extends owl.Component {
     setup() {
         // this.tagify = useRef("tagify")
         onWillStart(async () => {
-            await loadJS("https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.min.js")
-            await loadCSS("https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css")
+
         });
         onMounted(() => {
             const input = document.querySelector('input[name=tags]');

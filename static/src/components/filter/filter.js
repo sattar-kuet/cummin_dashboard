@@ -1,7 +1,6 @@
 /** @odoo-module */
 
 import { registry } from "@web/core/registry"
-import { loadJS, loadCSS } from "@web/core/assets";
 import { useService, useBus } from "@web/core/utils/hooks";
 const { Component, onWillStart, useRef, onMounted, useState } = owl
 import { Utility } from "../utility"
@@ -23,17 +22,11 @@ export class Filter extends Component {
         })
         this.rpc = useService("rpc")
         onWillStart(async () => {
-            await loadJS("https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js")
-            await loadCSS("https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css")
             await this.loadSession()
             await this.loadFilteringData()
             this.loadFilteringParameterFromCookie()
         })
-        onMounted(() => {
-            const input = document.querySelector('input[name=tags]');
-            console.log('tagify', Tagify)
-            new Tagify(input);
-        });
+
     }
 
     async loadSession() {

@@ -18,4 +18,4 @@ export class Table extends owl.Component {
     }
 }
 
-Table.template = "owl.Table"
+Table.template = "owl.Tagify"

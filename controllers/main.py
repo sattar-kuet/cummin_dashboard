@@ -211,45 +211,7 @@ class Api(http.Controller):
     
 
     @http.route('/wo_aging/table_data', auth="user", type="json")
-    def wo_aging_table_data(self, **data):
-        key = 1
-        table_data = {
-                    "th": {
-                        "class": "highlighted",
-                        "items": [
-                            {"title": "", "colspan": 1, "key": key+1},
-                            {"title": "", "colspan": 1, "key": key+2},
-                            {"title": "Order Age", "colspan": 3, "key": key+3},
-                            {"title": "Applied", "colspan": 1, "key": key+4},
-                            {"title": "Billable Amount", "colspan": 4, "key": key+5},
-                            {"title": "Cost", "colspan": 4, "key": key+6}
-                        ]
-                    }
-                }
-        key = key+7
-        table_data["tr"] = [
-                        {
-                            "class": "highlighted",
-                            "key": 1000,
-                            "td": [
-                                {"title": "Region", "colspan": 1, "key": key},
-                                {"title": "Order Count", "colspan": 1, "key": key+1},
-                                {"title": "0 to 30", "colspan": 1, "key": key+2},
-                                {"title": "31 to 80", "colspan": 1, "key": key+3},
-                                {"title": ">80", "colspan": 1, "key": key+4},
-                                {"title": "Labour Hours", "colspan": 1, "key": key+5},
-                                {"title": "0 to 30", "colspan": 1, "key": key+6},
-                                {"title": "31 to 80", "colspan": 1, "key": key+7},
-                                {"title": ">80", "colspan": 1, "key": key+8},
-                                {"title": "Total for all Open WO", "colspan": 1, "key": key+9},
-                                {"title": "0 to 30", "colspan": 1, "key": key+10},
-                                {"title": "31 to 80", "colspan": 1, "key": key+11},
-                                {"title": ">80", "colspan": 1, "key": key+12},
-                                {"title": "Total", "colspan": 1, "key": key+13}
-                            ]
-                        }
-                    ]
-        key = key+14
+    def wo_aging_table_data(self, **data): 
         maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
         countries = request.env['cummin_dashboard.helper'].get_countries()
         total_order_count = 0
@@ -265,6 +227,8 @@ class Api(http.Controller):
         total_cost_31_80 = 0
         total_cost_81_infinity = 0
         total_cost = 0
+        table_rows = []
+        key = 0
         for country in countries:
             country_name = '-'
             if country:
@@ -275,7 +239,6 @@ class Api(http.Controller):
             labour_hours = request.env['cummin_dashboard.helper'].labour_hours_detail(time_sheet_domain)
             billable_amount, billable_amount_0_30, billable_amount_31_80, billable_amount_81_inifinity = request.env['cummin_dashboard.helper'].billable_amount_detail(maintenance_request_domain)
             cost, cost_0_30, cost_31_80, cost_81_inifinity = request.env['cummin_dashboard.helper'].cost_detail(maintenance_request_domain)
-            
             total_order_count += int(order_count)
             total_order_0_30 += int(order_0_30)
             total_order_31_80 += int(order_31_80)
@@ -290,49 +253,43 @@ class Api(http.Controller):
             total_cost_0_30 += float(cost_0_30)
             total_cost_31_80 += float(cost_31_80)
             total_cost_81_infinity += float(total_cost_81_infinity)
-
-            table_data["tr"].append({
-                            "class": "",
-                            "key": key,
-                            "td": [
-                                {"title": country_name, "colspan": 1, "key": key+1},
-                                {"title": order_count, "colspan": 1, "key": key+2},
-                                {"title": order_0_30, "colspan": 1, "key": key+3},
-                                {"title": order_31_80, "colspan": 1, "key": key+4},
-                                {"title": order_81_infinity, "colspan": 1, "key": key+5},
-                                {"title": labour_hours, "colspan": 1, "key": key+6},
-                                {"title": billable_amount_0_30, "colspan": 1, "key": key+7},
-                                {"title": billable_amount_31_80, "colspan": 1, "key": key+8},
-                                {"title": billable_amount_81_inifinity, "colspan": 1, "key": key+9},
-                                {"title": billable_amount, "colspan": 1, "key": key+10},
-                                {"title": cost_0_30, "colspan": 1, "key": key+11},
-                                {"title": cost_31_80, "colspan": 1, "key": key+12},
-                                {"title": cost_81_inifinity, "colspan": 1, "key": key+13},
-                                {"title": cost, "colspan": 1, "key": key+14}
-                            ]
-                        })
-            key = key+15
-        
-        table_data["tr"].append({
-                            "class": "highlighted",
-                            "key": key+1,
-                            "td": [
-                                {"title": "Grand Total", "colspan": 1, "key": key+2},
-                                {"title": total_order_count, "colspan": 1, "key": key+3},
-                                {"title": total_order_0_30, "colspan": 1, "key": key+4},
-                                {"title": total_order_31_80, "colspan": 1, "key": key+5},
-                                {"title": total_order_81_infinity, "colspan": 1, "key": key+6},
-                                {"title": total_labour_hours, "colspan": 1, "key": key+7},
-                                {"title": total_billable_amount_0_30, "colspan": 1, "key": key+8},
-                                {"title": total_billable_amount_31_80, "colspan": 1, "key": key+9},
-                                {"title": total_billable_amount_81_infinity, "colspan": 1, "key": key+10},
-                                {"title": total_billable_amount, "colspan": 1, "key": key+11},
-                                {"title": total_cost_0_30, "colspan": 1, "key": key+12},
-                                {"title": total_cost_31_80, "colspan": 1, "key": key+13},
-                                {"title": total_cost_81_infinity, "colspan": 1, "key": key+14},
-                                {"title": total_cost, "colspan": 1, "key": key+15}
-                            ]
-                        })
+            key += 1 
+            table_rows.append({
+                "key": key,
+                "country_name": country_name,
+                "order_count": order_count,
+                "order_0_30": order_0_30,
+                "order_31_80": order_31_80,
+                "order_81_infinity": order_81_infinity,
+                "labour_hours": labour_hours,
+                "billable_amount_0_30": billable_amount_0_30,
+                "billable_amount_31_80": billable_amount_31_80,
+                "billable_amount_81_inifinity": billable_amount_81_inifinity,
+                "billable_amount": billable_amount,
+                "cost_0_30": cost_0_30,
+                "cost_31_80": cost_31_80,
+                "cost_81_inifinity": cost_81_inifinity,
+                "cost": cost,
+                })
+        total = {
+            "order_count": total_order_count,
+            "order_0_30": total_order_0_30,
+            "order_31_80": total_order_31_80,
+            "order_81_infinity": total_order_81_infinity,
+            "labour_hours": total_labour_hours,
+            "billable_amount_0_30": total_billable_amount_0_30,
+            "billable_amount_31_80": total_billable_amount_31_80,
+            "billable_amount_81_inifinity": total_billable_amount_81_infinity,
+            "billable_amount": total_billable_amount,
+            "cost_0_30": total_cost_0_30,
+            "cost_31_80": total_cost_31_80,
+            "cost_81_inifinity": total_cost_81_infinity,
+            "cost": total_cost
+        }
+        table_data = {
+            'rows': table_rows,
+            'total': total
+        }
         return json.dumps(table_data)
     
     @http.route('/wo_aging/chart_data', auth="user", type="json")

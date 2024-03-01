@@ -1,34 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
     <t t-name="owl.Table" owl="1">
-        <div class="d-flex align-items-center justify-content-between">
-            <div class="table__paginate">
-                <div role="search" class="o_cp_pager">
-
-                </div>
-            </div>
-        </div>
-        <table >
-            <thead >
-                <tr t-attf-class="{{props.data.th.class}}">
-                    <t t-foreach="props.data.th.items" t-as="th" t-key="th.key">
-                        <th t-attf-colspan="{{th.colspan}}">
-                            <t t-esc="th.title"/>
-                        </th>
-                    </t>
-                </tr>
-            </thead>
-            <tbody>
-                <t t-foreach="props.data.tr" t-as="tr" t-key="tr.key">
-                    <tr t-attf-class="{{tr.class}}">
-                        <t t-foreach="tr.td" t-as="td" t-key="td.key">
-                            <td t-attf-colspan="{{td.colspan}}">
-                                <t t-esc="td.title"/>
-                            </td>
-                        </t>
-                    </tr>
-                </t>
-            </tbody>
-        </table>
+        <h2>Hello
+            <span>
+                <t t-esc="props.data"/>
+                <input name='tags' class='tagify'/>
+            </span>
+        </h2>
     </t>
 </templates>

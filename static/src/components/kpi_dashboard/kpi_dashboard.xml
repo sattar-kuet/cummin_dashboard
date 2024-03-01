@@ -8,6 +8,7 @@
                 <div class="dashboard__item">
                     <div class="dashboard__title">
                         <h2>Growth Mindset</h2>
+                        <Tagify/>
                     </div>
                     <div class="dashboard__tables">
                         <table>
@@ -205,36 +206,6 @@
                         </table> -->
                     </div>
                 </div>
-                <!-- item 3 -->
-                <!-- <div class="dashboard__item">
-                    <div class="dashboard__title">
-                        <h2>Operational Efficiencies</h2>
-                    </div>
-                    <KpiCard
-                            value="state.kpi.operationalEfficiencies.tb"
-                            t-on-click="viewTBdetail"
-                            title="'TB %'"
-                            isParcent='true'
-                    />
-                    <KpiCard
-                            value="state.kpi.operationalEfficiencies.productivity"
-                            t-on-click="viewProductivityDetail"
-                            title="'Productivity'"
-                            isParcent='true'
-                    />
-                    <KpiCard
-                            value="state.kpi.operationalEfficiencies.labourUtilization"
-                            t-on-click="viewLabourUtilizationDetail"
-                            title="'Labour Utilization'"
-                            isParcent='true'
-                    />
-                    <KpiCard
-                            value="state.kpi.operationalEfficiencies.billingEfficiency"
-                            t-on-click="viewBillingEffeciencyDetail"
-                            title="'Billing Efficiency'"
-                            isParcent='true'
-                    />
-                </div> -->
             </div>
         </section>
         <div style="margin-bottom:25px;"></div>

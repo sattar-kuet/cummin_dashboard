@@ -44,7 +44,7 @@
                     </div>
                     <div class="form__group">
                         <label for="country">Country</label>
-                        <select class="form-control"  t-model="state.country">
+                        <select class="form-control"  t-model="state.country" multiple="true">
                             <option value="">Select Country</option>
                             <t t-foreach="state.countries" t-as="data" t-key="data.key">
                                 <option t-att-value="data.id">
@@ -52,6 +52,10 @@
                                 </option>
                             </t>
                         </select>
+                    </div>
+                    <div class="form__group">
+                        <label for="country">Country</label>
+                        <Tagify title="Shuvro"/>
                     </div>
                     <div class="form__group">
                         <label for="currency">Branch</label>

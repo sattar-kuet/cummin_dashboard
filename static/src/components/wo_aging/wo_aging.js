@@ -35,6 +35,7 @@ export class WoAging extends Component {
             this.env.bus.on("filterApplied", this, this.onFilterApplied)
             await this.loadwoAgingChartData()
             await this.loadwoAgingTableData()
+            this.state.name = 'Shuvro'
         })
         // onMounted(() => {
         //     this.env.bus.on("filterApplied", this, this.onFilterApplied)

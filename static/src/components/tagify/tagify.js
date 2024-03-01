@@ -1,7 +1,7 @@
 /** @odoo-module */
 import { loadJS, loadCSS } from "@web/core/assets";
 const { Component, onWillStart, useRef, onMounted } = owl;
-export class Table extends owl.Component {
+export class TagifyInput extends owl.Component {
     setup() {
         // this.tagify = useRef("tagify")
         onWillStart(async () => {
@@ -18,4 +18,4 @@ export class Table extends owl.Component {
     }
 }
 
-Table.template = "owl.Tagify"
+TagifyInput.template = "owl.Tagify"

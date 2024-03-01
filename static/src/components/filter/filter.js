@@ -4,7 +4,7 @@ import { registry } from "@web/core/registry"
 import { useService, useBus } from "@web/core/utils/hooks";
 const { Component, onWillStart, useRef, onMounted, useState } = owl
 import { Utility } from "../utility"
-import { Table } from "../tagify/tagify"
+import { TagifyInput } from "../tagify/tagify"
 const utility = new Utility()
 
 export class Filter extends Component {
@@ -158,6 +158,6 @@ export class Filter extends Component {
     }
 }
 Filter.template = "owl.Filter"
-Filter.components = { Table }
+Filter.components = { TagifyInput }
 registry.category("actions").add("filter", Filter)
 

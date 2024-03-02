@@ -1,6 +1,7 @@
 /** @odoo-module */
 
 import { registry } from "@web/core/registry"
+import { loadJS, loadCSS } from "@web/core/assets";
 import { useService, useBus } from "@web/core/utils/hooks";
 const { Component, onWillStart, useRef, onMounted, useState } = owl
 import { Utility } from "../utility"
@@ -9,6 +10,7 @@ const utility = new Utility()
 
 export class Filter extends Component {
     setup() {
+        this.tagify = useRef("tagify")
         this.state = useState({
             session: {},
             distributorId: 0,
@@ -17,16 +19,46 @@ export class Filter extends Component {
             showDateRange: false,
             periodStartAt: '',
             periodEndAt: '',
-            country: '',
+            country: [],
             branch: ''
         })
         this.rpc = useService("rpc")
         onWillStart(async () => {
-
+            await loadJS("/cummin_dashboard/static/src/lib/tagify/tagify.min.js")
+            await loadCSS("/cummin_dashboard/static/src/lib/tagify/tagify.css")
             await this.loadSession()
             await this.loadFilteringData()
             this.loadFilteringParameterFromCookie()
         })
+        onMounted(() => {
+            const tagify = new Tagify(this.tagify.el, {
+                whitelist: this.state.countries,
+                enforceWhitelist: true
+            });
+            // tagify.dropdown.show.call(tagify);
+            let countryList = []
+            this.tagify.el.addEventListener('change', function (e) {
+                if (e.target.value) {
+                    let countries = JSON.parse(e.target.value)
+                    for (let i = 0; i < countries.length; i++) {
+                        countryList.push(countries[i].value)
+                    }
+                }
+            })
+            this.state.country = countryList
+
+        });
+    }
+
+    onChange(e) {
+        let countries = JSON.parse(e.target.value)
+        let countryList = []
+        for (let i = 0; i < countries.length; i++) {
+            countryList.push(countries[i].value)
+        }
+
+        // this.state.country = [...countryList]
+
     }
 
     async loadSession() {
@@ -53,6 +85,7 @@ export class Filter extends Component {
 
     async loadCountries() {
         let countries = await this.rpc("/country/list");
+        countries = JSON.parse(countries);
         this.state.countries = countries;
     }
     async loadBranches() {
@@ -137,6 +170,7 @@ export class Filter extends Component {
         let filteringData = this.getFilteringData()
         this.setFilteringDataToCookie(filteringData)
         this.env.bus.trigger('filterApplied', filteringData)
+        console.log(this.state.country)
         window.location.reload(true)
     }
     getFilteringData() {

@@ -41,7 +41,7 @@ class Helper(models.AbstractModel):
                time_sheet_domain.append(('date', '<=', data['periodEndAt']))
 
            if data['country']:
-               maintenance_request_domain.append(('country', '=', data['country']))
+               maintenance_request_domain.append(('country', 'in', data['country']))
 
            if data['branch']:
                maintenance_request_domain.append(('branch', '=', data['branch']))

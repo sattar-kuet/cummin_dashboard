@@ -44,7 +44,7 @@
                     </div>
                     <div class="form__group">
                         <label for="country">Country</label>
-                        <TagifyInput options="state.countries"/>
+                        <input t-ref="tagify" class='tagify' t-model="state.country"/>
                     </div>
                     <div class="form__group">
                         <label for="currency">Branch</label>

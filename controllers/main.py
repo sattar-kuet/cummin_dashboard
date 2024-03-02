@@ -31,13 +31,8 @@ class Api(http.Controller):
         maintenance_requests = request.env['maintenance.request'].search([])
         country_list = []
         for maintenance_request in maintenance_requests:
-            if maintenance_request.country:
-                country_list.append({
-                    "id": maintenance_request.country,
-                    "name": maintenance_request.country,
-                    "key": f'country{maintenance_request.id}'
-                })
-           
+            if maintenance_request.country and maintenance_request.country not in country_list:
+                country_list.append(maintenance_request.country)
         return json.dumps(country_list)
     
     @http.route('/branch/list', auth="user", type="json")
@@ -213,7 +208,10 @@ class Api(http.Controller):
     @http.route('/wo_aging/table_data', auth="user", type="json")
     def wo_aging_table_data(self, **data): 
         maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
-        countries = request.env['cummin_dashboard.helper'].get_countries()
+        countries = data['country']
+        if len(countries)==0:
+           countries = request.env['cummin_dashboard.helper'].get_countries()
+        countries = list(set(countries))
         total_order_count = 0
         total_order_0_30 = 0
         total_order_31_80 = 0
@@ -294,7 +292,10 @@ class Api(http.Controller):
     
     @http.route('/wo_aging/chart_data', auth="user", type="json")
     def wo_aging_chart_data(self, **data):
-        countries = request.env['cummin_dashboard.helper'].get_countries()
+        countries = data['country']
+        if len(countries)==0:
+           countries = request.env['cummin_dashboard.helper'].get_countries()
+        countries = list(set(countries))
         labels = []
         bg_0_30 = []
         bg_31_80 = []

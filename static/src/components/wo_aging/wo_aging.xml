@@ -28,15 +28,15 @@
 								<td>Region</td>
 								<td>Order Count</td>
 								<td>0 to 30</td>
-								<td>31 to 80</td>
+								<td>31 to 60</td>
 								<td>&gt;80</td>
 								<td>Labour Hours</td>
 								<td>0 to 30</td>
-								<td>31 to 80</td>
+								<td>31 to 60</td>
 								<td>&gt;80</td>
 								<td>Total for all Open WO</td>
 								<td>0 to 30</td>
-								<td>31 to 80</td>
+								<td>31 to 60</td>
 								<td>&gt;80</td>
 								<td>Total</td>
 							</tr>
@@ -53,7 +53,7 @@
 										<t t-esc="rowData.order_0_30"/>
 									</td>
 									<td>
-										<t t-esc="rowData.order_31_80"/>
+										<t t-esc="rowData.order_31_60"/>
 									</td>
 									<td>
 										<t t-esc="rowData.order_81_infinity"/>
@@ -65,7 +65,7 @@
 										<t t-esc="rowData.billable_amount_0_30"/>
 									</td>
 									<td>
-										<t t-esc="rowData.billable_amount_31_80"/>
+										<t t-esc="rowData.billable_amount_31_60"/>
 									</td>
 									<td>
 										<t t-esc="rowData.billable_amount_81_inifinity"/>
@@ -77,7 +77,7 @@
 										<t t-esc="rowData.cost_0_30"/>
 									</td>
 									<td>
-										<t t-esc="rowData.cost_31_80"/>
+										<t t-esc="rowData.cost_31_60"/>
 									</td>
 									<td>
 										<t t-esc="rowData.cost_81_inifinity"/>
@@ -96,7 +96,7 @@
 									<t t-esc="total.order_0_30"/>
 								</td>
 								<td>
-									<t t-esc="total.order_31_80"/>
+									<t t-esc="total.order_31_60"/>
 								</td>
 								<td>
 									<t t-esc="total.order_81_infinity"/>
@@ -108,7 +108,7 @@
 									<t t-esc="total.billable_amount_0_30"/>
 								</td>
 								<td>
-									<t t-esc="total.billable_amount_31_80"/>
+									<t t-esc="total.billable_amount_31_60"/>
 								</td>
 								<td>
 									<t t-esc="total.billable_amount_81_inifinity"/>
@@ -120,7 +120,7 @@
 									<t t-esc="total.cost_0_30"/>
 								</td>
 								<td>
-									<t t-esc="total.cost_31_80"/>
+									<t t-esc="total.cost_31_60"/>
 								</td>
 								<td>
 									<t t-esc="total.cost_81_inifinity"/>

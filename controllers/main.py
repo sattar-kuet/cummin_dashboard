@@ -214,15 +214,15 @@ class Api(http.Controller):
         countries = list(set(countries))
         total_order_count = 0
         total_order_0_30 = 0
-        total_order_31_80 = 0
+        total_order_31_60 = 0
         total_order_81_infinity = 0
         total_labour_hours = 0
         total_billable_amount = 0
         total_billable_amount_0_30 = 0
-        total_billable_amount_31_80 = 0
+        total_billable_amount_31_60 = 0
         total_billable_amount_81_infinity = 0
         total_cost_0_30 = 0
-        total_cost_31_80 = 0
+        total_cost_31_60 = 0
         total_cost_81_infinity = 0
         total_cost = 0
         table_rows = []
@@ -232,24 +232,24 @@ class Api(http.Controller):
             if country:
                 country_name = country
             maintenance_request_domain.append(('country','=', country))
-            maintenance_request_ids,order_count,order_0_30,order_31_80,order_81_infinity = request.env['cummin_dashboard.helper'].order_count_detail(maintenance_request_domain)
+            maintenance_request_ids,order_count,order_0_30,order_31_60,order_81_infinity = request.env['cummin_dashboard.helper'].order_count_detail(maintenance_request_domain)
             time_sheet_domain.append(('maintenance_request_id','in',maintenance_request_ids))
             labour_hours = request.env['cummin_dashboard.helper'].labour_hours_detail(time_sheet_domain)
-            billable_amount, billable_amount_0_30, billable_amount_31_80, billable_amount_81_inifinity = request.env['cummin_dashboard.helper'].billable_amount_detail(maintenance_request_domain)
-            cost, cost_0_30, cost_31_80, cost_81_inifinity = request.env['cummin_dashboard.helper'].cost_detail(maintenance_request_domain)
+            billable_amount, billable_amount_0_30, billable_amount_31_60, billable_amount_81_inifinity = request.env['cummin_dashboard.helper'].billable_amount_detail(maintenance_request_domain)
+            cost, cost_0_30, cost_31_60, cost_81_inifinity = request.env['cummin_dashboard.helper'].cost_detail(maintenance_request_domain)
             total_order_count += int(order_count)
             total_order_0_30 += int(order_0_30)
-            total_order_31_80 += int(order_31_80)
+            total_order_31_60 += int(order_31_60)
             total_order_81_infinity += int(order_81_infinity)
             total_labour_hours += float(labour_hours)
             total_billable_amount += float(billable_amount)
             total_billable_amount_0_30 += float(billable_amount_0_30)
-            total_billable_amount_31_80 += float(billable_amount_31_80)
+            total_billable_amount_31_60 += float(billable_amount_31_60)
             total_billable_amount_81_infinity += float(billable_amount_81_inifinity)
 
             total_cost += float(cost)
             total_cost_0_30 += float(cost_0_30)
-            total_cost_31_80 += float(cost_31_80)
+            total_cost_31_60 += float(cost_31_60)
             total_cost_81_infinity += float(total_cost_81_infinity)
             key += 1 
             table_rows.append({
@@ -257,30 +257,30 @@ class Api(http.Controller):
                 "country_name": country_name,
                 "order_count": order_count,
                 "order_0_30": order_0_30,
-                "order_31_80": order_31_80,
+                "order_31_60": order_31_60,
                 "order_81_infinity": order_81_infinity,
                 "labour_hours": labour_hours,
                 "billable_amount_0_30": billable_amount_0_30,
-                "billable_amount_31_80": billable_amount_31_80,
+                "billable_amount_31_60": billable_amount_31_60,
                 "billable_amount_81_inifinity": billable_amount_81_inifinity,
                 "billable_amount": billable_amount,
                 "cost_0_30": cost_0_30,
-                "cost_31_80": cost_31_80,
+                "cost_31_60": cost_31_60,
                 "cost_81_inifinity": cost_81_inifinity,
                 "cost": cost,
                 })
         total = {
             "order_count": total_order_count,
             "order_0_30": total_order_0_30,
-            "order_31_80": total_order_31_80,
+            "order_31_60": total_order_31_60,
             "order_81_infinity": total_order_81_infinity,
             "labour_hours": total_labour_hours,
             "billable_amount_0_30": total_billable_amount_0_30,
-            "billable_amount_31_80": total_billable_amount_31_80,
+            "billable_amount_31_60": total_billable_amount_31_60,
             "billable_amount_81_inifinity": total_billable_amount_81_infinity,
             "billable_amount": total_billable_amount,
             "cost_0_30": total_cost_0_30,
-            "cost_31_80": total_cost_31_80,
+            "cost_31_60": total_cost_31_60,
             "cost_81_inifinity": total_cost_81_infinity,
             "cost": total_cost
         }
@@ -298,23 +298,23 @@ class Api(http.Controller):
         countries = list(set(countries))
         labels = []
         bg_0_30 = []
-        bg_31_80 = []
+        bg_31_60 = []
         bg_81_infinity = []
         data_0_30 = []
-        data_31_80 = []
+        data_31_60 = []
         data_81_infinity = []
         maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
         for country in countries:
             maintenance_request_domain.append(('country','=', country))
-            maintenance_request_ids,order_count,order_0_30,order_31_80,order_81_infinity = request.env['cummin_dashboard.helper'].order_count_detail(maintenance_request_domain)
+            maintenance_request_ids,order_count,order_0_30,order_31_60,order_81_infinity = request.env['cummin_dashboard.helper'].order_count_detail(maintenance_request_domain)
             if not country:
                 country = '-'
             labels.append(country)
             bg_0_30.append('green')
-            bg_31_80.append('red')
+            bg_31_60.append('red')
             bg_81_infinity.append('blue')
             data_0_30.append(order_0_30)
-            data_31_80.append(order_31_80)
+            data_31_60.append(order_31_60)
             data_81_infinity.append(order_81_infinity)
         chart_data = {
             "labels": labels,
@@ -325,9 +325,9 @@ class Api(http.Controller):
                     "data": data_0_30
                 },
                 {
-                    "label": "31 to 80",
-                    "backgroundColor": bg_31_80,
-                    "data": data_31_80
+                    "label": "31 to 60",
+                    "backgroundColor": bg_31_60,
+                    "data": data_31_60
                 },
                 {
                     "label": "<80",

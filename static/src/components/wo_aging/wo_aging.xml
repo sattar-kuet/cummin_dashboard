@@ -17,10 +17,10 @@
 							<tr class="highlighted">
 								<th ></th>
 								<th ></th>
-								<th colspan="3">Order Age</th>
+								<th colspan="4">Order Age</th>
 								<th >Applied</th>
-								<th colspan="4">Billable Amount</th>
-								<th colspan="4">Cost</th>
+								<th colspan="5">Billable Amount</th>
+								<th colspan="5">Cost</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -29,15 +29,18 @@
 								<td>Order Count</td>
 								<td>0 to 30</td>
 								<td>31 to 60</td>
-								<td>&gt;80</td>
+								<td>61 to 90</td>
+								<td>&gt;90</td>
 								<td>Labour Hours</td>
 								<td>0 to 30</td>
 								<td>31 to 60</td>
-								<td>&gt;80</td>
+								<td>61 to 90</td>
+								<td>&gt;90</td>
 								<td>Total for all Open WO</td>
 								<td>0 to 30</td>
 								<td>31 to 60</td>
-								<td>&gt;80</td>
+								<td>61 to 90</td>
+								<td>&gt;90</td>
 								<td>Total</td>
 							</tr>
 							<t t-set="total" t-value="state.woAginTableData.total"/>
@@ -56,7 +59,10 @@
 										<t t-esc="rowData.order_31_60"/>
 									</td>
 									<td>
-										<t t-esc="rowData.order_81_infinity"/>
+										<t t-esc="rowData.order_61_90"/>
+									</td>
+									<td>
+										<t t-esc="rowData.order_91_infinity"/>
 									</td>
 									<td>
 										<t t-esc="rowData.labour_hours"/>
@@ -68,7 +74,10 @@
 										<t t-esc="rowData.billable_amount_31_60"/>
 									</td>
 									<td>
-										<t t-esc="rowData.billable_amount_81_inifinity"/>
+										<t t-esc="rowData.billable_amount_61_90"/>
+									</td>
+									<td>
+										<t t-esc="rowData.billable_amount_91_inifinity"/>
 									</td>
 									<td>
 										<t t-esc="rowData.billable_amount"/>
@@ -80,7 +89,10 @@
 										<t t-esc="rowData.cost_31_60"/>
 									</td>
 									<td>
-										<t t-esc="rowData.cost_81_inifinity"/>
+										<t t-esc="rowData.cost_61_90"/>
+									</td>
+									<td>
+										<t t-esc="rowData.cost_91_inifinity"/>
 									</td>
 									<td>
 										<t t-esc="rowData.cost"/>
@@ -99,7 +111,10 @@
 									<t t-esc="total.order_31_60"/>
 								</td>
 								<td>
-									<t t-esc="total.order_81_infinity"/>
+									<t t-esc="total.order_61_90"/>
+								</td>
+								<td>
+									<t t-esc="total.order_91_infinity"/>
 								</td>
 								<td>
 									<t t-esc="total.labour_hours"/>
@@ -111,7 +126,10 @@
 									<t t-esc="total.billable_amount_31_60"/>
 								</td>
 								<td>
-									<t t-esc="total.billable_amount_81_inifinity"/>
+									<t t-esc="total.billable_amount_61_90"/>
+								</td>
+								<td>
+									<t t-esc="total.billable_amount_91_inifinity"/>
 								</td>
 								<td>
 									<t t-esc="total.billable_amount"/>
@@ -123,7 +141,10 @@
 									<t t-esc="total.cost_31_60"/>
 								</td>
 								<td>
-									<t t-esc="total.cost_81_inifinity"/>
+									<t t-esc="total.cost_61_90"/>
+								</td>
+								<td>
+									<t t-esc="total.cost_91_inifinity"/>
 								</td>
 								<td>
 									<t t-esc="total.cost"/>

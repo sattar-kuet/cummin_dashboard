@@ -358,6 +358,7 @@ class Api(http.Controller):
         }
         return json.dumps(chart_data)
     
+    
     @http.route('/wip_detail', auth="user", type="json")
     def wip_detail(self, **data):
         maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 

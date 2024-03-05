@@ -374,6 +374,7 @@ class Api(http.Controller):
                'last_labour_date': maintenance_request.last_labor_date,
                'customer_name': maintenance_request.customer,
                'currency': maintenance_request.currency,
+               'currency_rate': maintenance_request.currency_rate.rate,
                'billed_hours': maintenance_request.billed_hours,
                'labour_sales': maintenance_request.labour_sales,
                'other_sales': maintenance_request.labour_sales,
@@ -383,6 +384,8 @@ class Api(http.Controller):
                'invoice_date': maintenance_request.invoice_date,
                'wip_cost': maintenance_request.wip_cost,
                'parts_sales': maintenance_request.parts_sales,
+               'bill_type': maintenance_request.bill_type,
+               'service_model': maintenance_request.service_model,
             })
         # return wip_detail_data
         return json.dumps(wip_detail_data)

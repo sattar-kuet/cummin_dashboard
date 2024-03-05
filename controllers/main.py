@@ -357,7 +357,35 @@ class Api(http.Controller):
             ]
         }
         return json.dumps(chart_data)
-        
+    
+    @http.route('/wip_detail', auth="user", type="json")
+    def wip_detail(self, **data):
+        maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
+        maintenance_requests = request.env['maintenance.request'].search(maintenance_request_domain)
+        wip_detail_data = []
+        for maintenance_request in maintenance_requests:
+            wip_detail_data.append({
+               'key': maintenance_request.id,
+               'order_status': maintenance_request.order_status,
+               'country': maintenance_request.country,
+               'branch': maintenance_request.branch,
+               'invoice_no': maintenance_request.invoice,
+               'last_labour_date': maintenance_request.last_labor_date,
+               'customer_name': maintenance_request.customer,
+               'currency': maintenance_request.currency,
+               'billed_hours': maintenance_request.billed_hours,
+               'labour_sales': maintenance_request.labour_sales,
+               'other_sales': maintenance_request.labour_sales,
+               'distributor': maintenance_request.distributor,
+               'order_type': maintenance_request.order_type,
+               'serial': maintenance_request.serial,
+               'invoice_date': maintenance_request.invoice_date,
+               'wip_cost': maintenance_request.wip_cost,
+               'parts_sales': maintenance_request.parts_sales,
+            })
+        # return wip_detail_data
+        return json.dumps(wip_detail_data)
+
     @http.route('/test_url', auth="public", type="http", website="true")
     def test_url(self, **data):
         return request.render('cummin_dashboard.test_page', {'message':'Hey Gerald. How are you?'})

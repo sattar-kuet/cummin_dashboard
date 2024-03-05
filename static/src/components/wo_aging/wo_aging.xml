@@ -49,7 +49,7 @@
 									<td>
 										<t t-esc="rowData.country_name"/>
 									</td>
-									<td>
+									<td t-on-click="viewWipDetail" class="link_item">
 										<t t-esc="rowData.order_count"/>
 									</td>
 									<td>

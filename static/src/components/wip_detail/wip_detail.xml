@@ -1,11 +1,82 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<templates xml:space="preserve">
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
     <t t-name="owl.WipDetail" owl="1">
-        <div class="vh-100 overflow-auto">
+        <Header/>
+        <div class="overflow-auto">
             <section class="dashborad__section">
-                <Header/>
                 <section class="main__table sticky-top bg-white">
-                    <h2>Hello World</h2>
+                    <table>
+                        <thead>
+                            <tr class="highlighted">
+                                <th>Distributor</th>
+                                <th>Order Type</th>
+                                <th>Country</th>
+                                <th>Branch</th>
+                                <th>Serial/GSN</th>
+                                <th>Invoice Date</th>
+                                <th>Bill Type</th>
+                                <th>Service Model</th>
+                                <th>Conversion rate</th>
+                                <th>Invoice Numbe</th>
+                                <th>Last Labor Date</th>
+                                <th>Billed Hours</th>
+                                <th>Other Sales</th>
+                                <th>Parts Sales</th>
+                                <th>WIP Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="state.wip_detail" t-as="data" t-key="data.key">
+                                <tr>
+                                    <td>
+                                        <t t-esc="data.distributor"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="data.order_type"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="data.country"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="data.country"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="data.country"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="data.country"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="data.country"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="data.country"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="data.country"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="data.country"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="data.country"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="data.country"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="data.country"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="data.country"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="data.country"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
                 </section>
             </section>
         </div>

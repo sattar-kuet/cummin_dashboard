@@ -29,6 +29,7 @@ export class WoAging extends Component {
                 showTbDetail: false
             }
         })
+        this.actionService = useService("action")
         this.rpc = useService("rpc")
         onWillStart(async () => {
             this.loadFilteringParameterFromCookie()
@@ -76,6 +77,10 @@ export class WoAging extends Component {
         console.log('this.state.filteringParameter', this.state.filteringParameter)
         let wo_aging_table_data = await this.rpc("/wo_aging/table_data", this.state.filteringParameter)
         this.state.woAginTableData = JSON.parse(wo_aging_table_data)
+    }
+    viewWipDetail() {
+        this.actionService.doAction("cummin_dashboard.action_wip_detail")
+
     }
 }
 

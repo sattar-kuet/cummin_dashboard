@@ -14,42 +14,47 @@
                     </div>
                     <div class="o_cp_top_right">
                         <div role="search" class="o_cp_searchview">
-                            <div role="search" aria-autocomplete="list" class="o_searchview">
+                            <!-- <div role="search" aria-autocomplete="list" class="o_searchview">
                                 <i title="Search..." role="img" aria-label="Search..." class="o_searchview_icon fa fa-search"></i>
                                 <div class="o_searchview_input_container">
                                     <input type="text" autofocus="" accesskey="Q" placeholder="Search..." role="searchbox" title="Search for records" class="o_searchview_input"/>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
                 <div class="o_cp_bottom">
                     <div class="o_cp_bottom_left">
                         <div role="toolbar" aria-label="Control panel buttons" class="o_cp_buttons">
-                            <div class="o_list_buttons d-flex" role="toolbar" aria-label="Main actions">
+                            <!-- <div class="o_list_buttons d-flex" role="toolbar" aria-label="Main actions">
                                 <button type="button" class="btn btn-secondary fa fa-download o_list_export_xlsx" title="Export All" aria-label="Export All"></button>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="o_cp_bottom_right">
                         <div role="search" class="btn-group o_search_options position-static">
                             <div class="o-dropdown dropdown o-dropdown--no-caret o_filter_menu btn-group">
-                                <button class="dropdown-toggle btn btn-light " aria-expanded="false">
+                                <!-- <button class="dropdown-toggle btn btn-light " aria-expanded="false">
                                     <i class="small mr-1 fa fa-filter"></i>
                                     <span class="o_dropdown_title">Filters</span>
-                                </button>
+                                </button> -->
                             </div>
                         </div>
                         <div role="search" class="o_cp_pager">
                             <nav aria-label="Pager" class="o_pager">
                                 <span class="o_pager_counter mr-2">
-                                    <span class="o_pager_value">1-42</span>
+                                    <span class="o_pager_value">
+                                        <t t-esc="state.pager.recordStartAt"/>-
+                                        <t t-esc="state.pager.recordEndAt"/>
+                                    </span>
                                     <span> / </span>
-                                    <span class="o_pager_limit">42</span>
+                                    <span class="o_pager_limit">
+                                        <t t-esc="state.pager.totalRecord"/>
+                                    </span>
                                 </span>
                                 <span aria-atomic="true" class="btn-group">
-                                    <button type="button"  class="fa fa-chevron-left btn btn-secondary o_pager_previous rounded-left"></button>
-                                    <button type="button" disabled=""  class="fa fa-chevron-right btn btn-secondary o_pager_next rounded-right"></button>
+                                    <button t-on-click="prev" type="button"  t-attf-class="fa fa-chevron-left btn btn-secondary o_pager_previous rounded-left {{ state.prevButtonClass }}"></button>
+                                    <button t-on-click="next" type="button" t-attf-class="fa fa-chevron-right btn btn-secondary o_pager_next rounded-right {{ state.nextButtonClass }}"></button>
                                 </span>
                             </nav>
                         </div>

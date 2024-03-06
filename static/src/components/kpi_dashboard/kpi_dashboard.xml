@@ -21,7 +21,7 @@
                             <tbody>
                                 <tr>
                                     <td>WO Count</td>
-                                    <td t-on-click="viewOWaging" style="cursor: pointer;">
+                                    <td t-on-click="viewOWaging" class="link_item">
                                         <t t-esc="state.kpi.growthMindSet.woCount.open"/>
                                     </td>
                                     <td t-on-click="viewInvoicedMaintananceRequest" style="cursor: pointer;">

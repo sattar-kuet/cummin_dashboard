@@ -362,7 +362,31 @@ class Api(http.Controller):
     @http.route('/wip_detail', auth="user", type="json")
     def wip_detail(self, **data):
         maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
-        maintenance_requests = request.env['maintenance.request'].search(maintenance_request_domain)
+        page = data['page']
+        per_page_records = 20
+        offset = (page-1)*per_page_records
+        record_start_at =  1
+        is_first_page = True
+        if offset>0:
+            record_start_at = offset
+            is_first_page = False
+        record_end_at = offset+per_page_records
+        total_record = request.env['maintenance.request'].search_count(maintenance_request_domain)
+        
+        is_last_page = False
+        if record_end_at >= total_record:
+           record_end_at = total_record
+           is_last_page = True
+        
+        pager = {
+            'recordStartAt': record_start_at,
+            'recordEndAt': record_end_at,
+            'totalRecord': request.env['maintenance.request'].search_count(maintenance_request_domain),
+            'isFirstPage': is_first_page,
+            'isLastPage': is_last_page
+        }
+        
+        maintenance_requests = request.env['maintenance.request'].search(maintenance_request_domain, limit=per_page_records,offset=offset)
         wip_detail_data = []
         for maintenance_request in maintenance_requests:
             wip_detail_data.append({
@@ -388,7 +412,7 @@ class Api(http.Controller):
                'service_model': maintenance_request.service_model,
             })
         # return wip_detail_data
-        return json.dumps(wip_detail_data)
+        return json.dumps({'pager': pager, 'data':wip_detail_data})
 
     @http.route('/test_url', auth="public", type="http", website="true")
     def test_url(self, **data):

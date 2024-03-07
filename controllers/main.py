@@ -393,6 +393,9 @@ class Api(http.Controller):
         maintenance_requests = request.env['maintenance.request'].search(maintenance_request_domain, limit=per_page_records,offset=offset)
         wip_detail_data = []
         for maintenance_request in maintenance_requests:
+            last_labour_date = '-'
+            if maintenance_request.last_labor_date:
+               last_labour_date = request.env['cummin_dashboard.helper'].formatted_date(maintenance_request.last_labor_date)
             wip_detail_data.append({
                'key': maintenance_request.id,
                'order_status': maintenance_request.order_status,
@@ -400,7 +403,7 @@ class Api(http.Controller):
                'country': maintenance_request.country,
                'branch': maintenance_request.branch,
                'invoice_no': maintenance_request.invoice,
-               'last_labour_date': request.env['cummin_dashboard.helper'].formatted_date(maintenance_request.last_labor_date),
+               'last_labour_date':last_labour_date ,
                'customer_name': maintenance_request.customer,
                'currency': maintenance_request.currency,
             #    'currency_rate': maintenance_request.currency_rate.rate,

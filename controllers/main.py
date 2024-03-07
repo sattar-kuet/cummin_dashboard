@@ -394,8 +394,11 @@ class Api(http.Controller):
         wip_detail_data = []
         for maintenance_request in maintenance_requests:
             last_labour_date = '-'
+            invoice_date = '-'
             if maintenance_request.last_labor_date:
                last_labour_date = request.env['cummin_dashboard.helper'].formatted_date(maintenance_request.last_labor_date)
+            if maintenance_request.invoice_date:
+               last_labour_date = request.env['cummin_dashboard.helper'].formatted_date(maintenance_request.invoice_date)
             wip_detail_data.append({
                'key': maintenance_request.id,
                'order_status': maintenance_request.order_status,
@@ -413,7 +416,7 @@ class Api(http.Controller):
                'distributor': maintenance_request.distributor,
                'order_type': maintenance_request.order_type,
                'serial': maintenance_request.serial,
-               'invoice_date': maintenance_request.invoice_date,
+               'invoice_date': invoice_date,
                'wip_cost': maintenance_request.wip_cost,
                'parts_sales': maintenance_request.parts_sales,
                'bill_type': maintenance_request.bill_type,

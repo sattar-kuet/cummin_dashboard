@@ -403,7 +403,7 @@ class Api(http.Controller):
                'last_labour_date': maintenance_request.last_labor_date,
                'customer_name': maintenance_request.customer,
                'currency': maintenance_request.currency,
-               'currency_rate': maintenance_request.currency_rate.rate,
+            #    'currency_rate': maintenance_request.currency_rate.rate,
                'billed_hours': maintenance_request.billed_hours,
                'labour_sales': maintenance_request.labour_sales,
                'other_sales': maintenance_request.labour_sales,

@@ -74,7 +74,7 @@
                         <th>Invoice Date</th>
                         <th>Bill Type</th>
                         <th>Service Model</th>
-                        <th>Conversion rate</th>
+                        <!-- <th>Conversion rate</th> -->
                         <th>Last Labor Date</th>
                         <th>Billed Hours</th>
                         <th>Other Sales</th>
@@ -115,9 +115,9 @@
                             <td>
                                 <t t-esc="data.service_model"/>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <t t-esc="data.currency_rate"/>
-                            </td>
+                            </td> -->
                             <td>
                                 <t t-esc="data.last_labour_date"/>
                             </td>

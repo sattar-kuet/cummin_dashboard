@@ -400,7 +400,7 @@ class Api(http.Controller):
                'country': maintenance_request.country,
                'branch': maintenance_request.branch,
                'invoice_no': maintenance_request.invoice,
-               'last_labour_date': maintenance_request.last_labor_date,
+               'last_labour_date': request.env['cummin_dashboard.helper'].formatted_date(maintenance_request.last_labor_date),
                'customer_name': maintenance_request.customer,
                'currency': maintenance_request.currency,
             #    'currency_rate': maintenance_request.currency_rate.rate,

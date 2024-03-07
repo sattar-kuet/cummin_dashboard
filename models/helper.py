@@ -3,10 +3,21 @@ from datetime import datetime, timedelta
 from ..constants import PRODUCTIVE_HOURS
 from math import ceil
 import math
+from odoo.tools.safe_eval import pytz
 
 class Helper(models.AbstractModel): 
     _name = 'cummin_dashboard.helper'
-
+    
+    @staticmethod
+    def formatted_date(date_obj):
+        if isinstance(date_obj, str):
+            date_obj = datetime.strptime(date_obj, '%d-%m-%Y')
+        else:
+            date_obj = datetime(date_obj.year, date_obj.month, date_obj.day)
+        bd_tz = pytz.timezone("Asia/Dhaka")
+        bd_time = bd_tz.localize(date_obj)
+        date_format = "%d %b, %Y"
+        return bd_time.strftime(date_format)
 
     def calculate_percentage(self, numerator,denominator):
         if numerator == 0 and denominator == 0:

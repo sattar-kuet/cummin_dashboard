@@ -21,13 +21,14 @@ export class WipDetail extends Component {
                 country: '',
                 branch: '',
                 currency: '',
-                showTbDetail: false
+                showTbDetail: false,
+                searchInput: ''
             }
         })
         this.actionService = useService("action")
         this.rpc = useService("rpc")
         onWillStart(async () => {
-            await this.loadLedgerDetailData()
+            await this.loadWipDetailData()
             this.env.bus.on("filterApplied", this, this.onFilterApplied)
         })
         onWillUnmount(() => {
@@ -36,17 +37,20 @@ export class WipDetail extends Component {
     }
     onFilterApplied(filteringParameter) {
         this.state.filteringParameter = filteringParameter
-        this.loadLedgerDetailData()
+        this.loadWipDetailData()
+    }
+    search() {
+         this.loadWipDetailData()
     }
     next() {
         this.state.filteringParameter.page += 1
-        this.loadLedgerDetailData()
+        this.loadWipDetailData()
     }
     prev() {
         this.state.filteringParameter.page -= 1
-        this.loadLedgerDetailData()
+        this.loadWipDetailData()
     }
-    async loadLedgerDetailData() {
+    async loadWipDetailData() {
         let wip_detail = await this.rpc("/wip_detail", this.state.filteringParameter)
         wip_detail = JSON.parse(wip_detail)
         this.state.wip_detail = wip_detail.data

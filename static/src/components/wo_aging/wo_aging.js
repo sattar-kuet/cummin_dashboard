@@ -79,10 +79,11 @@ export class WoAging extends Component {
         this.state.woAginTableData = JSON.parse(wo_aging_table_data)
     }
     viewWipDetail(country) {
+        alert(country)
         let wip_detail_params = { 'country': country }
         let filteringDataString = JSON.stringify(wip_detail_params)
         utility.setCookie('wip_detail_params', filteringDataString, 30)
-        this.actionService.doAction("cummin_dashboard.action_wip_detail")
+        // this.actionService.doAction("cummin_dashboard.action_wip_detail")
         let baseUrl = utility.getBaseUrl()
         let redirectTo = baseUrl + '/web#action=942&cids=1&menu_id=780'
         window.location.href = redirectTo

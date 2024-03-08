@@ -54,6 +54,11 @@ export class WipDetail extends Component {
         this.loadWipDetailData()
     }
     async loadWipDetailData() {
+        let wip_detail_params = utility.getCookie('wip_detail_params')
+        if (wip_detail_params) {
+            wip_detail_params = JSON.parse(wip_detail_params)
+            console.log(wip_detail_params)
+        }
         let wip_detail = await this.rpc("/wip_detail", this.state.filteringParameter)
         wip_detail = JSON.parse(wip_detail)
         this.state.wip_detail = wip_detail.data

@@ -36,6 +36,5 @@
             <field name="name">WIP Detail</field>
             <field name="tag">wip_detail</field>
         </record>
-        
     </data>
 </odoo>

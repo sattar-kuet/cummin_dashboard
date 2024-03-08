@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
 	<t t-name="owl.WoAging" owl="1">
+		<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="#" t-on-click="goToDashboard">Dashboard</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">WO Aging</li>
+			</ol>
+		</div>
 		<div class="vh-100 overflow-auto">
 			<section class="dashborad__section">
 				<Header/>
@@ -48,6 +56,7 @@
 								<tr>
 									<td>
 										<t t-esc="rowData.country_name"/>
+										<t t-set="country_name" t-value="rowData.country_name"/>
 									</td>
 									<td t-on-click="viewWipDetail" class="link_item">
 										<t t-esc="rowData.order_count"/>

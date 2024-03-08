@@ -5,6 +5,8 @@ import { registry } from "@web/core/registry"
 const actionRegistry = registry.category("actions")
 import { Header } from "../header/header"
 import { Filter } from "../filter/filter"
+import { Utility } from "../utility"
+const utility = new Utility()
 export class WipDetail extends Component {
     setup() {
         this.state = useState({
@@ -34,13 +36,14 @@ export class WipDetail extends Component {
         onWillUnmount(() => {
             this.env.bus.off("filterApplied", this, this.onFilterApplied)
         });
+
     }
     onFilterApplied(filteringParameter) {
         this.state.filteringParameter = filteringParameter
         this.loadWipDetailData()
     }
     search() {
-         this.loadWipDetailData()
+        this.loadWipDetailData()
     }
     next() {
         this.state.filteringParameter.page += 1
@@ -66,6 +69,16 @@ export class WipDetail extends Component {
         } else {
             this.state.nextButtonClass = ''
         }
+    }
+    goToDashboard() {
+        this.actionService.doAction(
+            "cummin_dashboard.action_kpi_dashboard"
+        )
+    }
+    goToWoAgin() {
+        this.actionService.doAction(
+            "cummin_dashboard.action_wo_aging"
+        )
     }
 }
 

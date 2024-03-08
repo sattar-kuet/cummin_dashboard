@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates>
     <t t-name="owl.WipDetail" owl="1">
+        <div class="container-fluid">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#" t-on-click="goToDashboard">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item" >
+                    <a href="#" t-on-click="goToWoAgin">WO Aging</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Work Order Aging Detailed Report</li>
+            </ol>
+        </div>
         <Header/>
         <div class="container-fluid">
             <div data-command-category="actions" class="o_control_panel">
                 <div class="o_cp_top">
                     <div class="o_cp_top_left">
-                        <ol role="navigation" class="breadcrumb">
-                            <li class="breadcrumb-item active">
-                                <span class="text-900">WIP Detailed Report</span>
-                            </li>
-                        </ol>
+                        <!-- <h2>Work Order Aging Detailed Report</h2> -->
                     </div>
                     <div class="o_cp_top_right">
                         <div role="search" class="o_cp_searchview">
@@ -65,6 +72,7 @@
                 <thead>
                     <tr>
                         <th>Job Number</th>
+                        <th>Age</th>
                         <th>Distributor</th>
                         <th>Order Type</th>
                         <th>Country</th>
@@ -87,6 +95,9 @@
                         <tr>
                             <td>
                                 <t t-esc="data.name"/>
+                            </td>
+                            <td>
+                                <t t-esc="data.age"/>
                             </td>
                             <td>
                                 <t t-esc="data.distributor"/>

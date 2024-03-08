@@ -155,3 +155,10 @@ class Helper(models.AbstractModel):
         if x1 <= days_difference and (days_difference <= x2 or x2 == -1):
             return True
         return False
+    
+    @staticmethod
+    def calculate_age_in_day(date):
+        date_obj = datetime.strptime(str(date), '%Y-%m-%d')
+        current_date = datetime.now()
+        delta = current_date - date_obj
+        return delta.days

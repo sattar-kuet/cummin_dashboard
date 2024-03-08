@@ -403,6 +403,7 @@ class Api(http.Controller):
                last_labour_date = request.env['cummin_dashboard.helper'].formatted_date(maintenance_request.invoice_date)
             wip_detail_data.append({
                'key': maintenance_request.id,
+               'age': request.env['cummin_dashboard.helper'].calculate_age_in_day(maintenance_request.request_date),
                'order_status': maintenance_request.order_status,
                'name': maintenance_request.name,
                'country': maintenance_request.country,

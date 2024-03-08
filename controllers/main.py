@@ -362,11 +362,13 @@ class Api(http.Controller):
     @http.route('/wip_detail', auth="user", type="json")
     def wip_detail(self, **data):
         maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
-        if data['searchInput']:
+        if 'searchInput' in data and data['searchInput']:
            maintenance_request_domain.append(('name','=', data['searchInput'])) 
-        elif ('name', '=', data['searchInput']) in maintenance_request_domain:
+        elif 'searchInput' in data  and ('name', '=', data['searchInput']) in maintenance_request_domain:
             maintenance_request_domain.remove(('name', '=', data['searchInput']))
-        page = data['page']
+        page = 1
+        if 'page' in data:
+          page = data['page']
         per_page_records = 20
         offset = (page-1)*per_page_records
         record_start_at =  1

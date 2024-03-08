@@ -15,9 +15,9 @@
                     <div class="o_cp_top_right">
                         <div role="search" class="o_cp_searchview">
                             <div role="search" aria-autocomplete="list" class="o_searchview">
-                                <i title="Search..." role="img" aria-label="Search..." class="o_searchview_icon fa fa-search" t-on-click="search"></i>
+                                <i title="Search by job number" role="img" aria-label="Search..." class="o_searchview_icon fa fa-search" t-on-click="search"></i>
                                 <div class="o_searchview_input_container">
-                                    <input t-model="state.filteringParameter.searchInput" type="text" autofocus="" accesskey="Q" placeholder="Search..." role="searchbox" title="Search for records" class="o_searchview_input"/>
+                                    <input t-model="state.filteringParameter.searchInput" type="text" autofocus="" accesskey="Q" placeholder="Search by job number" role="searchbox" title="Search for records" class="o_searchview_input"/>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
             <table class="o_list_table table table-sm table-hover table-striped o_list_table_ungrouped" style="table-layout: fixed;">
                 <thead>
                     <tr>
-                        <th>Request</th>
+                        <th>Job Number</th>
                         <th>Distributor</th>
                         <th>Order Type</th>
                         <th>Country</th>

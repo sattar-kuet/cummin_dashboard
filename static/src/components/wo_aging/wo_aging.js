@@ -78,7 +78,7 @@ export class WoAging extends Component {
         let wo_aging_table_data = await this.rpc("/wo_aging/table_data", this.state.filteringParameter)
         this.state.woAginTableData = JSON.parse(wo_aging_table_data)
     }
-    viewWipDetail() {
+    viewWipDetail(country) {
         // let wip_detail_params = { 'country': country }
         // let filteringDataString = JSON.stringify(wip_detail_params)
         // utility.setCookie('wip_detail_params', filteringDataString, 30)

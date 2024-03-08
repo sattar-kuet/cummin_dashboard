@@ -58,7 +58,7 @@
 										<t t-esc="rowData.country_name"/>
 										<t t-set="country_name" t-value="rowData.country_name"/>
 									</td>
-									<td t-on-click="viewWipDetail" class="link_item">
+									<td t-on-click="() => viewWipDetail(country_name)" class="link_item">
 										<t t-esc="rowData.order_count"/>
 									</td>
 									<td>

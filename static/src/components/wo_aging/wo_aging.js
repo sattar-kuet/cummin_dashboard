@@ -89,7 +89,7 @@ export class WoAging extends Component {
         utility.setCookie('wip_detail_params', filteringDataString, 30)
         // this.actionService.doAction("cummin_dashboard.action_wip_detail")
         let baseUrl = utility.getBaseUrl()
-        let redirectTo = baseUrl + '/web#action=942&cids=1&menu_id=780'
+        let redirectTo = baseUrl + '/web#action=942&cids=1'
         window.location.href = redirectTo
 
     }

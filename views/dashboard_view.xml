@@ -36,10 +36,10 @@
             <field name="name">WIP Detail</field>
             <field name="tag">wip_detail</field>
         </record>
-        <!-- <menuitem
+        <menuitem
         name="Wip Detail"
         id="menu_wip_detail"
         action="action_wip_detail"
-        sequence="3"/> -->
+        sequence="3"/>
     </data>
 </odoo>

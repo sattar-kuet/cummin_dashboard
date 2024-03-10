@@ -361,6 +361,7 @@ class Api(http.Controller):
     
     @http.route('/wip_detail', auth="user", type="json")
     def wip_detail(self, **data):
+        print('*'*100, data)
         maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
         if 'searchInput' in data and data['searchInput']:
            maintenance_request_domain.append(('name','=', data['searchInput'])) 
@@ -370,13 +371,13 @@ class Api(http.Controller):
         if 'page' in data:
           page = data['page']
         per_page_records = 20
-        offset = (page-1)*per_page_records
+        offset = (page-1)*per_page_records + 1
         record_start_at =  1
         is_first_page = True
-        if offset>0:
+        if offset>1:
             record_start_at = offset
             is_first_page = False
-        record_end_at = offset+per_page_records
+        record_end_at = offset+per_page_records - 1
         total_record = request.env['maintenance.request'].search_count(maintenance_request_domain)
         
         is_last_page = False
@@ -387,12 +388,13 @@ class Api(http.Controller):
         pager = {
             'recordStartAt': record_start_at,
             'recordEndAt': record_end_at,
-            'totalRecord': request.env['maintenance.request'].search_count(maintenance_request_domain),
+            'totalRecord': total_record,
             'isFirstPage': is_first_page,
             'isLastPage': is_last_page
         }
         
-        maintenance_requests = request.env['maintenance.request'].search(maintenance_request_domain, limit=per_page_records,offset=offset)
+        # maintenance_requests = request.env['maintenance.request'].search(maintenance_request_domain, limit=per_page_records,offset=offset)
+        maintenance_requests = request.env['maintenance.request'].search(maintenance_request_domain)
         wip_detail_data = []
         for maintenance_request in maintenance_requests:
             last_labour_date = '-'
@@ -401,9 +403,14 @@ class Api(http.Controller):
                last_labour_date = request.env['cummin_dashboard.helper'].formatted_date(maintenance_request.last_labor_date)
             if maintenance_request.invoice_date:
                last_labour_date = request.env['cummin_dashboard.helper'].formatted_date(maintenance_request.invoice_date)
+            age= request.env['cummin_dashboard.helper'].calculate_age_in_day(maintenance_request.request_date)
+            if not request.env['cummin_dashboard.helper'].between_x1_x2_age(age,data['ageStartAt'],data['ageEndAt']): 
+                print('*'*100, 'Continuing..')
+                continue
+
             wip_detail_data.append({
                'key': maintenance_request.id,
-               'age': request.env['cummin_dashboard.helper'].calculate_age_in_day(maintenance_request.request_date),
+               'age': age,
                'order_status': maintenance_request.order_status,
                'name': maintenance_request.name,
                'country': maintenance_request.country,

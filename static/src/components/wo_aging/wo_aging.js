@@ -78,9 +78,13 @@ export class WoAging extends Component {
         let wo_aging_table_data = await this.rpc("/wo_aging/table_data", this.state.filteringParameter)
         this.state.woAginTableData = JSON.parse(wo_aging_table_data)
     }
-    viewWipDetail(country) {
-        alert(country)
-        let wip_detail_params = { 'country': country }
+    viewWipDetail(country, ageStartAt, ageEndAt) {
+        const filteringParameterFromCookie = utility.getCookie('filteringParameter')
+        let filteringParameter = {}
+        if (filteringParameterFromCookie) {
+            filteringParameter = JSON.parse(filteringParameterFromCookie)
+        }
+        let wip_detail_params = { 'country': country, 'ageStartAt': ageStartAt, 'ageEndAt': ageEndAt }
         let filteringDataString = JSON.stringify(wip_detail_params)
         utility.setCookie('wip_detail_params', filteringDataString, 30)
         // this.actionService.doAction("cummin_dashboard.action_wip_detail")

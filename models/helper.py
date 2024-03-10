@@ -157,6 +157,14 @@ class Helper(models.AbstractModel):
         return False
     
     @staticmethod
+    def between_x1_x2_age(age,ageStartAt,ageEndAt):
+        if ageStartAt == -1:
+            return True 
+        if age>=ageStartAt and  age<=ageEndAt:
+            return True
+        return False
+    
+    @staticmethod
     def calculate_age_in_day(date):
         date_obj = datetime.strptime(str(date), '%Y-%m-%d')
         current_date = datetime.now()

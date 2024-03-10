@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div role="search" class="o_cp_pager">
-                            <nav aria-label="Pager" class="o_pager">
+                            <!-- <nav aria-label="Pager" class="o_pager">
                                 <span class="o_pager_counter mr-2">
                                     <span class="o_pager_value">
                                         <t t-esc="state.pager.recordStartAt"/>-
@@ -63,7 +63,7 @@
                                     <button t-on-click="prev" type="button"  t-attf-class="fa fa-chevron-left btn btn-secondary o_pager_previous rounded-left {{ state.prevButtonClass }}"></button>
                                     <button t-on-click="next" type="button" t-attf-class="fa fa-chevron-right btn btn-secondary o_pager_next rounded-right {{ state.nextButtonClass }}"></button>
                                 </span>
-                            </nav>
+                            </nav> -->
                         </div>
                     </div>
                 </div>

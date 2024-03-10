@@ -58,19 +58,19 @@
 										<t t-esc="rowData.country_name"/>
 										<t t-set="country_name" t-value="rowData.country_name"/>
 									</td>
-									<td t-on-click="() => viewWipDetail(country_name)" class="link_item">
+									<td t-on-click="() => viewWipDetail(country_name,-1,-1)" class="link_item">
 										<t t-esc="rowData.order_count"/>
 									</td>
-									<td>
+									<td t-on-click="() => viewWipDetail(country_name,0,30)" class="link_item">
 										<t t-esc="rowData.order_0_30"/>
 									</td>
-									<td>
+									<td t-on-click="() => viewWipDetail(country_name,31,60)" class="link_item">
 										<t t-esc="rowData.order_31_60"/>
 									</td>
-									<td>
+									<td t-on-click="() => viewWipDetail(country_name,61,90)" class="link_item">
 										<t t-esc="rowData.order_61_90"/>
 									</td>
-									<td>
+									<td t-on-click="() => viewWipDetail(country_name,91,-1)" class="link_item">
 										<t t-esc="rowData.order_91_infinity"/>
 									</td>
 									<td>

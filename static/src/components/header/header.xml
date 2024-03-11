@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates>
     <t t-name="owl.Header" owl="1">
-        <div class="dashboard_header">
-            <span class="label_content">
-                <img height="40px" src="/cummin_dashboard/static/src/image/favicon.png"/>
-                <span style="font-size: 38px;font-weight: 900;">Cummins Enterprise Business Intelligence</span>
-            </span>
+        <div class="container-fluid mb-2" style="display: flex; justify-content: space-between;">
+            <div>
+                <span class="label_content">
+                    <img height="40px" src="/cummin_dashboard/static/src/image/favicon.png"/>
+                    <span style="font-size: 38px;font-weight: 900;">Cummins KPI tool</span>
+                </span>
+            </div>
+            <div>
+                <img style="height: 52px;" src="/cummin_dashboard/static/src/image/logo.png"/>
+            </div>
         </div>
     </t>
 </templates>

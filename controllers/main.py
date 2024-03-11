@@ -208,6 +208,8 @@ class Api(http.Controller):
     @http.route('/wo_aging/table_data', auth="user", type="json")
     def wo_aging_table_data(self, **data): 
         maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
+        # maintenance_request_domain.remove(('country','in', data['country']))
+        # return maintenance_request_domain
         countries = data['country']
         if len(countries)==0:
            countries = request.env['cummin_dashboard.helper'].get_countries()
@@ -234,7 +236,7 @@ class Api(http.Controller):
             country_name = '-'
             if country:
                 country_name = country
-            maintenance_request_domain.append(('country','in', [country]))
+            maintenance_request_domain.append(('country','=', country))
             maintenance_request_ids,order_count,order_0_30,order_31_60,order_61_90,order_91_infinity = request.env['cummin_dashboard.helper'].order_count_detail(maintenance_request_domain)
             time_sheet_domain.append(('maintenance_request_id','in',maintenance_request_ids))
             labour_hours = request.env['cummin_dashboard.helper'].labour_hours_detail(time_sheet_domain)

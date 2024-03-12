@@ -106,7 +106,7 @@
                                 <t t-esc="data.order_type"/>
                             </td>
                             <td>
-                                <t t-esc="data.country"/>
+                                <t t-esc="data.country" />
                             </td>
                             <td>
                                 <t t-esc="data.branch"/>

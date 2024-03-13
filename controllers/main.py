@@ -207,10 +207,12 @@ class Api(http.Controller):
 
     @http.route('/wo_aging/table_data', auth="user", type="json")
     def wo_aging_table_data(self, **data): 
+        countries = data['country']
+        del data['country']
         maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
         # maintenance_request_domain.remove(('country','in', data['country']))
         # return maintenance_request_domain
-        countries = data['country']
+        # print('*'*100,maintenance_request_domain)
         if len(countries)==0:
            countries = request.env['cummin_dashboard.helper'].get_countries()
         countries = list(set(countries))
@@ -236,12 +238,16 @@ class Api(http.Controller):
             country_name = '-'
             if country:
                 country_name = country
-            maintenance_request_domain.append(('country','=', country))
-            maintenance_request_ids,order_count,order_0_30,order_31_60,order_61_90,order_91_infinity = request.env['cummin_dashboard.helper'].order_count_detail(maintenance_request_domain)
+            maintenance_request_domain_with_perfect_country = [item for item in maintenance_request_domain if item[0] != 'country']
+            maintenance_request_domain_with_perfect_country.append(('country','=', country))
+            
+            maintenance_request_ids,order_count,order_0_30,order_31_60,order_61_90,order_91_infinity = request.env['cummin_dashboard.helper'].order_count_detail(maintenance_request_domain_with_perfect_country)
             time_sheet_domain.append(('maintenance_request_id','in',maintenance_request_ids))
+            # print('*'*100,maintenance_request_domain_with_perfect_country,order_count,country)
+
             labour_hours = request.env['cummin_dashboard.helper'].labour_hours_detail(time_sheet_domain)
-            billable_amount, billable_amount_0_30, billable_amount_31_60 ,billable_amount_61_90, billable_amount_91_inifinity = request.env['cummin_dashboard.helper'].billable_amount_detail(maintenance_request_domain)
-            cost, cost_0_30, cost_31_60, cost_61_90, cost_91_inifinity = request.env['cummin_dashboard.helper'].cost_detail(maintenance_request_domain)
+            billable_amount, billable_amount_0_30, billable_amount_31_60 ,billable_amount_61_90, billable_amount_91_inifinity = request.env['cummin_dashboard.helper'].billable_amount_detail(maintenance_request_domain_with_perfect_country)
+            cost, cost_0_30, cost_31_60, cost_61_90, cost_91_inifinity = request.env['cummin_dashboard.helper'].cost_detail(maintenance_request_domain_with_perfect_country)
             total_order_count += int(order_count)
             total_order_0_30 += int(order_0_30)
             total_order_31_60 += int(order_31_60)

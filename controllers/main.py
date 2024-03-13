@@ -372,7 +372,7 @@ class Api(http.Controller):
     def wip_detail(self, **data):
         print('*'*100, data)
         maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data)
-        maintenance_request_domain.append(('invoice','=',False)) 
+        
         if 'searchInput' in data and data['searchInput']:
            maintenance_request_domain.append(('name','=', data['searchInput'])) 
      
@@ -406,6 +406,9 @@ class Api(http.Controller):
         maintenance_requests = request.env['maintenance.request'].search(maintenance_request_domain)
         wip_detail_data = []
         for maintenance_request in maintenance_requests:
+            if maintenance_request.invoice:
+                continue
+            
             last_labour_date = '-'
             invoice_date = '-'
             if maintenance_request.last_labor_date:

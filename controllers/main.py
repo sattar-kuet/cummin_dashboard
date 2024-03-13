@@ -371,7 +371,8 @@ class Api(http.Controller):
     @http.route('/wip_detail', auth="user", type="json")
     def wip_detail(self, **data):
         print('*'*100, data)
-        maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
+        maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data)
+        maintenance_request.append(('invoice','=',False)) 
         if 'searchInput' in data and data['searchInput']:
            maintenance_request_domain.append(('name','=', data['searchInput'])) 
         elif 'searchInput' in data  and ('name', '=', data['searchInput']) in maintenance_request_domain:

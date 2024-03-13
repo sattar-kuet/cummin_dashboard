@@ -78,12 +78,9 @@
                         <th>Region</th>
                         <th>Branch</th>
                         <th>Serial/GSN</th>
-                        <th>Invoice Numbe</th>
-                        <th>Invoice Date</th>
                         <th>Bill Type</th>
                         <th>Service Model</th>
                         <!-- <th>Conversion rate</th> -->
-                        <th>Last Labor Date</th>
                         <th>Billed Hours</th>
                         <th>Other Sales</th>
                         <th>Parts Sales</th>
@@ -115,12 +112,6 @@
                                 <t t-esc="data.serial"/>
                             </td>
                             <td>
-                                <t t-esc="data.invoice_no"/>
-                            </td>
-                            <td>
-                                <t t-esc="data.invoice_date"/>
-                            </td>
-                            <td>
                                 <t t-esc="data.bill_type"/>
                             </td>
                             <td>
@@ -129,9 +120,6 @@
                             <!-- <td>
                                 <t t-esc="data.currency_rate"/>
                             </td> -->
-                            <td>
-                                <t t-esc="data.last_labour_date"/>
-                            </td>
                             <td>
                                 <t t-esc="data.billed_hours"/>
                             </td>

@@ -326,8 +326,9 @@ class Api(http.Controller):
         data_91_infinity = []
         maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
         for country in countries:
-            maintenance_request_domain.append(('country','=', country))
-            maintenance_request_ids,order_count,order_0_30,order_31_60,order_61_90,order_91_infinity = request.env['cummin_dashboard.helper'].order_count_detail(maintenance_request_domain)
+            maintenance_request_domain_with_perfect_country = [item for item in maintenance_request_domain if item[0] != 'country']
+            maintenance_request_domain_with_perfect_country.append(('country','=', country))
+            maintenance_request_ids,order_count,order_0_30,order_31_60,order_61_90,order_91_infinity = request.env['cummin_dashboard.helper'].order_count_detail(maintenance_request_domain_with_perfect_country)
             if not country:
                 country = '-'
             labels.append(country)

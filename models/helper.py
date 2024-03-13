@@ -71,8 +71,9 @@ class Helper(models.AbstractModel):
             maintenance_request_ids = []
             for maintenance_request in maintenance_requests:
             #   if maintenance_request.stage_id.name != 'Closure':
-                if not  maintenance_request.invoice:
-                   order_count +=1
+                if maintenance_request.invoice:
+                   continue
+                order_count +=1
                 if self.env['cummin_dashboard.helper'].between_x1_x2_days_older(maintenance_request.create_date,0,30):
                     order_0_30 += 1
                 if self.env['cummin_dashboard.helper'].between_x1_x2_days_older(maintenance_request.create_date,31,60):

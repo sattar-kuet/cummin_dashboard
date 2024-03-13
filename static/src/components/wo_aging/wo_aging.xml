@@ -53,10 +53,10 @@
 							</tr>
 							<t t-set="total" t-value="state.woAginTableData.total"/>
 							<t t-foreach="state.woAginTableData.rows" t-as="rowData" t-key="rowData.key">
+								<t t-set="country_name" t-value="rowData.country_name"/>
 								<tr>
-									<td>
+									<td t-on-click="() => viewWipDetail(country_name,-1,-1)" class="link_item">
 										<t t-esc="rowData.country_name"/>
-										<t t-set="country_name" t-value="rowData.country_name"/>
 									</td>
 									<td t-on-click="() => viewWipDetail(country_name,-1,-1)" class="link_item">
 										<t t-esc="rowData.order_count"/>

@@ -468,7 +468,7 @@ class Api(http.Controller):
                 country_name = country
             maintenance_request_domain_with_perfect_country = [item for item in maintenance_request_domain if item[0] != 'country']
             maintenance_request_domain_with_perfect_country.append(('country','=', country))
-            maintenance_requests = self.env['maintenance.request'].search(maintenance_request_domain_with_perfect_country)
+            maintenance_requests = request.env['maintenance.request'].search(maintenance_request_domain_with_perfect_country)
             order_count = 0
             service_operating_sales = 0
             labour_sales = 0
@@ -495,39 +495,19 @@ class Api(http.Controller):
             key += 1 
             table_rows.append({
                 "key": key,
+                "country_name": country_name,
                 "order_count": order_count,
-                "order_0_30": order_0_30,
-                "order_31_60": order_31_60,
-                "order_61_90": order_61_90,
-                "order_91_infinity": order_91_infinity,
-                "labour_hours": labour_hours,
-                "billable_amount_0_30": billable_amount_0_30,
-                "billable_amount_31_60": billable_amount_31_60,
-                "billable_amount_81_inifinity": billable_amount_91_inifinity,
-                "billable_amount": billable_amount,
-                "cost_0_30": cost_0_30,
-                "cost_31_60": cost_31_60,
-                "cost_61_90": cost_61_90,
-                "cost_91_inifinity": cost_91_inifinity,
-                "cost": cost,
+                "service_operating_sales": service_operating_sales,
+                "labour_sales": labour_sales,
+                "parts_sales": parts_sales,
+                "other_sales": other_sales
                 })
         total = {
-            "order_count": total_order_count,
-            "order_0_30": total_order_0_30,
-            "order_31_60": total_order_31_60,
-            "order_61_90": total_order_61_90,
-            "order_91_infinity": total_order_91_infinity,
-            "labour_hours": total_labour_hours,
-            "billable_amount_0_30": total_billable_amount_0_30,
-            "billable_amount_31_60": total_billable_amount_31_60,
-            "billable_amount_61_90": total_billable_amount_61_90,
-            "billable_amount_91_inifinity": total_billable_amount_91_infinity,
-            "billable_amount": total_billable_amount,
-            "cost_0_30": total_cost_0_30,
-            "cost_31_60": total_cost_31_60,
-            "cost_61_90": total_cost_61_90,
-            "cost_91_inifinity": total_cost_91_infinity,
-            "cost": total_cost
+            "order_count": order_count,
+            "service_operating_sales": service_operating_sales,
+            "labour_sales": labour_sales,
+            "parts_sales": parts_sales,
+            "other_sales": other_sales
         }
         table_data = {
             'rows': table_rows,

@@ -23,88 +23,36 @@
 					<table>
 						<thead>
 							<tr class="highlighted">
-								<th ></th>
-								<th ></th>
-								<th colspan="4">Order Age</th>
-								<th >Applied</th>
-								<th colspan="5">Billable Amount</th>
-								<th colspan="5">Cost</th>
+								<th>Region</th>
+								<th>Order Count</th>
+								<th>Total Service Operating Sales</th>
+								<th>Labour Sales</th>
+								<th>Parts Sales</th>
+								<th>Other Sales</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="highlighted">
-								<td>Region</td>
-								<td>Order Count</td>
-								<td>0 to 30</td>
-								<td>31 to 60</td>
-								<td>61 to 90</td>
-								<td>&gt;90</td>
-								<td>Labour Hours</td>
-								<td>0 to 30</td>
-								<td>31 to 60</td>
-								<td>61 to 90</td>
-								<td>&gt;90</td>
-								<td>Total for all Open WO</td>
-								<td>0 to 30</td>
-								<td>31 to 60</td>
-								<td>61 to 90</td>
-								<td>&gt;90</td>
-								<td>Total</td>
-							</tr>
-							<t t-set="total" t-value="state.woAginTableData.total"/>
-							<t t-foreach="state.woAginTableData.rows" t-as="rowData" t-key="rowData.key">
+							<t t-set="total" t-value="state.serviceOperatingSaleTableData.total"/>
+							<t t-foreach="state.serviceOperatingSaleTableData.rows" t-as="rowData" t-key="rowData.key">
 								<t t-set="country_name" t-value="rowData.country_name"/>
 								<tr>
 									<td t-on-click="() => viewWipDetail(country_name,-1,-1)" class="link_item">
 										<t t-esc="rowData.country_name"/>
 									</td>
-									<td t-on-click="() => viewWipDetail(country_name,-1,-1)" class="link_item">
+									<td>
 										<t t-esc="rowData.order_count"/>
 									</td>
-									<td t-on-click="() => viewWipDetail(country_name,0,30)" class="link_item">
-										<t t-esc="rowData.order_0_30"/>
-									</td>
-									<td t-on-click="() => viewWipDetail(country_name,31,60)" class="link_item">
-										<t t-esc="rowData.order_31_60"/>
-									</td>
-									<td t-on-click="() => viewWipDetail(country_name,61,90)" class="link_item">
-										<t t-esc="rowData.order_61_90"/>
-									</td>
-									<td t-on-click="() => viewWipDetail(country_name,91,-1)" class="link_item">
-										<t t-esc="rowData.order_91_infinity"/>
+									<td>
+										<t t-esc="rowData.service_operating_sales"/>
 									</td>
 									<td>
-										<t t-esc="rowData.labour_hours"/>
+										<t t-esc="rowData.labour_sales"/>
 									</td>
 									<td>
-										<t t-esc="rowData.billable_amount_0_30"/>
+										<t t-esc="rowData.parts_sales"/>
 									</td>
 									<td>
-										<t t-esc="rowData.billable_amount_31_60"/>
-									</td>
-									<td>
-										<t t-esc="rowData.billable_amount_61_90"/>
-									</td>
-									<td>
-										<t t-esc="rowData.billable_amount_91_inifinity"/>
-									</td>
-									<td>
-										<t t-esc="rowData.billable_amount"/>
-									</td>
-									<td>
-										<t t-esc="rowData.cost_0_30"/>
-									</td>
-									<td>
-										<t t-esc="rowData.cost_31_60"/>
-									</td>
-									<td>
-										<t t-esc="rowData.cost_61_90"/>
-									</td>
-									<td>
-										<t t-esc="rowData.cost_91_inifinity"/>
-									</td>
-									<td>
-										<t t-esc="rowData.cost"/>
+										<t t-esc="rowData.other_sales"/>
 									</td>
 								</tr>
 							</t>
@@ -114,49 +62,16 @@
 									<t t-esc="total.order_count"/>
 								</td>
 								<td>
-									<t t-esc="total.order_0_30"/>
+									<t t-esc="total.service_operating_sales"/>
 								</td>
 								<td>
-									<t t-esc="total.order_31_60"/>
+									<t t-esc="total.labour_sales"/>
 								</td>
 								<td>
-									<t t-esc="total.order_61_90"/>
+									<t t-esc="total.parts_sales"/>
 								</td>
 								<td>
-									<t t-esc="total.order_91_infinity"/>
-								</td>
-								<td>
-									<t t-esc="total.labour_hours"/>
-								</td>
-								<td>
-									<t t-esc="total.billable_amount_0_30"/>
-								</td>
-								<td>
-									<t t-esc="total.billable_amount_31_60"/>
-								</td>
-								<td>
-									<t t-esc="total.billable_amount_61_90"/>
-								</td>
-								<td>
-									<t t-esc="total.billable_amount_91_inifinity"/>
-								</td>
-								<td>
-									<t t-esc="total.billable_amount"/>
-								</td>
-								<td>
-									<t t-esc="total.cost_0_30"/>
-								</td>
-								<td>
-									<t t-esc="total.cost_31_60"/>
-								</td>
-								<td>
-									<t t-esc="total.cost_61_90"/>
-								</td>
-								<td>
-									<t t-esc="total.cost_91_inifinity"/>
-								</td>
-								<td>
-									<t t-esc="total.cost"/>
+									<t t-esc="total.other_sales"/>
 								</td>
 							</tr>
 						</tbody>

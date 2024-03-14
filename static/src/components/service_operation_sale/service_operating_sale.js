@@ -75,8 +75,8 @@ export class ServiceOperatingSale extends Component {
 
     async loadServiceOperatingSaleTableData() {
         console.log('this.state.filteringParameter', this.state.filteringParameter)
-        let wo_aging_table_data = await this.rpc("/wo_aging/table_data", this.state.filteringParameter)
-        this.state.woAginTableData = JSON.parse(wo_aging_table_data)
+        let serviceOperatingSaleTableData = await this.rpc("/service_operating_sales/table_data", this.state.filteringParameter)
+        this.state.serviceOperatingSaleTableData = JSON.parse(serviceOperatingSaleTableData)
     }
     viewWipDetail(country, ageStartAt, ageEndAt) {
         const filteringParameterFromCookie = utility.getCookie('filteringParameter')

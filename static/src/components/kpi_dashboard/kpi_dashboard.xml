@@ -48,7 +48,7 @@
                             <tbody>
                                 <tr>
                                     <td>Service Operating Sales</td>
-                                    <td>
+                                    <td t-on-click="viewServiceOperatingSales" class="link_item">
                                         <t t-esc="state.kpi.growthMindSet.woCount.serviceOperatingSales" />
                                     </td>
                                 </tr>

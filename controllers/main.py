@@ -139,7 +139,7 @@ class Api(http.Controller):
             else:
                 wo_open += 1
                 maintenance_request_open_ids.append(maintenance_request.id)
-            if maintenance_request.stage_id.name == 'Closure':
+            if not maintenance_request.invoice:
                 billable_hours += maintenance_request.billed_hours
                 service_operating_sales += maintenance_request.labour_sales + maintenance_request.parts_sales + maintenance_request.other_sales
             else:
@@ -204,7 +204,6 @@ class Api(http.Controller):
         # return {'ids':wip_billable_ids, 'amount':wip_billable_amount,'stage_id':stage_id}
         return json.dumps(kpi_data)
     
-
     @http.route('/wo_aging/table_data', auth="user", type="json")
     def wo_aging_table_data(self, **data): 
         countries = data['country']
@@ -446,6 +445,95 @@ class Api(http.Controller):
             })
         # return wip_detail_data
         return json.dumps({'pager': pager, 'data':wip_detail_data})
+    
+    @http.route('/service_operating_sales/table_data', auth="user", type="json")
+    def service_operating_sales_table_data(self, **data): 
+        countries = data['country']
+        del data['country']
+        maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
+        
+        if len(countries)==0:
+           countries = request.env['cummin_dashboard.helper'].get_countries()
+        countries = list(set(countries))
+        total_order_count = 0
+        total_service_operating_sales = 0
+        total_labour_sales = 0
+        total_parts_sales = 0
+        total_other_sales = 0
+        table_rows = []
+        key = 0
+        for country in countries:
+            country_name = '-'
+            if country:
+                country_name = country
+            maintenance_request_domain_with_perfect_country = [item for item in maintenance_request_domain if item[0] != 'country']
+            maintenance_request_domain_with_perfect_country.append(('country','=', country))
+            maintenance_requests = self.env['maintenance.request'].search(maintenance_request_domain_with_perfect_country)
+            order_count = 0
+            service_operating_sales = 0
+            labour_sales = 0
+            parts_sales = 0
+            other_sales = 0
+            maintenance_request_ids = []
+            for maintenance_request in maintenance_requests:
+                if maintenance_request.invoice:
+                    continue
+                maintenance_request_ids.append(maintenance_request.id)
+                order_count +=1
+                labour_sales += maintenance_request.labour_sales
+                parts_sales += maintenance_request.parts_sales
+                other_sales += maintenance_request.other_sales
+
+            service_operating_sales = labour_sales + parts_sales + other_sales
+
+            total_order_count += order_count
+            total_service_operating_sales += service_operating_sales
+            total_labour_sales += labour_sales
+            total_parts_sales += parts_sales
+            total_other_sales += other_sales
+
+            key += 1 
+            table_rows.append({
+                "key": key,
+                "order_count": order_count,
+                "order_0_30": order_0_30,
+                "order_31_60": order_31_60,
+                "order_61_90": order_61_90,
+                "order_91_infinity": order_91_infinity,
+                "labour_hours": labour_hours,
+                "billable_amount_0_30": billable_amount_0_30,
+                "billable_amount_31_60": billable_amount_31_60,
+                "billable_amount_81_inifinity": billable_amount_91_inifinity,
+                "billable_amount": billable_amount,
+                "cost_0_30": cost_0_30,
+                "cost_31_60": cost_31_60,
+                "cost_61_90": cost_61_90,
+                "cost_91_inifinity": cost_91_inifinity,
+                "cost": cost,
+                })
+        total = {
+            "order_count": total_order_count,
+            "order_0_30": total_order_0_30,
+            "order_31_60": total_order_31_60,
+            "order_61_90": total_order_61_90,
+            "order_91_infinity": total_order_91_infinity,
+            "labour_hours": total_labour_hours,
+            "billable_amount_0_30": total_billable_amount_0_30,
+            "billable_amount_31_60": total_billable_amount_31_60,
+            "billable_amount_61_90": total_billable_amount_61_90,
+            "billable_amount_91_inifinity": total_billable_amount_91_infinity,
+            "billable_amount": total_billable_amount,
+            "cost_0_30": total_cost_0_30,
+            "cost_31_60": total_cost_31_60,
+            "cost_61_90": total_cost_61_90,
+            "cost_91_inifinity": total_cost_91_infinity,
+            "cost": total_cost
+        }
+        table_data = {
+            'rows': table_rows,
+            'total': total
+        }
+        return json.dumps(table_data)
 
     @http.route('/test_url', auth="public", type="http", website="true")
     def test_url(self, **data):

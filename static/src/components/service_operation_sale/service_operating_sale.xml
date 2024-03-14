@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+	<t t-name="owl.ServiceOperatingSale" owl="1">
+		<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="#" t-on-click="goToDashboard">Dashboard</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">Service Operating Sale</li>
+			</ol>
+		</div>
+		<div class="vh-100 overflow-auto">
+			<section class="dashborad__section">
+				<Header/>
+				<Filter/>
+				<section class="chart__section bg-white">
+					<div></div>
+					<ChartRenderer3 type="'bar'" title="'Wo Aging'"
+                bg_color="'#AA2E24'" data="state.ServiceOperatingSaleChartData"/>
+					<div></div>
+				</section>
+				<section class="main__table sticky-top bg-white">
+					<table>
+						<thead>
+							<tr class="highlighted">
+								<th ></th>
+								<th ></th>
+								<th colspan="4">Order Age</th>
+								<th >Applied</th>
+								<th colspan="5">Billable Amount</th>
+								<th colspan="5">Cost</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="highlighted">
+								<td>Region</td>
+								<td>Order Count</td>
+								<td>0 to 30</td>
+								<td>31 to 60</td>
+								<td>61 to 90</td>
+								<td>&gt;90</td>
+								<td>Labour Hours</td>
+								<td>0 to 30</td>
+								<td>31 to 60</td>
+								<td>61 to 90</td>
+								<td>&gt;90</td>
+								<td>Total for all Open WO</td>
+								<td>0 to 30</td>
+								<td>31 to 60</td>
+								<td>61 to 90</td>
+								<td>&gt;90</td>
+								<td>Total</td>
+							</tr>
+							<t t-set="total" t-value="state.woAginTableData.total"/>
+							<t t-foreach="state.woAginTableData.rows" t-as="rowData" t-key="rowData.key">
+								<t t-set="country_name" t-value="rowData.country_name"/>
+								<tr>
+									<td t-on-click="() => viewWipDetail(country_name,-1,-1)" class="link_item">
+										<t t-esc="rowData.country_name"/>
+									</td>
+									<td t-on-click="() => viewWipDetail(country_name,-1,-1)" class="link_item">
+										<t t-esc="rowData.order_count"/>
+									</td>
+									<td t-on-click="() => viewWipDetail(country_name,0,30)" class="link_item">
+										<t t-esc="rowData.order_0_30"/>
+									</td>
+									<td t-on-click="() => viewWipDetail(country_name,31,60)" class="link_item">
+										<t t-esc="rowData.order_31_60"/>
+									</td>
+									<td t-on-click="() => viewWipDetail(country_name,61,90)" class="link_item">
+										<t t-esc="rowData.order_61_90"/>
+									</td>
+									<td t-on-click="() => viewWipDetail(country_name,91,-1)" class="link_item">
+										<t t-esc="rowData.order_91_infinity"/>
+									</td>
+									<td>
+										<t t-esc="rowData.labour_hours"/>
+									</td>
+									<td>
+										<t t-esc="rowData.billable_amount_0_30"/>
+									</td>
+									<td>
+										<t t-esc="rowData.billable_amount_31_60"/>
+									</td>
+									<td>
+										<t t-esc="rowData.billable_amount_61_90"/>
+									</td>
+									<td>
+										<t t-esc="rowData.billable_amount_91_inifinity"/>
+									</td>
+									<td>
+										<t t-esc="rowData.billable_amount"/>
+									</td>
+									<td>
+										<t t-esc="rowData.cost_0_30"/>
+									</td>
+									<td>
+										<t t-esc="rowData.cost_31_60"/>
+									</td>
+									<td>
+										<t t-esc="rowData.cost_61_90"/>
+									</td>
+									<td>
+										<t t-esc="rowData.cost_91_inifinity"/>
+									</td>
+									<td>
+										<t t-esc="rowData.cost"/>
+									</td>
+								</tr>
+							</t>
+							<tr class="highlighted">
+								<td>Grand Total</td>
+								<td>
+									<t t-esc="total.order_count"/>
+								</td>
+								<td>
+									<t t-esc="total.order_0_30"/>
+								</td>
+								<td>
+									<t t-esc="total.order_31_60"/>
+								</td>
+								<td>
+									<t t-esc="total.order_61_90"/>
+								</td>
+								<td>
+									<t t-esc="total.order_91_infinity"/>
+								</td>
+								<td>
+									<t t-esc="total.labour_hours"/>
+								</td>
+								<td>
+									<t t-esc="total.billable_amount_0_30"/>
+								</td>
+								<td>
+									<t t-esc="total.billable_amount_31_60"/>
+								</td>
+								<td>
+									<t t-esc="total.billable_amount_61_90"/>
+								</td>
+								<td>
+									<t t-esc="total.billable_amount_91_inifinity"/>
+								</td>
+								<td>
+									<t t-esc="total.billable_amount"/>
+								</td>
+								<td>
+									<t t-esc="total.cost_0_30"/>
+								</td>
+								<td>
+									<t t-esc="total.cost_31_60"/>
+								</td>
+								<td>
+									<t t-esc="total.cost_61_90"/>
+								</td>
+								<td>
+									<t t-esc="total.cost_91_inifinity"/>
+								</td>
+								<td>
+									<t t-esc="total.cost"/>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+			</section>
+		</div>
+	</t>
+</templates>

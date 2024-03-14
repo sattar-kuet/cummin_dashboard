@@ -36,5 +36,10 @@
             <field name="name">WIP Detail</field>
             <field name="tag">wip_detail</field>
         </record>
+        <record id="action_service_operating_sale" model="ir.actions.client">
+            <field name="name">Service Operating Sale Detail</field>
+            <field name="tag">service_operating_sale</field>
+        </record>
+       
     </data>
 </odoo>

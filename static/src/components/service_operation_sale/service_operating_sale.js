@@ -78,7 +78,7 @@ export class ServiceOperatingSale extends Component {
         let serviceOperatingSaleTableData = await this.rpc("/service_operating_sales/table_data", this.state.filteringParameter)
         this.state.serviceOperatingSaleTableData = JSON.parse(serviceOperatingSaleTableData)
     }
-    viewWipDetail(country, ageStartAt, ageEndAt) {
+    viewServiceOperationSalesDetail(country, ageStartAt, ageEndAt) {
         const filteringParameterFromCookie = utility.getCookie('filteringParameter')
         let filteringParameter = {}
         if (filteringParameterFromCookie) {
@@ -86,11 +86,11 @@ export class ServiceOperatingSale extends Component {
         }
         let wip_detail_params = { 'country': country, 'ageStartAt': ageStartAt, 'ageEndAt': ageEndAt }
         let filteringDataString = JSON.stringify(wip_detail_params)
-        utility.setCookie('wip_detail_params', filteringDataString, 30)
+        utility.setCookie('service_operation_sales_detail_params', filteringDataString, 30)
         // this.actionService.doAction("cummin_dashboard.action_wip_detail")
         let baseUrl = utility.getBaseUrl()
-        let redirectTo = baseUrl + '/web#action=962&cids=1&menu_id=805' // LIVE
-        // let redirectTo = baseUrl + '/web#action=942&cids=1&menu_id=780' // Local
+        // let redirectTo = baseUrl + '/web#action=962&cids=1&menu_id=805' // LIVE
+        let redirectTo = baseUrl + '/web#menu_id=788&action=945&cids=1' // Local
         window.location.href = redirectTo
 
     }

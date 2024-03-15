@@ -82,8 +82,9 @@
                         <th>Service Model</th>
                         <!-- <th>Conversion rate</th> -->
                         <th>Billed Hours</th>
-                        <th>Other Sales</th>
+                        <th>Labour Sales</th>
                         <th>Parts Sales</th>
+                        <th>Other Sales</th>
                         <th>WIP Cost</th>
                     </tr>
                 </thead>
@@ -124,10 +125,13 @@
                                 <t t-esc="data.billed_hours"/>
                             </td>
                             <td>
-                                <t t-esc="data.other_sales"/>
+                                <t t-esc="data.labour_sales"/>
                             </td>
                             <td>
                                 <t t-esc="data.parts_sales"/>
+                            </td>
+                            <td>
+                                <t t-esc="data.other_sales"/>
                             </td>
                             <td>
                                 <t t-esc="data.wip_cost"/>

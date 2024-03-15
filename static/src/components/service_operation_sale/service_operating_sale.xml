@@ -36,7 +36,7 @@
 							<t t-foreach="state.serviceOperatingSaleTableData.rows" t-as="rowData" t-key="rowData.key">
 								<t t-set="country_name" t-value="rowData.country_name"/>
 								<tr>
-									<td t-on-click="() => viewWipDetail(country_name,-1,-1)" class="link_item">
+									<td t-on-click="() => viewServiceOperationSalesDetail(country_name,-1,-1)" class="link_item">
 										<t t-esc="rowData.country_name"/>
 									</td>
 									<td>

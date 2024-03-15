@@ -89,8 +89,8 @@ export class ServiceOperatingSale extends Component {
         utility.setCookie('service_operation_sales_detail_params', filteringDataString, 30)
         // this.actionService.doAction("cummin_dashboard.action_wip_detail")
         let baseUrl = utility.getBaseUrl()
-        // let redirectTo = baseUrl + '/web#action=965&menu_id=788&cids=1' // LIVE
-        let redirectTo = baseUrl + '/web#menu_id=788&action=945&cids=1' // Local
+        let redirectTo = baseUrl + '/web#action=965&menu_id=788&cids=1' // LIVE
+        // let redirectTo = baseUrl + '/web#menu_id=788&action=945&cids=1' // Local
         window.location.href = redirectTo
 
     }

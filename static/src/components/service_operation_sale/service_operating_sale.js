@@ -68,7 +68,7 @@ export class ServiceOperatingSale extends Component {
         this.loadServiceOperatingSaleChartData()
     }
     async loadServiceOperatingSaleChartData() {
-        let wo_aging_chart_data = await this.rpc("/wo_aging/chart_data", this.state.filteringParameter)
+        let wo_aging_chart_data = await this.rpc("/service_operating_sales/chart_data", this.state.filteringParameter)
         console.log('Change on chart data is being detected')
         this.state.ServiceOperatingSaleChartData = JSON.parse(wo_aging_chart_data)
     }
@@ -89,8 +89,8 @@ export class ServiceOperatingSale extends Component {
         utility.setCookie('service_operation_sales_detail_params', filteringDataString, 30)
         // this.actionService.doAction("cummin_dashboard.action_wip_detail")
         let baseUrl = utility.getBaseUrl()
-        let redirectTo = baseUrl + '/web#action=965&menu_id=788&cids=1' // LIVE
-        // let redirectTo = baseUrl + '/web#menu_id=788&action=945&cids=1' // Local
+        // let redirectTo = baseUrl + '/web#action=965&menu_id=788&cids=1' // LIVE
+        let redirectTo = baseUrl + '/web#menu_id=788&action=945&cids=1' // Local
         window.location.href = redirectTo
 
     }

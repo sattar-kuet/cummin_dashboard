@@ -85,6 +85,23 @@ class Helper(models.AbstractModel):
                 maintenance_request_ids.append(maintenance_request.id)
             return maintenance_request_ids,order_count,order_0_30,order_31_60,order_61_90,order_91_infinity
     
+    def get_sales_stat(self, domain):
+        maintenance_requests = self.env['maintenance.request'].search(domain)
+        order_count = 0
+        labour_sales = 0
+        parts_sales = 0
+        other_sales = 0
+        maintenance_request_ids = []
+        for maintenance_request in maintenance_requests:
+            if maintenance_request.invoice:
+                continue
+            maintenance_request_ids.append(maintenance_request.id)
+            order_count +=1
+            labour_sales += maintenance_request.labour_sales
+            parts_sales += maintenance_request.parts_sales
+            other_sales += maintenance_request.other_sales
+        return maintenance_request_ids, order_count, labour_sales, parts_sales, other_sales
+    
     def labour_hours_detail(self,domain):
             domain.append(('task','in',PRODUCTIVE_HOURS))
             time_sheets = self.env['account.analytic.line'].search(domain)

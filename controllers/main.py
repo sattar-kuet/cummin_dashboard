@@ -468,22 +468,7 @@ class Api(http.Controller):
                 country_name = country
             maintenance_request_domain_with_perfect_country = [item for item in maintenance_request_domain if item[0] != 'country']
             maintenance_request_domain_with_perfect_country.append(('country','=', country))
-            maintenance_requests = request.env['maintenance.request'].search(maintenance_request_domain_with_perfect_country)
-            order_count = 0
-            service_operating_sales = 0
-            labour_sales = 0
-            parts_sales = 0
-            other_sales = 0
-            maintenance_request_ids = []
-            for maintenance_request in maintenance_requests:
-                if maintenance_request.invoice:
-                    continue
-                maintenance_request_ids.append(maintenance_request.id)
-                order_count +=1
-                labour_sales += maintenance_request.labour_sales
-                parts_sales += maintenance_request.parts_sales
-                other_sales += maintenance_request.other_sales
-
+            maintenance_request_ids,order_count,labour_sales, parts_sales, other_sales = request.env['cummin_dashboard.helper'].get_sales_stat(maintenance_request_domain_with_perfect_country)
             service_operating_sales = labour_sales + parts_sales + other_sales
 
             total_order_count += order_count
@@ -514,6 +499,59 @@ class Api(http.Controller):
             'total': total
         }
         return json.dumps(table_data)
+    
+    @http.route('/service_operating_sales/chart_data', auth="user", type="json")
+    def service_operating_sales_chart_data(self, **data):
+        countries = data['country']
+        if len(countries) == 0:
+           countries = request.env['cummin_dashboard.helper'].get_countries()
+        countries = list(set(countries))
+        labels = []
+        bg_labour_sales = []
+        bg_parts_sales = []
+        bg_other_sales = []
+
+        data_labour_sales = []
+        data_parts_sales = []
+        data_other_sales = []
+
+        maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
+        for country in countries:
+            maintenance_request_domain_with_perfect_country = [item for item in maintenance_request_domain if item[0] != 'country']
+            maintenance_request_domain_with_perfect_country.append(('country','=', country))
+            maintenance_request_ids,order_count,labour_sales, parts_sales, other_sales = request.env['cummin_dashboard.helper'].get_sales_stat(maintenance_request_domain_with_perfect_country)
+            if not country:
+                country = '-'
+            labels.append(country)
+            bg_labour_sales.append('green')
+            bg_parts_sales.append('red')
+            bg_other_sales.append('orange')
+            
+            data_labour_sales.append(labour_sales)
+            data_parts_sales.append(parts_sales)
+            data_other_sales.append(other_sales)
+            
+        chart_data = {
+            "labels": labels,
+            "datasets": [
+                {
+                    "label": "Labour Sales",
+                    "backgroundColor": bg_labour_sales,
+                    "data": data_labour_sales
+                },
+                {
+                    "label": "Parts Sales",
+                    "backgroundColor": bg_parts_sales,
+                    "data": data_parts_sales
+                },
+                {
+                    "label": "Other Sales",
+                    "backgroundColor": bg_other_sales,
+                    "data": data_other_sales
+                }
+            ]
+        }
+        return json.dumps(chart_data)
 
     @http.route('/test_url', auth="public", type="http", website="true")
     def test_url(self, **data):

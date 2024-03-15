@@ -433,7 +433,7 @@ class Api(http.Controller):
             #    'currency_rate': maintenance_request.currency_rate.rate,
                'billed_hours': maintenance_request.billed_hours,
                'labour_sales': maintenance_request.labour_sales,
-               'other_sales': maintenance_request.labour_sales,
+               'other_sales': maintenance_request.other_sales,
                'distributor': maintenance_request.distributor,
                'order_type': maintenance_request.order_type,
                'serial': maintenance_request.serial,

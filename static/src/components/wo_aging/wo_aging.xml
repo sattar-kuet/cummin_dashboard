@@ -15,7 +15,7 @@
 				<Filter/>
 				<section class="chart__section bg-white">
 					<div></div>
-					<ChartRenderer3  data="state.woAgingChartData" />
+					<ChartRenderer3  data="state.woAgingChartData" xtitle="'Region'" ytitle="'WO Count'"/>
 					<div></div>
 				</section>
 				<section class="main__table sticky-top bg-white">

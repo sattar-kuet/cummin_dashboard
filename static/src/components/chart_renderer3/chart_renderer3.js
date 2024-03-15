@@ -24,14 +24,14 @@ export class ChartRenderer3 extends Component {
                 y: {
                     title: {
                         display: true,
-                        text: 'WO Count'
+                        text: this.props.ytitle
                     }
                 }
             },
             plugins: {
                 title: {
                     display: true,
-                    text: "Worksheets completed this week",
+                    text: this.props.xtitle,
                     position: "bottom"
                 },
                 legend: {

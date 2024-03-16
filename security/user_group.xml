@@ -4,19 +4,19 @@
         <field name="name">Cummin User type</field>
     </record>
     <record id="cummin_dashboard.group_cummin_admin" model="res.groups">
-        <field name="name">Cummin Admin</field>
+        <field name="name">Dashboard: Cummin Admin</field>
         <field name="category_id" ref="module_category_cummin_user_type"/>
     </record>
     <record id="cummin_dashboard.group_distributor" model="res.groups">
-        <field name="name">Distributor</field>
+        <field name="name">Dashboard: Distributor</field>
         <field name="category_id" ref="module_category_cummin_user_type"/>
     </record>
     <record id="cummin_dashboard.group_technician" model="res.groups">
-        <field name="name">Technician</field>
+        <field name="name">Dashboard: Technician</field>
         <field name="category_id" ref="module_category_cummin_user_type"/>
     </record>
     <record id="cummin_dashboard.group_supervisor" model="res.groups">
-        <field name="name">Supervisor</field>
+        <field name="name">Dashboard: Supervisor</field>
         <field name="category_id" ref="module_category_cummin_user_type"/>
     </record>
 </odoo>

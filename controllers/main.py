@@ -404,29 +404,31 @@ class Api(http.Controller):
                 print('*'*100, 'Continuing..')
                 continue
 
+            Helper = request.env['cummin_dashboard']
+
             wip_detail_data.append({
                'key': maintenance_request.id,
                'age': age,
-               'order_status': maintenance_request.order_status,
-               'name': maintenance_request.name,
-               'country': maintenance_request.country,
-               'branch': maintenance_request.branch,
-               'invoice_no': maintenance_request.invoice,
-               'last_labour_date':last_labour_date ,
-               'customer_name': maintenance_request.customer,
-               'currency': maintenance_request.currency,
+               'order_status': Helper.sanitizeFalseValue(maintenance_request.order_status),
+               'name': Helper.sanitizeFalseValue(maintenance_request.name),
+               'country': Helper.sanitizeFalseValue(maintenance_request.country),
+               'branch': Helper.sanitizeFalseValue(maintenance_request.branch),
+               'invoice_no': Helper.sanitizeFalseValue(maintenance_request.invoice),
+               'last_labour_date': Helper.sanitizeFalseValue(last_labour_date) ,
+               'customer_name': Helper.sanitizeFalseValue(maintenance_request.customer),
+               'currency': Helper.sanitizeFalseValue(maintenance_request.currency),
             #    'currency_rate': maintenance_request.currency_rate.rate,
-               'billed_hours': maintenance_request.billed_hours,
-               'labour_sales': maintenance_request.labour_sales,
-               'other_sales': maintenance_request.other_sales,
-               'distributor': maintenance_request.distributor,
-               'order_type': maintenance_request.order_type,
-               'serial': maintenance_request.serial,
-               'invoice_date': invoice_date,
-               'wip_cost': maintenance_request.wip_cost,
-               'parts_sales': maintenance_request.parts_sales,
-               'bill_type': maintenance_request.bill_type,
-               'service_model': maintenance_request.service_model,
+               'billed_hours': Helper.sanitizeFalseValue(maintenance_request.billed_hours),
+               'labour_sales': Helper.sanitizeFalseValue(maintenance_request.labour_sales),
+               'other_sales': Helper.sanitizeFalseValue(maintenance_request.other_sales),
+               'distributor': Helper.sanitizeFalseValue(maintenance_request.distributor),
+               'order_type': Helper.sanitizeFalseValue(maintenance_request.order_type),
+               'serial': Helper.sanitizeFalseValue(maintenance_request.serial),
+               'invoice_date': Helper.sanitizeFalseValue(invoice_date),
+               'wip_cost': Helper.sanitizeFalseValue(maintenance_request.wip_cost),
+               'parts_sales': Helper.sanitizeFalseValue(maintenance_request.parts_sales),
+               'bill_type': Helper.sanitizeFalseValue(maintenance_request.bill_type),
+               'service_model': Helper.sanitizeFalseValue(maintenance_request.service_model),
             })
         # return wip_detail_data
         return json.dumps({'pager': pager, 'data':wip_detail_data})
@@ -606,7 +608,7 @@ class Api(http.Controller):
             maintenance_request_ids,total_billed_hours = request.env['cummin_dashboard.helper'].get_total_billed_hours(maintenance_request_domain, country)
             tb, total_hours, total_billed_hours = request.env['cummin_dashboard.helper'].get_tb_detail(time_sheet_domain, maintenance_request_ids, total_billed_hours)
       
-            labels.append(country)
+            labels.append(country_name)
             bg_billed_hours.append('green')
             bg_total_hours.append('red')
             

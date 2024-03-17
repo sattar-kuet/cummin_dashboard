@@ -228,3 +228,9 @@ class Helper(models.AbstractModel):
             total_hours / total_billed_hours
         tb = round(tb,2)
         return tb, total_hours, total_billed_hours
+    
+    @staticmethod
+    def sanitizeFalseValue(value):
+        if value == False:
+            return ''
+        return value

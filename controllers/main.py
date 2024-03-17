@@ -404,7 +404,7 @@ class Api(http.Controller):
                 print('*'*100, 'Continuing..')
                 continue
 
-            Helper = request.env['cummin_dashboard']
+            Helper = request.env['cummin_dashboard.helper']
 
             wip_detail_data.append({
                'key': maintenance_request.id,

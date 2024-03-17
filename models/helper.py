@@ -23,7 +23,8 @@ class Helper(models.AbstractModel):
         if numerator == 0 and denominator == 0:
             return 0
         if denominator == 0:
-            return 'Inifinity'
+            # return 'Inifinity'
+            return 0
         return round(numerator/denominator,2)
     
    

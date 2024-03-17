@@ -89,8 +89,8 @@ export class TbSummary extends Component {
         utility.setCookie('wip_detail_params', filteringDataString, 30)
         // this.actionService.doAction("cummin_dashboard.action_wip_detail")
         let baseUrl = utility.getBaseUrl()
-        // let redirectTo = baseUrl + '/web#action=962&cids=1&menu_id=805' // LIVE
-        let redirectTo = baseUrl + '/web#menu_id=789&action=946' // Local
+        let redirectTo = baseUrl + '/web#action=1011&menu_id=833' // LIVE
+        // let redirectTo = baseUrl + '/web#menu_id=789&action=946' // Local
         window.location.href = redirectTo
 
     }

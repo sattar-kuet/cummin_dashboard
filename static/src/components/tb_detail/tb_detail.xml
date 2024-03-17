@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="owl.TbDetail" owl="1">
+        <div class="container-fluid">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#" t-on-click="goToDashboard">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item" >
+                    <a href="#" t-on-click="goToTbSummary">TB Branch Comparison Period</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Labour Utilization Detailed Report</li>
+            </ol>
+        </div>
+        <Header/>
+        <div class="container-fluid">
+            <div data-command-category="actions" class="o_control_panel">
+                <div class="o_cp_top">
+                    <div class="o_cp_top_left">
+                        <!-- <h2>Work Order Aging Detailed Report</h2> -->
+                    </div>
+                    <div class="o_cp_top_right">
+                        <div role="search" class="o_cp_searchview">
+                            <div role="search" aria-autocomplete="list" class="o_searchview">
+                                <i title="Search by job number" role="img" aria-label="Search..." class="o_searchview_icon fa fa-search" t-on-click="search"></i>
+                                <div class="o_searchview_input_container">
+                                    <input t-model="state.filteringParameter.searchInput" type="text" autofocus="" accesskey="Q" placeholder="Search by job number" role="searchbox" title="Search for records" class="o_searchview_input"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="o_cp_bottom">
+                    <div class="o_cp_bottom_left">
+                        <div role="toolbar" aria-label="Control panel buttons" class="o_cp_buttons">
+                            <!-- <div class="o_list_buttons d-flex" role="toolbar" aria-label="Main actions">
+                                <button type="button" class="btn btn-secondary fa fa-download o_list_export_xlsx" title="Export All" aria-label="Export All"></button>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="o_cp_bottom_right">
+                        <div role="search" class="btn-group o_search_options position-static">
+                            <div class="o-dropdown dropdown o-dropdown--no-caret o_filter_menu btn-group">
+                                <!-- <button class="dropdown-toggle btn btn-light " aria-expanded="false">
+                                    <i class="small mr-1 fa fa-filter"></i>
+                                    <span class="o_dropdown_title">Filters</span>
+                                </button> -->
+                            </div>
+                        </div>
+                        <div role="search" class="o_cp_pager">
+                            <!-- <nav aria-label="Pager" class="o_pager">
+                                <span class="o_pager_counter mr-2">
+                                    <span class="o_pager_value">
+                                        <t t-esc="state.pager.recordStartAt"/>-
+                                        <t t-esc="state.pager.recordEndAt"/>
+                                    </span>
+                                    <span> / </span>
+                                    <span class="o_pager_limit">
+                                        <t t-esc="state.pager.totalRecord"/>
+                                    </span>
+                                </span>
+                                <span aria-atomic="true" class="btn-group">
+                                    <button t-on-click="prev" type="button"  t-attf-class="fa fa-chevron-left btn btn-secondary o_pager_previous rounded-left {{ state.prevButtonClass }}"></button>
+                                    <button t-on-click="next" type="button" t-attf-class="fa fa-chevron-right btn btn-secondary o_pager_next rounded-right {{ state.nextButtonClass }}"></button>
+                                </span>
+                            </nav> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="o_list_table table table-sm table-hover table-striped o_list_table_ungrouped" style="table-layout: fixed;">
+                <thead>
+                    <tr>
+                        <th>Job Number</th>
+                        <th>Age</th>
+                        <th>Distributor</th>
+                        <th>Order Type</th>
+                        <th>Region</th>
+                        <th>Branch</th>
+                        <th>Serial/GSN</th>
+                        <th>Bill Type</th>
+                        <th>Service Model</th>
+                        <!-- <th>Conversion rate</th> -->
+                        <th>Billed Hours</th>
+                        <th>Labour Sales</th>
+                        <th>Parts Sales</th>
+                        <th>Other Sales</th>
+                        <th>WIP Cost</th>
+                    </tr>
+                </thead>
+                <tbody class="ui-sortable">
+                    <t t-foreach="state.wip_detail" t-as="data" t-key="data.key">
+                        <tr>
+                            <td>
+                                <t t-esc="data.name"/>
+                            </td>
+                            <td>
+                                <t t-esc="data.age"/>
+                            </td>
+                            <td>
+                                <t t-esc="data.distributor"/>
+                            </td>
+                            <td>
+                                <t t-esc="data.order_type"/>
+                            </td>
+                            <td>
+                                <t t-esc="data.country" />
+                            </td>
+                            <td>
+                                <t t-esc="data.branch"/>
+                            </td>
+                            <td>
+                                <t t-esc="data.serial"/>
+                            </td>
+                            <td>
+                                <t t-esc="data.bill_type"/>
+                            </td>
+                            <td>
+                                <t t-esc="data.service_model"/>
+                            </td>
+                            <!-- <td>
+                                <t t-esc="data.currency_rate"/>
+                            </td> -->
+                            <td>
+                                <t t-esc="data.billed_hours"/>
+                            </td>
+                            <td>
+                                <t t-esc="data.labour_sales"/>
+                            </td>
+                            <td>
+                                <t t-esc="data.parts_sales"/>
+                            </td>
+                            <td>
+                                <t t-esc="data.other_sales"/>
+                            </td>
+                            <td>
+                                <t t-esc="data.wip_cost"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </t>
+</templates>

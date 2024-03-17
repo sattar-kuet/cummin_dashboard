@@ -36,6 +36,10 @@
             <field name="name">WIP Detail</field>
             <field name="tag">wip_detail</field>
         </record>
+        <record id="action_tb_detail" model="ir.actions.client">
+            <field name="name">TB Detail</field>
+            <field name="tag">tb_detail</field>
+        </record>
         <record id="action_service_operating_sale" model="ir.actions.client">
             <field name="name">Service Operating Sale</field>
             <field name="tag">service_operating_sale</field>
@@ -44,10 +48,19 @@
             <field name="name">Service Operating Sale Detail</field>
             <field name="tag">service_operating_sale_detail</field>
         </record>
+        <record id="action_tb_summary" model="ir.actions.client">
+            <field name="name">TB Summary</field>
+            <field name="tag">tb_summary</field>
+        </record>
         <menuitem
-        name="Service Operating Sale Detail"
-        id="menu_service_operating_sale_detail"
-        action="action_service_operating_sale_detail"
+        name="TB Detail"
+        id="menu_tb_detail"
+        action="action_tb_detail"
         sequence="2"/>
+        <menuitem
+        name="TB Summary"
+        id="menu_tb_summary"
+        action="action_tb_summary"
+        sequence="3"/>
     </data>
 </odoo>

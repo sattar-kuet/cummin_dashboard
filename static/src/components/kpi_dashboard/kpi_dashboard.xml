@@ -94,8 +94,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td colspan="2">TB %</td>
-                                    <td colspan="2" style="cursor: pointer;">
+                                    <td colspan="2" title="T/B % = Billed Hours*100/Total Hours.">TB %</td>
+                                    <td colspan="2" t-on-click="viewTBsummary" class="link_item">
                                         <t t-esc="state.kpi.operationalEfficiencies.tb"/>
                                     </td>
                                 </tr>

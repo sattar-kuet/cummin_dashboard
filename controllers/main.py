@@ -152,22 +152,7 @@ class Api(http.Controller):
 
             billed_hours += maintenance_request.billed_hours
 
-        account_analytics = request.env['account.analytic.line'].search(time_sheet_domain)
-        
-        total_hours = 0
-        benifit_hours = 0
-        applied_hours = 0
-        tb_detail = {}
-        productivity_ids = []
-        applied_hours_ids = []
-        for account_analytic in account_analytics:
-            total_hours += account_analytic.unit_amount
-            if account_analytic.task in ['0410','0710','0711','0712']:
-                benifit_hours += account_analytic.unit_amount
-                productivity_ids.append(account_analytic.id)
-            if account_analytic.task in ['0104','0105','0107','0108','0800']:
-                applied_hours += account_analytic.unit_amount
-                applied_hours_ids.append(account_analytic.id)
+        productivity_ids,applied_hours_ids, total_hours, benifit_hours,applied_hours = request.env['cummin_dashboard.helper'].get_time_sheet_detail(time_sheet_domain)
 
         payroll_hours = total_hours
         available_hours = payroll_hours - benifit_hours
@@ -548,6 +533,98 @@ class Api(http.Controller):
                     "label": "Other Sales",
                     "backgroundColor": bg_other_sales,
                     "data": data_other_sales
+                }
+            ]
+        }
+        return json.dumps(chart_data)
+    
+    @http.route('/tb/table_data', auth="user", type="json")
+    def tb_table_data(self, **data): 
+        countries = data['country']
+        del data['country']
+        maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
+       
+        if len(countries)==0:
+           countries = request.env['cummin_dashboard.helper'].get_countries()
+        countries = list(set(countries))
+        grand_total_tb = 0
+        grand_total_hours = 0
+        grand_total_billed_hours = 0
+        table_rows = []
+        key = 0
+        for country in countries:
+            country_name = '-'
+            if country:
+                country_name = country
+
+            maintenance_request_ids,total_billed_hours = request.env['cummin_dashboard.helper'].get_total_billed_hours(maintenance_request_domain, country)
+            tb, total_hours, total_billed_hours = request.env['cummin_dashboard.helper'].get_tb_detail(time_sheet_domain, maintenance_request_ids, total_billed_hours)
+            grand_total_hours += total_hours
+            grand_total_billed_hours += total_billed_hours
+            key += 1 
+            table_rows.append({
+                "key": key,
+                "country_name": country_name,
+                "tb": tb,
+                "total_hours": total_hours,
+                "billed_hours": total_billed_hours,
+                })
+        total_tb = 0 
+        if grand_total_billed_hours:
+           total_tb =  grand_total_hours / grand_total_billed_hours
+        total_tb = round(total_tb,2)
+        total = {
+            "tb": total_tb,
+            "total_hours": grand_total_hours,
+            "billed_hours": grand_total_billed_hours,
+        }
+        table_data = {
+            'rows': table_rows,
+            'total': total
+        }
+        return json.dumps(table_data)
+    
+    @http.route('/tb/chart_data', auth="user", type="json")
+    def service_operating_sales_chart_data(self, **data):
+        countries = data['country']
+        if len(countries) == 0:
+           countries = request.env['cummin_dashboard.helper'].get_countries()
+        countries = list(set(countries))
+        labels = []
+        bg_billed_hours = []
+        bg_total_hours = []
+
+        data_billed_hours = []
+        data_total_hours = []
+
+        maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
+        for country in countries:
+            country_name = '-'
+            if country:
+                country_name = country
+
+            maintenance_request_ids,total_billed_hours = request.env['cummin_dashboard.helper'].get_total_billed_hours(maintenance_request_domain, country)
+            tb, total_hours, total_billed_hours = request.env['cummin_dashboard.helper'].get_tb_detail(time_sheet_domain, maintenance_request_ids, total_billed_hours)
+      
+            labels.append(country)
+            bg_billed_hours.append('green')
+            bg_total_hours.append('red')
+            
+            data_billed_hours.append(total_billed_hours)
+            data_total_hours.append(total_hours)
+            
+        chart_data = {
+            "labels": labels,
+            "datasets": [
+                {
+                    "label": "Total Hours",
+                    "backgroundColor": bg_total_hours,
+                    "data": data_total_hours
+                },
+                {
+                    "label": "Billed Hours",
+                    "backgroundColor": bg_billed_hours,
+                    "data": data_billed_hours
                 }
             ]
         }

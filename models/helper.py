@@ -188,3 +188,42 @@ class Helper(models.AbstractModel):
         current_date = datetime.now()
         delta = current_date - date_obj
         return delta.days
+    
+    def get_time_sheet_detail(self,time_sheet_domain):
+        account_analytics = self.env['account.analytic.line'].search(time_sheet_domain)
+        
+        total_hours = 0
+        benifit_hours = 0
+        applied_hours = 0
+        productivity_ids = []
+        applied_hours_ids = []
+        for account_analytic in account_analytics:
+            total_hours += account_analytic.unit_amount
+            if account_analytic.task in ['0410','0710','0711','0712']:
+                benifit_hours += account_analytic.unit_amount
+                productivity_ids.append(account_analytic.id)
+            if account_analytic.task in ['0104','0105','0107','0108','0800']:
+                applied_hours += account_analytic.unit_amount
+                applied_hours_ids.append(account_analytic.id)
+
+        return productivity_ids,applied_hours_ids, total_hours, benifit_hours,applied_hours
+    
+    def get_total_billed_hours(self,maintenance_request_domain,country):
+        maintenance_request_domain_with_perfect_country = [item for item in maintenance_request_domain if item[0] != 'country']
+        maintenance_request_domain_with_perfect_country.append(('country','=', country))
+        total_billed_hours = 0
+        maintenance_requests = self.env['maintenance.request'].search(maintenance_request_domain_with_perfect_country)
+        maintenance_request_ids = []
+        for maintenance_request in maintenance_requests:
+            total_billed_hours += maintenance_request.billed_hours
+            maintenance_request_ids.append(maintenance_request.id)
+        return maintenance_request_ids, total_billed_hours
+    
+    def get_tb_detail(self, time_sheet_domain,maintenance_request_ids,total_billed_hours):
+        time_sheet_domain.append(('maintenance_request_id','in',maintenance_request_ids))
+        productivity_ids,applied_hours_ids, total_hours, benifit_hours,applied_hours = self.env['cummin_dashboard.helper'].get_time_sheet_detail(time_sheet_domain)
+        tb = 0
+        if total_billed_hours>0:
+            total_hours / total_billed_hours
+        tb = round(tb,2)
+        return tb, total_hours, total_billed_hours

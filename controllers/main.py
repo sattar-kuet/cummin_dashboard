@@ -409,7 +409,7 @@ class Api(http.Controller):
             wip_detail_data.append({
                'key': maintenance_request.id,
                'age': age,
-               'order_status': Helper.sanitizeFalseValue(maintenance_request.order_status),
+            #    'order_status': Helper.sanitizeFalseValue(maintenance_request.order_status),
                'name': Helper.sanitizeFalseValue(maintenance_request.name),
                'country': Helper.sanitizeFalseValue(maintenance_request.country),
                'branch': Helper.sanitizeFalseValue(maintenance_request.branch),

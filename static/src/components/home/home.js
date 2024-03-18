@@ -30,7 +30,7 @@ export class Home extends owl.Component {
     }
     redirectToServiceOrder() {
         let baseUrl = utility.getBaseUrl()
-        let redirectTo = baseUrl + '/web#action=963&model=maintenance.request&view_type=kanban&cids=1&menu_id=802'
+        let redirectTo = baseUrl + '/web#action=999&model=maintenance.request&view_type=kanban&cids=1&menu_id=830'
         window.location.href = redirectTo
     }
     redirectToAttendance() {

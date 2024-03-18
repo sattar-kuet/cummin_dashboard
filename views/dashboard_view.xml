@@ -56,6 +56,10 @@
             <field name="name">Productivity Summary</field>
             <field name="tag">productivity_summary</field>
         </record>
+        <record id="action_productivity_detail" model="ir.actions.client">
+            <field name="name">Productivity Detail</field>
+            <field name="tag">productivity_detail</field>
+        </record>
         <menuitem
         name="TB Detail"
         id="menu_tb_detail"
@@ -66,5 +70,10 @@
         id="menu_productivity_summary"
         action="action_productivity_summary"
         sequence="3"/>
+        <menuitem
+        name="Productivity Detail"
+        id="menu_productivity_detail"
+        action="action_productivity_detail"
+        sequence="4"/>
     </data>
 </odoo>

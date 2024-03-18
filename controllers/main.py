@@ -587,7 +587,102 @@ class Api(http.Controller):
         return json.dumps(table_data)
     
     @http.route('/tb/chart_data', auth="user", type="json")
-    def service_operating_sales_chart_data(self, **data):
+    def tb_chart_data(self, **data):
+        countries = data['country']
+        if len(countries) == 0:
+           countries = request.env['cummin_dashboard.helper'].get_countries()
+        countries = list(set(countries))
+        labels = []
+        bg_billed_hours = []
+        bg_total_hours = []
+
+        data_billed_hours = []
+        data_total_hours = []
+
+        maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
+        for country in countries:
+            country_name = '-'
+            if country:
+                country_name = country
+
+            maintenance_request_ids,total_billed_hours = request.env['cummin_dashboard.helper'].get_total_billed_hours(maintenance_request_domain, country)
+            tb, total_hours, total_billed_hours = request.env['cummin_dashboard.helper'].get_tb_detail(time_sheet_domain, maintenance_request_ids, total_billed_hours)
+      
+            labels.append(country_name)
+            bg_billed_hours.append('green')
+            bg_total_hours.append('red')
+            
+            data_billed_hours.append(total_billed_hours)
+            data_total_hours.append(total_hours)
+            
+        chart_data = {
+            "labels": labels,
+            "datasets": [
+                {
+                    "label": "Total Hours",
+                    "backgroundColor": bg_total_hours,
+                    "data": data_total_hours
+                },
+                {
+                    "label": "Billed Hours",
+                    "backgroundColor": bg_billed_hours,
+                    "data": data_billed_hours
+                }
+            ]
+        }
+        return json.dumps(chart_data)
+    
+    @http.route('/productivity/table_data', auth="user", type="json")
+    def productivity_table_data(self, **data): 
+        countries = data['country']
+        del data['country']
+        maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
+       
+        if len(countries)==0:
+           countries = request.env['cummin_dashboard.helper'].get_countries()
+        countries = list(set(countries))
+       
+        total_payroll_hours = 0
+        total_benifit_hours = 0
+        table_rows = []
+        key = 0
+        for country in countries:
+            country_name = '-'
+            if country:
+                country_name = country
+
+            maintenance_request_ids,total_billed_hours = request.env['cummin_dashboard.helper'].get_total_billed_hours(maintenance_request_domain, country)
+            time_sheet_domain.append(('maintenance_request_id','in',maintenance_request_ids))
+            productivity_ids,applied_hours_ids, total_hours, benifit_hours,applied_hours = request.env['cummin_dashboard.helper'].get_time_sheet_detail(time_sheet_domain)
+        
+            payroll_hours = total_hours
+            total_payroll_hours += payroll_hours
+            total_benifit_hours += benifit_hours
+            productivity = request.env['cummin_dashboard.helper'].calcalculate_percentage(payroll_hours,benifit_hours)
+            key += 1 
+            table_rows.append({
+                "key": key,
+                "country_name": country_name,
+                "productivity": productivity,
+                "payroll_hours": payroll_hours,
+                "benifit_hours": benifit_hours
+                })
+            
+        total_productivity = request.env['cummin_dashboard.helper'].calcalculate_percentage(total_payroll_hours,total_benifit_hours)
+          
+        total = {
+            "productivity": total_productivity,
+            "payroll_hours": total_payroll_hours,
+            "benifit_hours": total_benifit_hours
+        }
+        table_data = {
+            'rows': table_rows,
+            'total': total
+        }
+        return json.dumps(table_data)
+    
+    @http.route('/productivity/chart_data', auth="user", type="json")
+    def productivity_chart_data(self, **data):
         countries = data['country']
         if len(countries) == 0:
            countries = request.env['cummin_dashboard.helper'].get_countries()

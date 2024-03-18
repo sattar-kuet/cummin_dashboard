@@ -135,13 +135,15 @@ class Api(http.Controller):
         for maintenance_request in maintenance_requests:
             
             if maintenance_request.invoice:
+              return 'OK3'
               wo_invoiced += 1
               maintenance_request_invoiced_ids.append(maintenance_request.id)
-              return 'OK3'
+             
             else:
+                return 'OK4'
                 wo_open += 1
                 maintenance_request_open_ids.append(maintenance_request.id)
-                return 'OK4'
+                
             
             if not maintenance_request.invoice:
                 billable_hours += maintenance_request.billed_hours

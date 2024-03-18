@@ -131,21 +131,14 @@ class Api(http.Controller):
         service_operating_sales = 0
         maintenance_request_open_ids = []
         maintenance_request_invoiced_ids = []
-        stage_id = request.env['maintenance.stage'].search([('name','=','Job Closure')],limit=1).id
-        # return stage_id
+        
         for maintenance_request in maintenance_requests:
-            return maintenance_request.invoice
-            if maintenance_request.stage_id == stage_id:
-              return 'OK3'
+            if maintenance_request.invoice:
               wo_invoiced += 1
               maintenance_request_invoiced_ids.append(maintenance_request.id)
-             
             else:
-                return 'OK4'
                 wo_open += 1
                 maintenance_request_open_ids.append(maintenance_request.id)
-                
-            
             if not maintenance_request.invoice:
                 billable_hours += maintenance_request.billed_hours
                 service_operating_sales += maintenance_request.labour_sales + maintenance_request.parts_sales + maintenance_request.other_sales
@@ -158,7 +151,7 @@ class Api(http.Controller):
                wip_cost_ids.append(maintenance_request.id)
 
             billed_hours += maintenance_request.billed_hours
-        
+
         productivity_ids,applied_hours_ids, total_hours, benifit_hours,applied_hours = request.env['cummin_dashboard.helper'].get_time_sheet_detail(time_sheet_domain)
 
         payroll_hours = total_hours
@@ -392,7 +385,7 @@ class Api(http.Controller):
             'isFirstPage': is_first_page,
             'isLastPage': is_last_page
         }
-       
+        
         # maintenance_requests = request.env['maintenance.request'].search(maintenance_request_domain, limit=per_page_records,offset=offset)
         maintenance_requests = request.env['maintenance.request'].search(maintenance_request_domain)
         wip_detail_data = []

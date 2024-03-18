@@ -134,7 +134,7 @@ class Api(http.Controller):
         stage_id = request.env['maintenance.stage'].search([('name','=','Job Closure')],limit=1).id
         # return stage_id
         for maintenance_request in maintenance_requests:
-            return maintenance_request.stage_id
+            return maintenance_request.invoice
             if maintenance_request.stage_id == stage_id:
               return 'OK3'
               wo_invoiced += 1

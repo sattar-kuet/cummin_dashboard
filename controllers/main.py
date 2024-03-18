@@ -385,7 +385,7 @@ class Api(http.Controller):
             'isFirstPage': is_first_page,
             'isLastPage': is_last_page
         }
-        
+        return pager
         # maintenance_requests = request.env['maintenance.request'].search(maintenance_request_domain, limit=per_page_records,offset=offset)
         maintenance_requests = request.env['maintenance.request'].search(maintenance_request_domain)
         wip_detail_data = []

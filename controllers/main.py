@@ -151,7 +151,7 @@ class Api(http.Controller):
                wip_cost_ids.append(maintenance_request.id)
 
             billed_hours += maintenance_request.billed_hours
-
+        return 'OK'
         productivity_ids,applied_hours_ids, total_hours, benifit_hours,applied_hours = request.env['cummin_dashboard.helper'].get_time_sheet_detail(time_sheet_domain)
 
         payroll_hours = total_hours
@@ -385,7 +385,7 @@ class Api(http.Controller):
             'isFirstPage': is_first_page,
             'isLastPage': is_last_page
         }
-        return pager
+       
         # maintenance_requests = request.env['maintenance.request'].search(maintenance_request_domain, limit=per_page_records,offset=offset)
         maintenance_requests = request.env['maintenance.request'].search(maintenance_request_domain)
         wip_detail_data = []

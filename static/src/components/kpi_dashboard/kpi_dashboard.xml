@@ -121,7 +121,7 @@
                             <tbody>
                                 <tr>
                                     <td>Productivity</td>
-                                    <td style="cursor: pointer;">0.0%</td>
+                                    <td t-on-click="viewProductivitySummary" class="link_item">0.0%</td>
                                 </tr>
                             </tbody>
                         </table>

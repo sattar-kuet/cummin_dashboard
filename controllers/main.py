@@ -658,7 +658,7 @@ class Api(http.Controller):
             payroll_hours = total_hours
             total_payroll_hours += payroll_hours
             total_benifit_hours += benifit_hours
-            productivity = request.env['cummin_dashboard.helper'].calcalculate_percentage(payroll_hours,benifit_hours)
+            productivity = request.env['cummin_dashboard.helper'].calculate_percentage(payroll_hours,benifit_hours)
             key += 1 
             table_rows.append({
                 "key": key,
@@ -668,7 +668,7 @@ class Api(http.Controller):
                 "benifit_hours": benifit_hours
                 })
             
-        total_productivity = request.env['cummin_dashboard.helper'].calcalculate_percentage(total_payroll_hours,total_benifit_hours)
+        total_productivity = request.env['cummin_dashboard.helper'].calculate_percentage(total_payroll_hours,total_benifit_hours)
           
         total = {
             "productivity": total_productivity,

@@ -62,9 +62,15 @@ export class OwlKpiDashboard extends Component {
       "cummin_dashboard.action_service_operating_sale"
     )
   }
+
   viewTBsummary() {
     this.actionService.doAction(
       "cummin_dashboard.action_tb_summary"
+    )
+  }
+  viewProductivitySummary() {
+    this.actionService.doAction(
+      "cummin_dashboard.action_productivity_summary"
     )
   }
   goToHome() {

@@ -52,15 +52,19 @@
             <field name="name">TB Summary</field>
             <field name="tag">tb_summary</field>
         </record>
+        <record id="action_productivity_summary" model="ir.actions.client">
+            <field name="name">Productivity Summary</field>
+            <field name="tag">productivity_summary</field>
+        </record>
         <menuitem
         name="TB Detail"
         id="menu_tb_detail"
         action="action_tb_detail"
         sequence="2"/>
         <menuitem
-        name="TB Summary"
-        id="menu_tb_summary"
-        action="action_tb_summary"
+        name="Productivity Summary"
+        id="menu_productivity_summary"
+        action="action_productivity_summary"
         sequence="3"/>
     </data>
 </odoo>

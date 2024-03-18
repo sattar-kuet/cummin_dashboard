@@ -140,6 +140,7 @@ class Api(http.Controller):
             else:
                 wo_open += 1
                 maintenance_request_open_ids.append(maintenance_request.id)
+            return 'OK3'
             if not maintenance_request.invoice:
                 billable_hours += maintenance_request.billed_hours
                 service_operating_sales += maintenance_request.labour_sales + maintenance_request.parts_sales + maintenance_request.other_sales
@@ -152,7 +153,7 @@ class Api(http.Controller):
                wip_cost_ids.append(maintenance_request.id)
 
             billed_hours += maintenance_request.billed_hours
-        return 'OK2'
+        
         productivity_ids,applied_hours_ids, total_hours, benifit_hours,applied_hours = request.env['cummin_dashboard.helper'].get_time_sheet_detail(time_sheet_domain)
 
         payroll_hours = total_hours

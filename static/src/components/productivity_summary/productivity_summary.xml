@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+	<t t-name="owl.ProductivitySummary" owl="1">
+		<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="#" t-on-click="goToDashboard">Dashboard</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">Productivity Summary Report</li>
+			</ol>
+		</div>
+		<div class="vh-100 overflow-auto">
+			<section class="dashborad__section">
+				<Header/>
+				<Filter/>
+				<section class="chart__section bg-white">
+					<div></div>
+					<ChartRenderer3  data="state.productivityChartData" xtitle="'Region'" ytitle="'Hours'"/>
+					<div></div>
+				</section>
+				<section class="main__table sticky-top bg-white">
+					<table>
+						<thead>
+							<tr class="highlighted">
+								<th>Region</th>
+								<th> Productivity % </th>
+								<th>Payroll Hours</th>
+								<th>Benifit Hours</th>
+							</tr>
+						</thead>
+						<tbody>
+							<t t-set="total" t-value="state.productivityTableData.total"/>
+							<t t-foreach="state.productivityTableData.rows" t-as="rowData" t-key="rowData.key">
+								<t t-set="country_name" t-value="rowData.country_name"/>
+								<tr>
+									<td t-on-click="() => viewDetail(country_name,-1,-1)" class="link_item">
+										<t t-esc="rowData.country_name"/>
+									</td>
+									<td>
+										<t t-esc="rowData.productivity"/>
+									</td>
+									<td>
+										<t t-esc="rowData.payroll_hours"/>
+									</td>
+									<td>
+										<t t-esc="rowData.benifit_hours"/>
+									</td>
+								</tr>
+							</t>
+							<tr class="highlighted">
+								<td>Grand Total</td>
+								<td>
+									<t t-esc="total.productivity"/>
+								</td>
+								<td>
+									<t t-esc="total.payroll_hours"/>
+								</td>
+								<td>
+									<t t-esc="total.benifit_hours"/>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+			</section>
+		</div>
+	</t>
+</templates>

@@ -688,11 +688,11 @@ class Api(http.Controller):
            countries = request.env['cummin_dashboard.helper'].get_countries()
         countries = list(set(countries))
         labels = []
-        bg_billed_hours = []
-        bg_total_hours = []
+        bg_payroll_hours = []
+        bg_benifit_hours = []
 
-        data_billed_hours = []
-        data_total_hours = []
+        data_payroll_hours = []
+        data_benifit_hours = []
 
         maintenance_request_domain, time_sheet_domain = request.env['cummin_dashboard.helper'].get_filtering_domain(data) 
         for country in countries:
@@ -701,27 +701,29 @@ class Api(http.Controller):
                 country_name = country
 
             maintenance_request_ids,total_billed_hours = request.env['cummin_dashboard.helper'].get_total_billed_hours(maintenance_request_domain, country)
-            tb, total_hours, total_billed_hours = request.env['cummin_dashboard.helper'].get_tb_detail(time_sheet_domain, maintenance_request_ids, total_billed_hours)
-      
+            time_sheet_domain.append(('maintenance_request_id','in',maintenance_request_ids))
+            productivity_ids,applied_hours_ids, total_hours, benifit_hours,applied_hours = request.env['cummin_dashboard.helper'].get_time_sheet_detail(time_sheet_domain)
+        
+            payroll_hours = total_hours
             labels.append(country_name)
-            bg_billed_hours.append('green')
-            bg_total_hours.append('red')
+            bg_payroll_hours.append('green')
+            bg_benifit_hours.append('red')
             
-            data_billed_hours.append(total_billed_hours)
-            data_total_hours.append(total_hours)
+            data_payroll_hours.append(payroll_hours)
+            data_benifit_hours.append(benifit_hours)
             
         chart_data = {
             "labels": labels,
             "datasets": [
                 {
-                    "label": "Total Hours",
-                    "backgroundColor": bg_total_hours,
-                    "data": data_total_hours
+                    "label": "Payroll Hours",
+                    "backgroundColor": bg_payroll_hours,
+                    "data": data_payroll_hours
                 },
                 {
-                    "label": "Billed Hours",
-                    "backgroundColor": bg_billed_hours,
-                    "data": data_billed_hours
+                    "label": "Benifit Hours",
+                    "backgroundColor": bg_benifit_hours,
+                    "data": data_benifit_hours
                 }
             ]
         }
